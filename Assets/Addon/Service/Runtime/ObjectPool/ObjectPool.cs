@@ -7,16 +7,14 @@ namespace Services.ObjectPools
     {
         [SerializeField]
         private GameObject prefab;
-        private Queue<IMyObject> myObjects;  //对象上的脚本
+        private Queue<IMyObject> myObjects;  //瀵硅薄涓婄殑鑴氭湰
         public int Count => myObjects.Count;
-        [SerializeField]
-        private int accumulateCount;
 
         internal void Initialize(GameObject prefab)
         {
             if (prefab.GetComponent<IMyObject>() == null)
             {
-                Debugger.LogError("对象池中的物体未实现IMyObject", EMessageType.System);
+                Debugger.LogError("瀵硅薄姹犱腑鐨勭墿浣撴湭瀹炵幇IMyObject", EMessageType.System);
                 return;
             }
             this.prefab = prefab;
@@ -40,9 +38,6 @@ namespace Services.ObjectPools
 
         internal void Create(int count = 1)
         {
-            accumulateCount += count;
-            if (count > 100)
-                Debugger.LogWarning("大量的预生成应分散到多帧执行", EMessageType.System);
             for (int i = 0; i < count; i++)
             {
                 IMyObject newObject = ObjectPoolUtility.Clone(prefab, true, this);
