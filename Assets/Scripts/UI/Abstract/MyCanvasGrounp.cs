@@ -1,7 +1,7 @@
 using MyTimer;
 using UnityEngine;
 
-//¹ÒÔÚĞèÒªÒş²Ø-ÏÔÊ¾µÄUIÎïÌåÉÏ
+//æŒ‚åœ¨éœ€è¦éšè—-æ˜¾ç¤ºçš„UIç‰©ä½“ä¸Š
 [RequireComponent(typeof(CanvasGroup))]
 public class MyCanvasGrounp : MonoBehaviour
 {
@@ -11,17 +11,19 @@ public class MyCanvasGrounp : MonoBehaviour
 
     [SerializeField]
     protected float fadeTime = 0.2f;
+    [Range(0f,1f),SerializeField]
+    private float threshold_blockRaycast = 0.5f;
 
     /// <summary>
-    /// ÏÂÒ»´ÎÏÔÊ¾/Òş²ØÊÇ·ñÁ¢¼´Íê³É
+    /// ä¸‹ä¸€æ¬¡æ˜¾ç¤º/éšè—æ˜¯å¦ç«‹å³å®Œæˆ
     /// </summary>
     public bool immediate_next;
     /// <summary>
-    /// ÏÔÊ¾/Òş²ØÊÇ·ñÒ»Ö±ÊÇÁ¢¼´Íê³É
+    /// æ˜¾ç¤º/éšè—æ˜¯å¦ä¸€ç›´æ˜¯ç«‹å³å®Œæˆ
     /// </summary>
     public bool immediate;
     [SerializeField]
-    private bool visible_init;
+    private bool visibleOnAwake;
 
     private bool visible;
     public bool Visible
@@ -45,14 +47,14 @@ public class MyCanvasGrounp : MonoBehaviour
         linear.AfterCompelete += SetAlpha;
         alpha_default = canvasGroup.alpha;
         immediate_next = true;
-        visible = !visible_init;
-        Visible = visible_init;
+        visible = !visibleOnAwake;
+        Visible = visibleOnAwake;
     }
 
     protected void SetVisibleAndActive()
     {
         canvasGroup.interactable = visible;
-        canvasGroup.blocksRaycasts = visible;
+        canvasGroup.blocksRaycasts = canvasGroup.alpha > threshold_blockRaycast;
         float target = visible ? alpha_default : 0f;
         linear.Initialize(canvasGroup.alpha, target, fadeTime);
         if (immediate || immediate_next)
