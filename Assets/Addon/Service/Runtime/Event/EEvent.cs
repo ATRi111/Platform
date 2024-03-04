@@ -18,5 +18,9 @@ namespace Services
         /// 隐藏充电桩信息
         /// </summary>
         HideChargingStaionMessage,
+        /// <summary>
+        /// 车辆模型变化
+        /// </summary>
+        AfterCarChange,
     }
 }
