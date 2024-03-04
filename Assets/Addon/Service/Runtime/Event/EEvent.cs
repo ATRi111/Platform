@@ -11,13 +11,17 @@ namespace Services
         /// </summary>
         AfterLoadScene,
         /// <summary>
-        /// 显示充电桩信息，参数：要显示的ChangingStation，位置
+        /// 显示充电桩消息窗口，参数：要显示的ChangingStation，位置
         /// </summary>
-        ShowChargingStaionMessage,
+        ShowChargingStaionMessageWindow,
         /// <summary>
-        /// 隐藏充电桩信息
+        /// 隐藏充电桩消息窗口
         /// </summary>
-        HideChargingStaionMessage,
+        HideChargingStaionMessageWindow,
+        /// <summary>
+        /// 打开充电桩面板，参数：要显示的ChangingStation
+        /// </summary>
+        OpenChargingStationPanel,
         /// <summary>
         /// 车辆模型变化
         /// </summary>

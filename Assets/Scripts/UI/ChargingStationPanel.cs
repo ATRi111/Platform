@@ -3,7 +3,7 @@ using Services.Event;
 using TMPro;
 using UnityEngine;
 
-public class ChargingStationMessagePanel : MonoBehaviour
+public class ChargingStationPanel : MonoBehaviour
 {
     private IEventSystem eventSystem;
     private TextMeshProUGUI tmp;
@@ -16,21 +16,26 @@ public class ChargingStationMessagePanel : MonoBehaviour
         canvasGrounp = GetComponent<MyCanvasGrounp>();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            Hide();
+        }
+    }
+
     private void OnEnable()
     {
-        eventSystem.AddListener<ChargingStation, Vector3>(EEvent.ShowChargingStaionMessage, Show);
-        eventSystem.AddListener(EEvent.HideChargingStaionMessage, Hide);
+        eventSystem.AddListener<ChargingStation>(EEvent.OpenChargingStationPanel, Show);
     }
 
     private void OnDisable()
     {
-        eventSystem.RemoveListener<ChargingStation, Vector3>(EEvent.ShowChargingStaionMessage, Show);
-        eventSystem.RemoveListener(EEvent.HideChargingStaionMessage, Hide);
+        eventSystem.RemoveListener<ChargingStation>(EEvent.OpenChargingStationPanel, Show);
     }
 
-    private void Show(ChargingStation station, Vector3 position)
+    private void Show(ChargingStation station)
     {
-        transform.position = position;
         StationStaticData data = station.data.Value;
         tmp.text = $"编号:{data.id}\n" +
             $"充电桩类型:{data.type}\n" +

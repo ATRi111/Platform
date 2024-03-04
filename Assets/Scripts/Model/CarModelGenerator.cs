@@ -36,7 +36,7 @@ public class CarModelGenerator : MonoBehaviour
 
     private void AfterCarChange()
     {
-        EStationState state = station.GetStationState();
+        EStationState state = station.GetState();
         switch(state)
         {
             case EStationState.Available:

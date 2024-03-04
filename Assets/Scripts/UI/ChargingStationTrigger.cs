@@ -1,19 +1,17 @@
 using Services;
-using Services.Event;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ChargingStationTriggerPanel : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class ChargingStationTrigger : MyButton,IPointerEnterHandler,IPointerExitHandler
 {
-    private IEventSystem eventSystem;
     private ChargingStation station;
     [SerializeField]
     private Vector3 offset;
 
-    private void Awake()
+    protected override void Awake()
     {
-        eventSystem = ServiceLocator.Get<IEventSystem>();
+        base.Awake();
         station = GetComponentInParent<ChargingStation>();
         Image image = GetComponent<Image>();
         image.color = Color.clear;
@@ -21,12 +19,16 @@ public class ChargingStationTriggerPanel : MonoBehaviour,IPointerEnterHandler,IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        eventSystem.Invoke(EEvent.ShowChargingStaionMessage, station, transform.position + offset);
+        eventSystem.Invoke(EEvent.ShowChargingStaionMessageWindow, station, transform.position + offset);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        eventSystem.Invoke(EEvent.HideChargingStaionMessage);
+        eventSystem.Invoke(EEvent.HideChargingStaionMessageWindow);
+    }
+    protected override void OnClick()
+    {
+        eventSystem.Invoke(EEvent.OpenChargingStationPanel, station);
     }
 
     private void OnDrawGizmos()

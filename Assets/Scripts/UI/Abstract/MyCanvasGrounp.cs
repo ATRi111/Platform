@@ -54,7 +54,6 @@ public class MyCanvasGrounp : MonoBehaviour
     protected void SetVisibleAndActive()
     {
         canvasGroup.interactable = visible;
-        canvasGroup.blocksRaycasts = canvasGroup.alpha > threshold_blockRaycast;
         float target = visible ? alpha_default : 0f;
         linear.Initialize(canvasGroup.alpha, target, fadeTime);
         if (immediate || immediate_next)
@@ -62,6 +61,7 @@ public class MyCanvasGrounp : MonoBehaviour
             linear.ForceComplete();
             immediate_next = false;
         }
+        canvasGroup.blocksRaycasts = canvasGroup.alpha > threshold_blockRaycast;
     }
 
     private void SetAlpha(float alpha)

@@ -14,7 +14,7 @@ public class ChargingStation : NetworkBehaviour
         }
     }
 
-    public EStationState GetStationState()
+    public EStationState GetState()
     {
         return EStationState.Available;
     }
