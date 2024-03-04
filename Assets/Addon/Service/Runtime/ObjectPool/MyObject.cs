@@ -35,8 +35,10 @@ namespace Services.ObjectPools
         /// </summary>
         public void Activate(Vector3 pos, Vector3 eulerAngles, Transform parent = null)
         {
+            Vector3 scale = transform.localScale;
             if (parent != null)
                 transform.SetParent(parent);
+            transform.localScale = scale;
             transform.position = pos;
             transform.eulerAngles = eulerAngles;
             Active = true;

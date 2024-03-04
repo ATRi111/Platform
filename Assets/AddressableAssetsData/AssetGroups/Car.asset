@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Car
+  m_EditorClassIdentifier: 
+  m_GroupName: Car
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 7a05b76fb5c3c4d469aede1496de942a
+  m_SerializeEntries:
+  - m_GUID: 46488094413fc9e4381dde89bdcda6cc
+    m_Address: Sport
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f31fc0f80fbd58245a720ecf0fff564f
+    m_Address: Hatchback
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6321e03298801ec42b10bcf6fcc64629
+    m_Address: Truck
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 41ec37ef83ba29148afd6eadccb8ceef
+    m_Address: Jeep
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5ec09526dd935ca4681251506b95eb01
+    m_Address: Taxi
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 00ad4a2c729ee214784459c27bdc6949
+    m_Address: Sedan
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b76c1db3236e08d49a1fd529a7b4dfbd
+    m_Address: Suv
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 367dbf3c078958543960fc6201de77d7, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ec21f09a989bfee4e96781e3b53bf49c, type: 2}
+    - {fileID: 11400000, guid: fea6a677ce0c57047b73af5e428a8ec8, type: 2}
