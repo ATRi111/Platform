@@ -23,8 +23,8 @@ namespace Services
         /// </summary>
         OpenChargingStationPanel,
         /// <summary>
-        /// 车辆模型变化
+        /// 数据刷新
         /// </summary>
-        AfterCarChange,
+        Refresh,
     }
 }

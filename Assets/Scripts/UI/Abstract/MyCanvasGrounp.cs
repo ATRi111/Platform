@@ -61,6 +61,10 @@ public class MyCanvasGrounp : MonoBehaviour
             linear.ForceComplete();
             immediate_next = false;
         }
+    }
+
+    private void Update()
+    {
         canvasGroup.blocksRaycasts = canvasGroup.alpha > threshold_blockRaycast;
     }
 

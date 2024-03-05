@@ -1,4 +1,3 @@
-using MyTimer;
 using Services;
 using Services.Event;
 using Services.ObjectPools;
@@ -12,29 +11,25 @@ public class CarModelGenerator : MonoBehaviour
 
     [SerializeField]
     private string carType;
-    private Metronome metronome;
 
     private void Awake()
     {
         objectManager = ServiceLocator.Get<IObjectManager>(); 
         eventSystem = ServiceLocator.Get<IEventSystem>();
         station = GetComponentInParent<ChargingStation>();
-        metronome = new Metronome();
-        metronome.AfterCompelete += (float _) => AfterCarChange();
-        metronome.Initialize(5f);
     }
 
     private void OnEnable()
     {
-        eventSystem.AddListener(EEvent.AfterCarChange, AfterCarChange);
+        eventSystem.AddListener(EEvent.Refresh, AfterRefresh);
     }
 
     private void OnDisable()
     {
-        eventSystem.AddListener(EEvent.AfterCarChange, AfterCarChange);
+        eventSystem.AddListener(EEvent.Refresh, AfterRefresh);
     }
 
-    private void AfterCarChange()
+    private void AfterRefresh()
     {
         EStationState state = station.GetState();
         switch(state)

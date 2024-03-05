@@ -1,13 +1,13 @@
 namespace MyTimer
 {
     /// <summary>
-    /// ´ò×Ö»úĞ§¹û
+    /// æ‰“å­—æœºæ•ˆæœ
     /// </summary>
     public class TypeWriter : Timer<string, StringLerp>
     {
-        /// <param name="text">ÎÄ±¾</param>
-        /// <param name="letterPerSecond">Ã¿Ãë´òµÄ×Ö·ûÊı</param>
-        /// <param name="start">ÊÇ·ñÆô¶¯¼ÆÊ±Æ÷</param>
+        /// <param name="text">æ–‡æœ¬</param>
+        /// <param name="letterPerSecond">æ¯ç§’æ‰“çš„å­—ç¬¦æ•°</param>
+        /// <param name="start">æ˜¯å¦å¯åŠ¨è®¡æ—¶å™¨</param>
         public void Initialize(string text, float letterPerSecond, bool start = true)
         {
             base.Initialize("", text, text.Length / letterPerSecond, start);
@@ -15,20 +15,26 @@ namespace MyTimer
     }
 
     /// <summary>
-    /// ÎªTypeWriterÌá¹©¾ä×Ó½áÊøºóÍ£¶ÙµÄ¹¦ÄÜ
+    /// ä¸ºTypeWriteræä¾›å¥å­ç»“æŸååœé¡¿çš„åŠŸèƒ½
     /// </summary>
     public class TypeWriterExtend
     {
-        public const string SentenceSeparator = "?!.¡££¡£¿¡­";
+        public const string SentenceSeparator = "?!.ã€‚ï¼ï¼Ÿâ€¦";
 
         private TypeWriter typeWriter;
         private string separator;
         private float interval;
         private readonly TimerOnly timer;
 
+        /// <summary>
+        /// å®Œå…¨æ’­æ”¾ç»“æŸçŠ¶æ€çš„æ–‡æœ¬
+        /// </summary>
         private string target;
 
         private string text;
+        /// <summary>
+        /// å½“å‰æ’­æ”¾å‡ºçš„æ–‡æœ¬
+        /// </summary>
         private string Text
         {
             set
@@ -38,7 +44,7 @@ namespace MyTimer
                     text = value;
                     if (value.Length > 1 && separator.IndexOf(target[value.Length - 1]) != -1)
                     {
-                        //±ÜÃâÖØ¸´·Ö¸ô·û¶à´ÎÑÓÊ±
+                        //é¿å…é‡å¤åˆ†éš”ç¬¦å¤šæ¬¡å»¶æ—¶
                         if (target.Length > value.Length)
                         {
                             if (separator.IndexOf(target[value.Length]) == -1)
@@ -63,9 +69,9 @@ namespace MyTimer
             timer.AfterCompelete += AfterDelay;
         }
 
-        /// <param name="typeWriter">Òª¿ØÖÆµÄTypeWriter</param>
-        /// <param name="interval">Ã¿¾ä»°½áÊøºóµÄÍ£ÁôÊ±¼ä</param>
-        /// <param name="separator">ËùÓĞ±êÖ¾¾ä×Ó½áÊøµÄ±êÖ¾£¬Îª¿ÕÔòÊ¹ÓÃÄ¬ÈÏµÄ½áÊø±êÖ¾</param>
+        /// <param name="typeWriter">è¦æ§åˆ¶çš„TypeWriter</param>
+        /// <param name="interval">æ¯å¥è¯ç»“æŸåçš„åœç•™æ—¶é—´</param>
+        /// <param name="separator">æ‰€æœ‰æ ‡å¿—å¥å­ç»“æŸçš„æ ‡å¿—ï¼Œä¸ºç©ºåˆ™ä½¿ç”¨é»˜è®¤çš„ç»“æŸæ ‡å¿—</param>
         public void Initialize(TypeWriter typeWriter, float interval = 0.5f, string separator = null)
         {
             Dispose();
