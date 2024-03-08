@@ -36,6 +36,8 @@ public class ChargingStationPanel : MonoBehaviour
 
     private void Show(ChargingStation station)
     {
+        if (station == null)
+            return;
         StationStaticData data = station.data.Value;
         tmp.text = $"编号:{data.id}\n" +
             $"充电桩类型:{data.type}\n" +

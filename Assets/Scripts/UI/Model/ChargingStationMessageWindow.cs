@@ -2,6 +2,7 @@ using Services;
 using Services.Event;
 using System.Text;
 using TMPro;
+using Tools;
 using UnityEngine;
 
 public class ChargingStationMessageWindow : MonoBehaviour
@@ -9,12 +10,22 @@ public class ChargingStationMessageWindow : MonoBehaviour
     private IEventSystem eventSystem;
     private TextMeshProUGUI tmp;
     private MyCanvasGrounp canvasGrounp;
+    private ChargingStation current;
 
     private void Awake()
     {
         eventSystem = ServiceLocator.Get<IEventSystem>();
         tmp = GetComponentInChildren<TextMeshProUGUI>();
         canvasGrounp = GetComponent<MyCanvasGrounp>();
+    }
+
+    private void Update()
+    {
+        if(canvasGrounp.Visible && Input.GetMouseButtonDown(0))
+        {
+            eventSystem.Invoke(EEvent.OpenChargingStationPanel, current);
+            Hide();
+        }
     }
 
     private void OnEnable()
@@ -31,9 +42,9 @@ public class ChargingStationMessageWindow : MonoBehaviour
 
     private void Show(ChargingStation station, Vector3 position)
     {
-        transform.position = position;
+        current = station;
+        transform.position = Camera.main.WorldToScreenPoint(position);
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine(station.data.Value.id.ToString());
         string s = station.GetState() switch
         {
             EStationState.Available => "空闲",
@@ -42,14 +53,16 @@ public class ChargingStationMessageWindow : MonoBehaviour
             EStationState.Repairing => "维修中",
             _ => string.Empty,
         };
+        s.FontSize(32);
         sb.AppendLine(s);
-        sb.AppendLine("点击查看更多信息");
+        sb.AppendLine("查看详情");
         tmp.text = sb.ToString();
         canvasGrounp.Visible = true;
     }
 
     private void Hide()
     {
+        current = null;
         canvasGrounp.Visible = false;
     }
 }

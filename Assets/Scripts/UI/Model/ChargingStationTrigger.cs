@@ -1,18 +1,20 @@
 using Services;
+using Services.Event;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ChargingStationTrigger : MyButton,IPointerEnterHandler,IPointerExitHandler
+public class ChargingStationTrigger : MonoBehaviour ,IPointerEnterHandler,IPointerExitHandler
 {
     private ChargingStation station;
     [SerializeField]
     private Vector3 offset;
+    private IEventSystem eventSystem;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         station = GetComponentInParent<ChargingStation>();
+        eventSystem = ServiceLocator.Get<IEventSystem>();
         Image image = GetComponent<Image>();
         image.color = Color.clear;
     }
@@ -26,10 +28,6 @@ public class ChargingStationTrigger : MyButton,IPointerEnterHandler,IPointerExit
     public void OnPointerExit(PointerEventData eventData)
     {
         eventSystem.Invoke(EEvent.HideChargingStaionMessageWindow);
-    }
-    protected override void OnClick()
-    {
-        eventSystem.Invoke(EEvent.OpenChargingStationPanel, station);
     }
 
     private void OnDrawGizmos()
