@@ -1,9 +1,12 @@
-using Services;
-using System;
+using MySql.Data.MySqlClient;
+using Unity.Netcode;
 
-public class DatabaseManager : Service,IService
+public class DatabaseManager : NetworkBehaviour
 {
-    public override Type RegisterType => GetType();
+    private MySqlConnection connection;
 
-
+    private void Start()
+    {
+        
+    }
 }
