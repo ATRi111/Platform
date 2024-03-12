@@ -12,7 +12,6 @@ public class Button_Close : MyButton
 
     protected override void OnClick()
     {
-        Debug.Log(1);
         canvasGrounp.immediate_next = true;
         canvasGrounp.Visible = false;
     }

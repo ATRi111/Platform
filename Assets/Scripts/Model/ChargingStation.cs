@@ -1,10 +1,25 @@
-using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
 public class ChargingStation : NetworkBehaviour
 {
-    public NetworkVariable<StationStaticData> data;
+    public string id;
+    public float rate;
+    public StationStaticData data;
+
+    private void Awake()
+    {
+        NetworkObject.Spawn();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        if(IsServer)
+        {
+
+        }
+    }
 
     public void Update()
     {
@@ -40,9 +55,8 @@ public class ChargingStation : NetworkBehaviour
 [System.Serializable]
 public struct StationStaticData
 {
-    public FixedString32Bytes id;
-    public FixedString32Bytes type;
-    public float voltage;
+    public string type;
+    public string voltage;
     public float power;
     public float price;
 }
