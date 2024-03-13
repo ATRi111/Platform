@@ -25,12 +25,12 @@ public class DatabaseManager : NetworkBehaviour
         {
             try
             {
-                connection = new MySqlConnection(
-                    "server=127.0.0.1;" +
+                string str = "server=127.0.0.1;" +
                     "port=3306;" +
                     "user=root;" +
                     "password=123456;" +
-                    "database=data");
+                    "database=data";
+                connection = new MySqlConnection(str);
                 connection.Open();
             }
             catch(Exception e)
@@ -61,7 +61,7 @@ public class DatabaseManager : NetworkBehaviour
                 temp.Add(initializer.stations[i].id, initializer.stations[i]);
             }
             using MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "chargingstation_all";
+            command.CommandText = "all_chargingstation";
             command.CommandType = CommandType.StoredProcedure;
             using MySqlDataReader reader = command.ExecuteReader();
             for (int i = 0; reader.Read(); i++)

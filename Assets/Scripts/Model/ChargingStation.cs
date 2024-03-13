@@ -17,7 +17,6 @@ public class ChargingStation : NetworkBehaviour
         base.OnNetworkSpawn();
         if(IsServer)
         {
-
         }
     }
 
