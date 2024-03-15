@@ -17,7 +17,7 @@ public class StationInitializer : MonoBehaviour
             stations[i].data = new StationStaticData()
             {
                 type = "落地式",
-                voltage = "直流380V",
+                voltage = 380,
                 power = 30f,
                 price = 0.6f,
             };

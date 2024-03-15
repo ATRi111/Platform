@@ -55,7 +55,7 @@ public class ChargingStation : NetworkBehaviour
 public struct StationStaticData
 {
     public string type;
-    public string voltage;
+    public int voltage;
     public float power;
     public float price;
 }

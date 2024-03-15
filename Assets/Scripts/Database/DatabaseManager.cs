@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+using SQLite4Unity3d;
 using Services;
 using Services.Event;
 using System;
@@ -10,7 +10,7 @@ using UnityEngine;
 public class DatabaseManager : NetworkBehaviour
 {
     private IEventSystem eventSystem;
-    private MySqlConnection connection;
+    private SQLiteConnection connection;
 
     private void Start()
     {
@@ -25,13 +25,8 @@ public class DatabaseManager : NetworkBehaviour
         {
             try
             {
-                string str = "server=127.0.0.1;" +
-                    "port=3306;" +
-                    "user=root;" +
-                    "password=123456;" +
-                    "database=data";
-                connection = new MySqlConnection(str);
-                connection.Open();
+                string str = @"D:\Database\Platform.db";
+                connection = new SQLiteConnection(str);
             }
             catch(Exception e)
             {
@@ -59,14 +54,6 @@ public class DatabaseManager : NetworkBehaviour
             for (int i = 0; i < initializer.stations.Length; i++)
             {
                 temp.Add(initializer.stations[i].id, initializer.stations[i]);
-            }
-            using MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "all_chargingstation";
-            command.CommandType = CommandType.StoredProcedure;
-            using MySqlDataReader reader = command.ExecuteReader();
-            for (int i = 0; reader.Read(); i++)
-            {
-                Debug.Log(reader[i]);
             }
         }
     }
