@@ -1,9 +1,9 @@
-using SQLite4Unity3d;
 using Services;
+using Services.Asset;
 using Services.Event;
+using SQLite4Unity3d;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -11,10 +11,19 @@ public class DatabaseManager : NetworkBehaviour
 {
     private IEventSystem eventSystem;
     private SQLiteConnection connection;
+    private IAssetLoader assetLoader;
 
     private void Start()
     {
+        DontDestroyOnLoad(this);
         eventSystem = ServiceLocator.Get<IEventSystem>();
+        assetLoader = ServiceLocator.Get<IAssetLoader>();
+    }
+
+    public List<T> ExcuteQuery<T>(string name) where T : new ()
+    {
+        QuerySO so = assetLoader.Load<QuerySO>(name);
+        return connection.Query<T>(so.content);
     }
 
     public override void OnNetworkSpawn()
@@ -55,6 +64,13 @@ public class DatabaseManager : NetworkBehaviour
             {
                 temp.Add(initializer.stations[i].id, initializer.stations[i]);
             }
+            List<ChargingStationData> datas = ExcuteQuery<ChargingStationData>("AllChargingStation");
+            foreach (ChargingStation station in temp.Values)
+            {
+                ChargingStationData data = new ChargingStationData(station);
+                connection.Insert(data);
+            }
+            Debug.Log(datas.Count);
         }
     }
 }

@@ -1,67 +1,84 @@
-using System;
+using SQLite4Unity3d;
 
+[Table("ChargingStation")]
 public class ChargingStationData
 {
-    public string id;
-    public string type;
-    public float price;
-    public float power;
-    public int voltage;
+    [Column("id"),PrimaryKey]
+    public string Id { get; set; }
+    [Column("type")]
+    public string Type { get; set; }
+    [Column("price")]
+    public float Price { get; set; }
+    [Column("power")]
+    public float Power { get; set; }
+    [Column("voltage")]
+    public int Voltage { get; set; }
 
+    public ChargingStationData() { }
     public ChargingStationData(string id, string type, float price, float power, int voltage)
     {
-        this.id = id ?? throw new ArgumentNullException(nameof(id));
-        this.type = type;
-        this.price = price;
-        this.power = power;
-        this.voltage = voltage;
+        Id = id;
+        Type = type;
+        Price = price;
+        Power = power;
+        Voltage = voltage;
+    }
+    public ChargingStationData(ChargingStation station) : this(station.id, station.data.type, station.data.price, station.data.power, station.data.voltage)
+    {
+
     }
 }
 
+[Table("Fault")]
 public class FaultData
 {
-    public int id;
-    public string time;
-    public string content;
-    public bool solved;
+    public int Id { get; set; }
+    public string Time { get; set; }
+    public string Content { get; set; }
+    public bool Solved { get; set; }
 
+    public FaultData() { }
     public FaultData(int id, string time, string content, bool solved)
     {
-        this.id = id;
-        this.time = time;
-        this.content = content;
-        this.solved = solved;
+        Id = id;
+        Time = time;
+        Content = content;
+        Solved = solved;
     }
 }
 
+[Table("Usage")]
 public class UsageData
 {
-    public int id;
-    public int phoneNumber;
-    public string stationId;
-    public string time;
-    public EStationState state;
+    public int Id { get; set; }
+    public int PhoneNumber { get; set; }
+    public string StationId { get; set; }
+    public string Time { get; set; }
+    public EStationState State { get; set; }
 
+    public UsageData() { }
     public UsageData(int id, int phoneNumber, string stationId, string time, EStationState state)
     {
-        this.id = id;
-        this.phoneNumber = phoneNumber;
-        this.stationId = stationId;
-        this.time = time;
-        this.state = state;
+        Id = id;
+        PhoneNumber = phoneNumber;
+        StationId = stationId;
+        Time = time;
+        State = state;
     }
 }
 
+[Table("User")]
 public class UserData
 {
-    public int phoneNumber;
-    public string model;
-    public string password;
+    public int PhoneNumber { get; set; }
+    public string Model { get; set; }
+    public string Password { get; set; }
 
+    public UserData() { }
     public UserData(int phoneNumber, string model, string password)
     {
-        this.phoneNumber = phoneNumber;
-        this.model = model;
-        this.password = password;
+        PhoneNumber = phoneNumber;
+        Model = model;
+        Password = password;
     }
 }
