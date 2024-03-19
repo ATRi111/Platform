@@ -12,10 +12,10 @@ public class ChargingStationData
     [Column("power")]
     public float Power { get; set; }
     [Column("voltage")]
-    public int Voltage { get; set; }
+    public string Voltage { get; set; }
 
     public ChargingStationData() { }
-    public ChargingStationData(string id, string type, float price, float power, int voltage)
+    public ChargingStationData(string id, string type, float price, float power, string voltage)
     {
         Id = id;
         Type = type;
@@ -32,9 +32,13 @@ public class ChargingStationData
 [Table("Fault")]
 public class FaultData
 {
+    [Column("id"), PrimaryKey]
     public int Id { get; set; }
+    [Column("time")]
     public string Time { get; set; }
+    [Column("content")]
     public string Content { get; set; }
+    [Column("solved")]
     public bool Solved { get; set; }
 
     public FaultData() { }
@@ -50,10 +54,15 @@ public class FaultData
 [Table("Usage")]
 public class UsageData
 {
+    [Column("id"), PrimaryKey]
     public int Id { get; set; }
+    [Column("phoneNumber")]
     public int PhoneNumber { get; set; }
+    [Column("stationId")]
     public string StationId { get; set; }
+    [Column("time")]
     public string Time { get; set; }
+    [Column("state")]
     public EStationState State { get; set; }
 
     public UsageData() { }
@@ -70,8 +79,11 @@ public class UsageData
 [Table("User")]
 public class UserData
 {
+    [Column("phoneNumber"),PrimaryKey]
     public int PhoneNumber { get; set; }
+    [Column("model")]
     public string Model { get; set; }
+    [Column("password")]
     public string Password { get; set; }
 
     public UserData() { }

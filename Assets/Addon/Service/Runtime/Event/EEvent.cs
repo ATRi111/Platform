@@ -23,10 +23,6 @@ namespace Services.Event
         /// </summary>
         OpenChargingStationPanel,
         /// <summary>
-        /// 充电桩数据初始化完成，参数：StationInitializer
-        /// </summary>
-        AfterChargingStationInitialized,
-        /// <summary>
         /// 数据刷新
         /// </summary>
         Refresh,

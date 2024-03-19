@@ -7,11 +7,6 @@ public class ChargingStation : NetworkBehaviour
     public float rate;
     public StationStaticData data;
 
-    private void Awake()
-    {
-        NetworkObject.Spawn();
-    }
-
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -55,7 +50,7 @@ public class ChargingStation : NetworkBehaviour
 public struct StationStaticData
 {
     public string type;
-    public int voltage;
+    public string voltage;
     public float power;
     public float price;
 }
