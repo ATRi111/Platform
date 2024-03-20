@@ -1,19 +1,12 @@
-using Services;
 using Services.Event;
 using System.Collections.Generic;
-using Unity.Netcode;
 
-public class StationDataManager : NetworkBehaviour
+public class StationDataManager : DataManager
 {
-    private IEventSystem eventSystem;
-    private DatabaseManager databaseManager;
-    public Dictionary<string, ChargingStation> stationDict = new Dictionary<string, ChargingStation>();
+    private Dictionary<string, ChargingStation> stationDict = new Dictionary<string, ChargingStation>();
 
-    private void Awake()
+    protected override void Awake()
     {
-        eventSystem = ServiceLocator.Get<IEventSystem>();
-        if(NetworkManager.Singleton.IsServer)
-            databaseManager = DatabaseManager.FindInstance();
         ChargingStation[] stations = GetComponentsInChildren<ChargingStation>();
         for (int i = 0; i < stations.Length; i++)
         {
@@ -37,9 +30,9 @@ public class StationDataManager : NetworkBehaviour
         eventSystem.RemoveListener(EEvent.Refresh, UpdateData);
     }
 
-    private void Start()
+    protected override void Start()
     {
-        if (NetworkManager.Singleton.IsServer)
+        if (IsServer)
         {
             Initialize();
             UpdateData();
@@ -61,13 +54,21 @@ public class StationDataManager : NetworkBehaviour
         }
     }
 
-    private void UpdateData()
+    protected override void UpdateData()
     {
-        List<ChargingStationData> result = databaseManager.Query<ChargingStationData>("AllChargingStation");
-        for (int i = 0; i < result.Count; i++)
+        if(IsServer)
         {
-            if (stationDict.ContainsKey(result[i].Id))
-                stationDict[result[i].Id].data = result[i];
+            List<ChargingStationData> result = databaseManager.Query<ChargingStationData>("AllChargingStation");
+            for (int i = 0; i < result.Count; i++)
+            {
+                if (stationDict.ContainsKey(result[i].Id))
+                    stationDict[result[i].Id].data = result[i];
+            }
         }
+    }
+
+    private void GetUsage()
+    {
+
     }
 }
