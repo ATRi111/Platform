@@ -17,10 +17,7 @@ public class AutoSpawn : MonoBehaviour
 
         self = GetComponent<NetworkObject>();
         if (transform.parent != null)
-        {
             parent = transform.parent.GetComponentInParent<NetworkObject>();
-            transform.SetParent(null);
-        }
         else
             parent = null;
     }

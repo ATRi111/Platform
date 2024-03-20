@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class ChargingStation : NetworkBehaviour
 {
-    public string id;
     public float rate;
-    public StationStaticData data;
+    public ChargingStationData data;
 
     public override void OnNetworkSpawn()
     {
@@ -39,20 +38,6 @@ public class ChargingStation : NetworkBehaviour
             _ => null
         };
     }
-
-    private void OnValueChanged(StationStaticData prev, StationStaticData data)
-    {
-
-    }
-}
-
-[System.Serializable]
-public struct StationStaticData
-{
-    public string type;
-    public string voltage;
-    public float power;
-    public float price;
 }
 
 public enum EStationState

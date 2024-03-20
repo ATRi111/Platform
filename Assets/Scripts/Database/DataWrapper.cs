@@ -23,10 +23,6 @@ public class ChargingStationData
         Power = power;
         Voltage = voltage;
     }
-    public ChargingStationData(ChargingStation station) : this(station.id, station.data.type, station.data.price, station.data.power, station.data.voltage)
-    {
-
-    }
 }
 
 [Table("Fault")]

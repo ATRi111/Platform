@@ -38,12 +38,12 @@ public class ChargingStationPanel : MonoBehaviour
     {
         if (station == null)
             return;
-        StationStaticData data = station.data;
-        tmp.text = $"编号:{station.id}\n" +
-            $"充电桩类型:{data.type}\n" +
-            $"输入电压:{data.voltage:F1}V\n" +
-            $"输出功率:{data.power:F1}kW\n" +
-            $"电价:{data.price:F2}￥/kWh\n";
+        ChargingStationData data = station.data;
+        tmp.text = $"编号:{data.Id}\n" +
+            $"充电桩类型:{data.Type}\n" +
+            $"输入电压:{data.Voltage:F1}V\n" +
+            $"输出功率:{data.Power:F1}kW\n" +
+            $"电价:{data.Price:F2}￥/kWh\n";
         canvasGrounp.Visible = true;
     }
 

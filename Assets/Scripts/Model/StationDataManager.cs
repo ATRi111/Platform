@@ -18,16 +18,11 @@ public class StationDataManager : NetworkBehaviour
         stations = GetComponentsInChildren<ChargingStation>();
         for (int i = 0; i < stations.Length; i++)
         {
-            stations[i].id = i.ToString().PadLeft(6, '0');
-            stations[i].data = new StationStaticData()
-            {
-                type = "落地式",
-                voltage = i<= stations.Length/2 ? "直流380V" : "交流220V",
-                power = 30f,
-                price = 0.6f,
-            };
+            if(i <= stations.Length / 2)
+                stations[i].data = new ChargingStationData(i.ToString().PadLeft(6, '0'), "落地式", 0.5f, 150f, "直流380V");
+            else
+                stations[i].data = new ChargingStationData(i.ToString().PadLeft(6, '0'), "落地式", 0.6f, 300f, "直流380V");
         }
-
     }
 
     public override void OnNetworkSpawn()
@@ -38,13 +33,13 @@ public class StationDataManager : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        eventSystem.RemoveListener(EEvent.Refresh, UpdateData);
         base.OnNetworkDespawn();
+        eventSystem.RemoveListener(EEvent.Refresh, UpdateData);
     }
 
     private void Start()
     {
-        if (IsServer)
+        if (NetworkManager.Singleton.IsServer)
         {
             Initialize();
             UpdateData();
@@ -53,19 +48,19 @@ public class StationDataManager : NetworkBehaviour
 
     private void Initialize()
     {
-        Dictionary<string, ChargingStation> temp = new Dictionary<string, ChargingStation>();
+        Dictionary<string, ChargingStationData> temp = new Dictionary<string, ChargingStationData>();
         for (int i = 0; i < stations.Length; i++)
         {
-            temp.Add(stations[i].id, stations[i]);
+            temp.Add(stations[i].data.Id, stations[i].data);
         }
         List<ChargingStationData> result = databaseManager.Query<ChargingStationData>("AllChargingStation");
         for (int i = 0; i < result.Count; i++)
         {
             temp.Remove(result[i].Id);
         }
-        foreach (ChargingStation station in temp.Values)
+        foreach (ChargingStationData data in temp.Values)
         {
-            databaseManager.Insert(new ChargingStationData(station));
+            databaseManager.Insert(data);
         }
     }
 
