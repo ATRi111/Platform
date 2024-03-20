@@ -41,9 +41,9 @@ public class ChargingStationPanel : MonoBehaviour
         ChargingStationData data = station.data;
         tmp.text = $"编号:{data.Id}\n" +
             $"充电桩类型:{data.Type}\n" +
-            $"输入电压:{data.Voltage:F1}V\n" +
+            $"输入电压:{data.Voltage}\n" +
             $"输出功率:{data.Power:F1}kW\n" +
-            $"电价:{data.Price:F2}￥/kWh\n";
+            $"电价:{data.Price:F2}元/度\n";
         canvasGrounp.Visible = true;
     }
 
