@@ -1,12 +1,28 @@
+using Newtonsoft.Json;
+using Services;
 using Services.Event;
 using System.Collections.Generic;
+using Unity.Netcode;
 
 public class StationDataManager : DataManager
 {
+    private class RpcData
+    {
+        public List<ChargingStationData> stationDatas;
+        public List<UsageData> usageDatas;
+
+        public RpcData(List<ChargingStationData> stationDatas, List<UsageData> usageDatas)
+        {
+            this.stationDatas = stationDatas;
+            this.usageDatas = usageDatas;
+        }
+    }
+
     private Dictionary<string, ChargingStation> stationDict = new Dictionary<string, ChargingStation>();
 
     protected override void Awake()
     {
+        base.Awake();
         ChargingStation[] stations = GetComponentsInChildren<ChargingStation>();
         for (int i = 0; i < stations.Length; i++)
         {
@@ -21,22 +37,18 @@ public class StationDataManager : DataManager
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        eventSystem.AddListener(EEvent.Refresh, UpdateData);
+        eventSystem.AddListener(EEvent.Refresh, GetDataRpc); 
+        if (IsServer)
+        {
+            Initialize();
+            GetDataRpc();
+        }
     }
 
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-        eventSystem.RemoveListener(EEvent.Refresh, UpdateData);
-    }
-
-    protected override void Start()
-    {
-        if (IsServer)
-        {
-            Initialize();
-            UpdateData();
-        }
+        eventSystem.RemoveListener(EEvent.Refresh, GetDataRpc);
     }
 
     private void Initialize()
@@ -54,21 +66,37 @@ public class StationDataManager : DataManager
         }
     }
 
-    protected override void UpdateData()
+    [Rpc(SendTo.Server)]
+    protected override void GetDataRpc()
     {
-        if(IsServer)
-        {
-            List<ChargingStationData> result = databaseManager.Query<ChargingStationData>("AllChargingStation");
-            for (int i = 0; i < result.Count; i++)
-            {
-                if (stationDict.ContainsKey(result[i].Id))
-                    stationDict[result[i].Id].data = result[i];
-            }
-        }
+        List<ChargingStationData> stationDatas = databaseManager.Query<ChargingStationData>("AllChargingStation");
+        List<UsageData> usageDatas = databaseManager.Query<UsageData>("AllUsage");
+        RpcData data = new RpcData(stationDatas, usageDatas);
+        string json = JsonConvert.SerializeObject(data, JsonTool.DefaultSettings);
+        SendDataRpc(json);
     }
 
-    private void GetUsage()
+    [Rpc(SendTo.ClientsAndHost)]
+    private void SendDataRpc(string json)
     {
-
+        RpcData data = JsonConvert.DeserializeObject<RpcData>(json);
+        List<ChargingStationData> stationDatas = data.stationDatas;
+        List<UsageData> usageDatas = data.usageDatas;
+        for (int i = 0; i < stationDatas.Count; i++)
+        {
+            string id = stationDatas[i].Id;
+            if (stationDict.ContainsKey(id))
+                stationDict[id].data = stationDatas[i];
+        }
+        foreach(ChargingStation station in stationDict.Values)
+        {
+            station.usageRecord.Clear();
+        }
+        for (int i = 0; i < usageDatas.Count; i++)
+        {
+            string id = usageDatas[i].StationId;
+            if (stationDict.ContainsKey(id))
+                stationDict[id].usageRecord.Add(usageDatas[i]);
+        }
     }
 }

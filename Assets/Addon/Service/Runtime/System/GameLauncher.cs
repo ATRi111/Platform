@@ -1,6 +1,7 @@
 ﻿using Services;
-using Services.SceneManagement;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-999)]
 public class GameLauncher : MonoBehaviour
@@ -52,6 +53,6 @@ public class GameLauncher : MonoBehaviour
             GameInitSettings settings = Resources.Load<GameInitSettings>(nameof(GameInitSettings));
             StartGameIndex = settings == null ? 1 : settings.startGameIndex;
         }
-        ServiceLocator.Get<ISceneController>().LoadScene(StartGameIndex);
+        NetworkManager.Singleton.SceneManager.LoadScene("Log", LoadSceneMode.Single);
     }
 }

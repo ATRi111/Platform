@@ -11,20 +11,19 @@ public abstract class DataManager : NetworkBehaviour
     protected virtual void Awake()
     {
         eventSystem = ServiceLocator.Get<IEventSystem>();
-        if (IsServer)
-            databaseManager = DatabaseManager.FindInstance();
+        databaseManager = DatabaseManager.FindInstance();
     }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        eventSystem.AddListener(EEvent.Refresh, UpdateData);
+        eventSystem.AddListener(EEvent.Refresh, GetDataRpc);
     }
 
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-        eventSystem.RemoveListener(EEvent.Refresh, UpdateData);
+        eventSystem.RemoveListener(EEvent.Refresh, GetDataRpc);
     }
 
     protected virtual void Start()
@@ -32,5 +31,5 @@ public abstract class DataManager : NetworkBehaviour
 
     }
 
-    protected abstract void UpdateData();
+    protected abstract void GetDataRpc();
 }

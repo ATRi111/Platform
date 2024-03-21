@@ -1,42 +1,26 @@
-using Unity.Netcode;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargingStation : NetworkBehaviour
+public class ChargingStation : MonoBehaviour
 {
     public float rate;
     public ChargingStationData data;
-
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-        if(IsServer)
-        {
-        }
-    }
-
-    public void Update()
-    {
-        if (IsServer)
-        {
-            
-        }
-    }
+    public List<UsageData> usageRecord = new List<UsageData>();
 
     public EStationState GetState()
     {
-        return EStationState.Available;
+        if(usageRecord.Count == 0)
+            return EStationState.Available;
+        return (EStationState)usageRecord[^1].State;
     }
 
     public string GetCarType()
     {
-        int r = Random.Range(0, 4);
-        return r switch
+        if(GetState() == EStationState.Ocuppied)
         {
-            0 => "Sedan",
-            1 => "Jeep",
-            2 => "Sport",
-            _ => null
-        };
+            //
+        }
+        return null;
     }
 }
 

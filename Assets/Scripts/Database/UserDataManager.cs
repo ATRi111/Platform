@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 
 public class UserDataManager : DataManager
 {
@@ -11,9 +12,10 @@ public class UserDataManager : DataManager
         dirty = true;
     }
 
-    protected override void UpdateData()
+    [Rpc(SendTo.Server)]
+    protected override void GetDataRpc()
     {
-        if(IsServer && dirty)
+        if(dirty)
         {
             userDict.Clear();
             List<UserData> result = databaseManager.Query<UserData>("AllUser");
