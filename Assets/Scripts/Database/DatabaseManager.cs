@@ -17,7 +17,7 @@ public class DatabaseManager : NetworkBehaviour
     private SQLiteConnection connection;
     private IAssetLoader assetLoader;
 
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(this);
         eventSystem = ServiceLocator.Get<IEventSystem>();

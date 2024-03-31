@@ -1,29 +1,35 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using Unity.Netcode;
 
 public class UserDataManager : DataManager
 {
-    private bool dirty;
-    private Dictionary<int,UserData> userDict = new Dictionary<int,UserData>();
-
-    protected override void Awake()
+    private class SyncData
     {
-        base.Awake();
-        dirty = true;
+        public List<UserData> userDatas;
+
+        public SyncData(List<UserData> userDatas)
+        {
+            this.userDatas = userDatas;
+        }
     }
 
-    [Rpc(SendTo.Server)]
-    protected override void GetDataRpc()
+    private Dictionary<int,UserData> userDict = new Dictionary<int,UserData>();
+
+    protected override void ReadData()
     {
-        if(dirty)
+        List<UserData> result = databaseManager.Query<UserData>("AllUser");
+        SyncData data = new SyncData(result);
+        dataJson = JsonConvert.SerializeObject(data);
+        SendJsonRpc(dataJson);
+    }
+
+    public override void UpdateData()
+    {
+        SyncData data = JsonConvert.DeserializeObject<SyncData>(dataJson);
+        userDict.Clear();
+        for (int i = 0; i < data.userDatas.Count; i++)
         {
-            userDict.Clear();
-            List<UserData> result = databaseManager.Query<UserData>("AllUser");
-            for (int i = 0; i < result.Count; i++)
-            {
-                userDict.Add(result[i].PhoneNumber, result[i]);
-            }
-            dirty = false;
+            userDict.Add(data.userDatas[i].PhoneNumber, data.userDatas[i]);
         }
     }
 }

@@ -1,17 +1,16 @@
 using Newtonsoft.Json;
 using Services;
-using Services.Event;
 using System.Collections.Generic;
-using Unity.Netcode;
+using UnityEngine;
 
 public class StationDataManager : DataManager
 {
-    private class RpcData
+    private class SyncData
     {
         public List<ChargingStationData> stationDatas;
         public List<UsageData> usageDatas;
 
-        public RpcData(List<ChargingStationData> stationDatas, List<UsageData> usageDatas)
+        public SyncData(List<ChargingStationData> stationDatas, List<UsageData> usageDatas)
         {
             this.stationDatas = stationDatas;
             this.usageDatas = usageDatas;
@@ -36,19 +35,9 @@ public class StationDataManager : DataManager
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
-        eventSystem.AddListener(EEvent.Refresh, GetDataRpc); 
         if (IsServer)
-        {
             Initialize();
-            GetDataRpc();
-        }
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        base.OnNetworkDespawn();
-        eventSystem.RemoveListener(EEvent.Refresh, GetDataRpc);
+        base.OnNetworkSpawn();
     }
 
     private void Initialize()
@@ -66,20 +55,19 @@ public class StationDataManager : DataManager
         }
     }
 
-    [Rpc(SendTo.Server)]
-    protected override void GetDataRpc()
+    protected override void ReadData()
     {
         List<ChargingStationData> stationDatas = databaseManager.Query<ChargingStationData>("AllChargingStation");
         List<UsageData> usageDatas = databaseManager.Query<UsageData>("AllUsage");
-        RpcData data = new RpcData(stationDatas, usageDatas);
-        string json = JsonConvert.SerializeObject(data, JsonTool.DefaultSettings);
-        SendDataRpc(json);
+        SyncData data = new SyncData(stationDatas, usageDatas);
+        dataJson = JsonConvert.SerializeObject(data, JsonTool.DefaultSettings);
+        SendJsonRpc(dataJson);
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    private void SendDataRpc(string json)
+    public override void UpdateData()
     {
-        RpcData data = JsonConvert.DeserializeObject<RpcData>(json);
+        Debug.Log(dataJson);
+        SyncData data = JsonConvert.DeserializeObject<SyncData>(dataJson);
         List<ChargingStationData> stationDatas = data.stationDatas;
         List<UsageData> usageDatas = data.usageDatas;
         for (int i = 0; i < stationDatas.Count; i++)
@@ -88,7 +76,7 @@ public class StationDataManager : DataManager
             if (stationDict.ContainsKey(id))
                 stationDict[id].data = stationDatas[i];
         }
-        foreach(ChargingStation station in stationDict.Values)
+        foreach (ChargingStation station in stationDict.Values)
         {
             station.usageRecord.Clear();
         }

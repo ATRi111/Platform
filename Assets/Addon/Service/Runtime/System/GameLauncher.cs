@@ -53,6 +53,6 @@ public class GameLauncher : MonoBehaviour
             GameInitSettings settings = Resources.Load<GameInitSettings>(nameof(GameInitSettings));
             StartGameIndex = settings == null ? 1 : settings.startGameIndex;
         }
-        NetworkManager.Singleton.SceneManager.LoadScene("Log", LoadSceneMode.Single);
+        SceneManager.LoadScene("Log", LoadSceneMode.Single);
     }
 }
