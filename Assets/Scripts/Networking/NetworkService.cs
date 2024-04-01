@@ -1,10 +1,18 @@
+using Services;
+using Services.Event;
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class NetworkTest : MonoBehaviour
+public class NetworkService : Service,IService
 {
-    private void Start()
+    public override Type RegisterType => typeof(NetworkService);
+    [AutoService]
+    protected IEventSystem eventSystem;
+
+    protected override void Start()
     {
+        base.Start();
         NetworkManager.Singleton.OnClientConnectedCallback += OnConnect;
         NetworkManager.Singleton.OnClientDisconnectCallback += OnDisConnent;
         NetworkManager.Singleton.OnServerStarted += OnStart;

@@ -23,12 +23,12 @@ public abstract class DataManager : NetworkBehaviour
         {
             eventSystem.AddListener(EEvent.UpdateData, ReadData);
             ReadData();
+            UpdateData();
         }
         else
         {
             AskForJsonRpc();
         }
-        UpdateData();
     }
 
     public override void OnNetworkDespawn()
@@ -47,9 +47,7 @@ public abstract class DataManager : NetworkBehaviour
     /// (服务器)从数据库读数据,并更新json
     /// </summary>
     protected abstract void ReadData();
-    /// <summary>
-    /// 请求服务器发送Json
-    /// </summary>
+  
     [Rpc(SendTo.Server)]
     protected void AskForJsonRpc()
     {
@@ -58,11 +56,11 @@ public abstract class DataManager : NetworkBehaviour
     /// <summary>
     /// 向客户端发送json
     /// </summary>
-
-    [Rpc(SendTo.ClientsAndHost)]
+    [Rpc(SendTo.NotServer)]
     protected void SendJsonRpc(string json)
     {
         dataJson = json;
+        UpdateData();
     }
     /// <summary>
     /// 根据json更新数据
