@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Services;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class StationDataManager : DataManager
 {
@@ -64,8 +65,9 @@ public class StationDataManager : DataManager
         UpdateData();
     }
 
-    public override void UpdateData()
+    protected override void UpdateData()
     {
+        base.UpdateData();
         SyncData data = JsonConvert.DeserializeObject<SyncData>(dataJson);
         List<ChargingStationData> stationDatas = data.stationDatas;
         List<UsageData> usageDatas = data.usageDatas;

@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class UserDataManager : DataManager
 {
@@ -23,8 +24,9 @@ public class UserDataManager : DataManager
         SendJsonRpc(dataJson);
     }
 
-    public override void UpdateData()
+    protected override void UpdateData()
     {
+        base.UpdateData();
         SyncData data = JsonConvert.DeserializeObject<SyncData>(dataJson);
         userDict.Clear();
         for (int i = 0; i < data.userDatas.Count; i++)

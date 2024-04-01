@@ -1,6 +1,7 @@
 using Services;
 using Services.Event;
 using Unity.Netcode;
+using UnityEngine;
 
 public abstract class DataManager : NetworkBehaviour
 {
@@ -23,7 +24,6 @@ public abstract class DataManager : NetworkBehaviour
         {
             eventSystem.AddListener(EEvent.UpdateData, ReadData);
             ReadData();
-            UpdateData();
         }
         else
         {
@@ -65,5 +65,8 @@ public abstract class DataManager : NetworkBehaviour
     /// <summary>
     /// 根据json更新数据
     /// </summary>
-    public abstract void UpdateData();
+    protected virtual void UpdateData()
+    {
+        Debug.Log(dataJson);
+    }
 }
