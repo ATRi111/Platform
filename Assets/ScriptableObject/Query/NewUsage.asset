@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c92e4dad13834374aa7feb2ec3df74f5, type: 3}
-  m_Name: AllUsage
+  m_Name: NewUsage
   m_EditorClassIdentifier: 
-  content: SELECT * FROM Usage
+  content: SELECT * FROM Usage ORDER BY id DESC LIMIT 100

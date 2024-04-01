@@ -1,10 +1,18 @@
+using Newtonsoft.Json;
 using Services;
 using Services.Event;
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
 public abstract class DataManager : NetworkBehaviour
 {
+    public static T FindInstance<T>() where T : NetworkBehaviour
+    {
+        Type type = typeof(T);
+        return GameObject.Find(type.Name).GetComponent<T>();
+    }
+
     protected new static bool IsServer => NetworkManager.Singleton.IsServer;
     protected IEventSystem eventSystem;
     protected DatabaseManager databaseManager;
@@ -46,7 +54,14 @@ public abstract class DataManager : NetworkBehaviour
     /// <summary>
     /// (服务器)从数据库读数据,并更新json
     /// </summary>
-    protected abstract void ReadData();
+    protected void ReadData()
+    {
+        dataJson = JsonConvert.SerializeObject(Query(), JsonTool.DefaultSettings);
+        SendJsonRpc(dataJson);
+        UpdateData();
+    }
+
+    protected abstract object Query();
   
     [Rpc(SendTo.Server)]
     protected void AskForJsonRpc()

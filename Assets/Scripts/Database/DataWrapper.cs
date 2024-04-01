@@ -1,5 +1,4 @@
 using SQLite4Unity3d;
-using Unity.Netcode;
 
 [Table("ChargingStation")]
 public class ChargingStationData
@@ -31,6 +30,9 @@ public class FaultData
 {
     [Column("id"), PrimaryKey]
     public int Id { get; set; }
+
+    [Column("stationId")]
+    public string StationId { get; set; }
     [Column("time")]
     public string Time { get; set; }
     [Column("content")]

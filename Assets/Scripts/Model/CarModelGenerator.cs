@@ -34,7 +34,7 @@ public class CarModelGenerator : MonoBehaviour
         EStationState state = station.GetState();
         switch(state)
         {
-            case EStationState.Available:
+            case EStationState.Ocuppied:
                 string newType = station.GetCarType();
                 if (newType != carType)
                 {

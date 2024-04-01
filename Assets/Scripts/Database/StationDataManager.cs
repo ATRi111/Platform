@@ -1,7 +1,5 @@
 using Newtonsoft.Json;
-using Services;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class StationDataManager : DataManager
 {
@@ -9,15 +7,17 @@ public class StationDataManager : DataManager
     {
         public List<ChargingStationData> stationDatas;
         public List<UsageData> usageDatas;
+        public List<FaultData> faultDatas;
 
-        public SyncData(List<ChargingStationData> stationDatas, List<UsageData> usageDatas)
+        public SyncData(List<ChargingStationData> stationDatas, List<UsageData> usageDatas, List<FaultData> faultDatas)
         {
             this.stationDatas = stationDatas;
             this.usageDatas = usageDatas;
+            this.faultDatas = faultDatas;
         }
     }
 
-    private Dictionary<string, ChargingStation> stationDict = new Dictionary<string, ChargingStation>();
+    public Dictionary<string, ChargingStation> stationDict = new Dictionary<string, ChargingStation>();
 
     protected override void Awake()
     {
@@ -55,14 +55,12 @@ public class StationDataManager : DataManager
         }
     }
 
-    protected override void ReadData()
+    protected override object Query()
     {
         List<ChargingStationData> stationDatas = databaseManager.Query<ChargingStationData>("AllChargingStation");
-        List<UsageData> usageDatas = databaseManager.Query<UsageData>("AllUsage");
-        SyncData data = new SyncData(stationDatas, usageDatas);
-        dataJson = JsonConvert.SerializeObject(data, JsonTool.DefaultSettings);
-        SendJsonRpc(dataJson);
-        UpdateData();
+        List<UsageData> usageDatas = databaseManager.Query<UsageData>("NewUsage");
+        List<FaultData> faultDatas = databaseManager.Query<FaultData>("NewFault");
+        return new SyncData(stationDatas, usageDatas, faultDatas);
     }
 
     protected override void UpdateData()

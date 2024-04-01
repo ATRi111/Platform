@@ -1,6 +1,5 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class UserDataManager : DataManager
 {
@@ -14,14 +13,12 @@ public class UserDataManager : DataManager
         }
     }
 
-    private Dictionary<int,UserData> userDict = new Dictionary<int,UserData>();
+    public Dictionary<int,UserData> userDict = new Dictionary<int,UserData>();
 
-    protected override void ReadData()
+    protected override object Query()
     {
         List<UserData> result = databaseManager.Query<UserData>("AllUser");
-        SyncData data = new SyncData(result);
-        dataJson = JsonConvert.SerializeObject(data);
-        SendJsonRpc(dataJson);
+        return new SyncData(result);
     }
 
     protected override void UpdateData()
