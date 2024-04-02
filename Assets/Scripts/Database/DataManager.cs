@@ -60,18 +60,6 @@ public abstract class DataManager : NetworkBehaviour
         SendJsonRpc(dataJson);
         UpdateState();
     }
-    [Rpc(SendTo.Server)]
-    protected void ModifyDataRpc(object tuple)
-    {
-        databaseManager.Modify(tuple);
-        SendJsonRpc(dataJson);
-    }
-    [Rpc(SendTo.Server)]
-    protected void InsertDataRpc(object tuple)
-    {
-        databaseManager.Insert(tuple);
-        SendJsonRpc(dataJson);
-    }
 
     protected abstract object Query();
   

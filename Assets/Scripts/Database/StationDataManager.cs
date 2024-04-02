@@ -102,7 +102,7 @@ public class StationDataManager : DataManager
         databaseManager.QueryWithoutSO<FaultData>(query);
     }
     [Rpc(SendTo.Server)]
-    public void ModifyFaultRpc(string id,string content,bool solved)
+    public void ModifyFaultRpc(string id, string content, bool solved)
     {
         string s = solved ? "0" : "1";
         string query = $"UPDATE Fault SET content='{content}', solved = {s} WHERE id = '{id}')";
