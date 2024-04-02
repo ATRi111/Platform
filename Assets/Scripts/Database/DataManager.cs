@@ -35,7 +35,7 @@ public abstract class DataManager : NetworkBehaviour
         }
         else
         {
-            AskForJsonRpc();
+            AskForJsonRpc(NetworkManager.LocalClientId);
         }
     }
 
@@ -64,15 +64,16 @@ public abstract class DataManager : NetworkBehaviour
     protected abstract object Query();
   
     [Rpc(SendTo.Server)]
-    protected void AskForJsonRpc()
+    protected void AskForJsonRpc(ulong clientId)
     {
-        SendJsonRpc(dataJson);
+        Debug.Log($"client {clientId} ask for json");
+        SendJsonRpc(dataJson, RpcTarget.Single(clientId, RpcTargetUse.Temp));
     }
     /// <summary>
     /// 向客户端发送json
     /// </summary>
-    [Rpc(SendTo.NotServer)]
-    protected void SendJsonRpc(string json)
+    [Rpc(SendTo.NotServer, AllowTargetOverride = true)]
+    protected void SendJsonRpc(string json, RpcParams _ = default)
     {
         dataJson = json;
         UpdateData();
