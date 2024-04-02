@@ -1,9 +1,11 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 
 public class StationDataManager : DataManager
 {
-    private class SyncData
+    public class SyncData
     {
         public List<ChargingStationData> stationDatas;
         public List<UsageData> usageDatas;
@@ -63,9 +65,9 @@ public class StationDataManager : DataManager
         return new SyncData(stationDatas, usageDatas, faultDatas);
     }
 
-    protected override void UpdateData()
+    protected override void UpdateState()
     {
-        base.UpdateData();
+        base.UpdateState();
         SyncData data = JsonConvert.DeserializeObject<SyncData>(dataJson);
         List<ChargingStationData> stationDatas = data.stationDatas;
         List<UsageData> usageDatas = data.usageDatas;
@@ -85,5 +87,25 @@ public class StationDataManager : DataManager
             if (stationDict.ContainsKey(id))
                 stationDict[id].usageRecord.Add(usageDatas[i]);
         }
+    }
+    [Rpc(SendTo.Server)]
+    public void InsertUsageRpc(int phoneNumber, string stationId, EStationState state)
+    {
+        string query = $"INSERT INTO Usage VALUES (NULL, {phoneNumber}, '{stationId}', '{DateTime.Now}',{(int)state})";
+        databaseManager.QueryWithoutSO<UsageData>(query);
+    }
+
+    [Rpc(SendTo.Server)]
+    public void InsertFaultRpc(string stationId, string content)
+    {
+        string query = $"INSERT INTO Fault VALUES (NULL, '{stationId}',  '{DateTime.Now}','{content}',0)";
+        databaseManager.QueryWithoutSO<FaultData>(query);
+    }
+    [Rpc(SendTo.Server)]
+    public void ModifyFaultRpc(string id,string content,bool solved)
+    {
+        string s = solved ? "0" : "1";
+        string query = $"UPDATE Fault SET content='{content}', solved = {s} WHERE id = '{id}')";
+        databaseManager.QueryWithoutSO<FaultData>(query);
     }
 }

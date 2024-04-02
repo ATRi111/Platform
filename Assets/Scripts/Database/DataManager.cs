@@ -58,7 +58,19 @@ public abstract class DataManager : NetworkBehaviour
     {
         dataJson = JsonConvert.SerializeObject(Query(), JsonTool.DefaultSettings);
         SendJsonRpc(dataJson);
-        UpdateData();
+        UpdateState();
+    }
+    [Rpc(SendTo.Server)]
+    protected void ModifyDataRpc(object tuple)
+    {
+        databaseManager.Modify(tuple);
+        SendJsonRpc(dataJson);
+    }
+    [Rpc(SendTo.Server)]
+    protected void InsertDataRpc(object tuple)
+    {
+        databaseManager.Insert(tuple);
+        SendJsonRpc(dataJson);
     }
 
     protected abstract object Query();
@@ -76,12 +88,12 @@ public abstract class DataManager : NetworkBehaviour
     protected void SendJsonRpc(string json, RpcParams _ = default)
     {
         dataJson = json;
-        UpdateData();
+        UpdateState();
     }
     /// <summary>
-    /// 根据json更新数据
+    /// 根据json更新游戏对象的状态
     /// </summary>
-    protected virtual void UpdateData()
+    protected virtual void UpdateState()
     {
         Debug.Log(dataJson);
     }

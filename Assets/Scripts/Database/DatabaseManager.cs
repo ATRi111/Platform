@@ -29,17 +29,21 @@ public class DatabaseManager : NetworkBehaviour
         QuerySO so = assetLoader.Load<QuerySO>(name);
         return connection.Query<T>(so.content);
     }
-
     public List<T> QueryWithArguments<T>(string name,params string[] args) where T : new()
     {
         QuerySO so = assetLoader.Load<QuerySO>(name);
         return connection.Query<T>(so.ReplaceArguments(args));
     }
-
+    public List<T> QueryWithoutSO<T>(string content) where T : new()
+    {
+        return connection.Query<T>(content);
+    }
     public int Insert(IEnumerable collection)
         => connection.InsertAll(collection);
-    public int Insert<T>(T tuple)
+    public int Insert(object tuple)
         => connection.Insert(tuple);
+    public int Modify(object tuple)
+        => connection.Update(tuple);
 
     public override void OnNetworkSpawn()
     {

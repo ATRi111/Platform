@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class UserDataManager : DataManager
 {
-    private class SyncData
+    public class SyncData
     {
         public List<UserData> userDatas;
 
@@ -21,9 +21,9 @@ public class UserDataManager : DataManager
         return new SyncData(result);
     }
 
-    protected override void UpdateData()
+    protected override void UpdateState()
     {
-        base.UpdateData();
+        base.UpdateState();
         SyncData data = JsonConvert.DeserializeObject<SyncData>(dataJson);
         userDict.Clear();
         for (int i = 0; i < data.userDatas.Count; i++)
