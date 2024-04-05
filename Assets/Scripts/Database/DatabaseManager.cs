@@ -5,6 +5,7 @@ using SQLite4Unity3d;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -52,7 +53,7 @@ public class DatabaseManager : NetworkBehaviour
         {
             try
             {
-                string str = @"D:\Database\Platform.db";
+                string str = Path.Combine(Application.streamingAssetsPath, "Platform.db");
                 connection = new SQLiteConnection(str);
             }
             catch(Exception e)
