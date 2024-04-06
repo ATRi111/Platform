@@ -30,11 +30,12 @@ public abstract class DataManager : NetworkBehaviour
         base.OnNetworkSpawn();
         if (IsServer)
         {
-            eventSystem.AddListener(EEvent.UpdateData, ReadData);
+            eventSystem.AddListener(EEvent.AfterDatabaseUpdate, ReadData);
             ReadData();
         }
         else
         {
+            eventSystem.AddListener<ChargingStation>(EEvent.OpenChargingStationPanel, OnOpenChargingStationPanel);
             AskForJsonRpc(NetworkManager.LocalClientId);
         }
     }
@@ -43,7 +44,13 @@ public abstract class DataManager : NetworkBehaviour
     {
         base.OnNetworkDespawn();
         if(IsServer)
-            eventSystem.RemoveListener(EEvent.UpdateData, ReadData);
+        {
+            eventSystem.RemoveListener(EEvent.AfterDatabaseUpdate, ReadData);
+        }
+        else
+        {
+            eventSystem.RemoveListener<ChargingStation>(EEvent.OpenChargingStationPanel, OnOpenChargingStationPanel);
+        }
     }
 
     protected virtual void Start()
@@ -85,4 +92,7 @@ public abstract class DataManager : NetworkBehaviour
     {
         Debug.Log(dataJson);
     }
+
+    protected void OnOpenChargingStationPanel(ChargingStation _)
+        => AskForJsonRpc(NetworkManager.LocalClientId);
 }

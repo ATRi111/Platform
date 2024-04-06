@@ -7,8 +7,12 @@ public class ChargingStationPanel : MonoBehaviour
 {
     private IEventSystem eventSystem;
     [SerializeField]
-    private TextMeshProUGUI tmp;
+    private TextMeshProUGUI stationData;
+    [SerializeField]
+    private TextMeshProUGUI stationState;
     private MyCanvasGrounp canvasGrounp;
+    [HideInInspector]
+    public ChargingStation activeStation;
 
     private void Awake()
     {
@@ -18,7 +22,7 @@ public class ChargingStationPanel : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape))
+        if(Input.GetKeyUp(KeyCode.Escape) || Input.GetMouseButtonDown(1))
         {
             Hide();
         }
@@ -36,19 +40,35 @@ public class ChargingStationPanel : MonoBehaviour
 
     private void Show(ChargingStation station)
     {
-        if (station == null)
+        activeStation = station;
+        ShowStationData();
+        ShowStationState();
+        canvasGrounp.Visible = true;
+    }
+
+    private void ShowStationData()
+    {
+        if (activeStation == null)
             return;
-        ChargingStationData data = station.data;
-        tmp.text = $"编号:{data.Id}\n" +
+        ChargingStationData data = activeStation.data;
+        stationData.text = $"编号:{data.Id}\n" +
             $"充电桩类型:{data.Type}\n" +
             $"输入电压:{data.Voltage}\n" +
             $"输出功率:{data.Power:F1}kW\n" +
             $"电价:{data.Price:F2}元/度\n";
-        canvasGrounp.Visible = true;
+    }
+
+    private void ShowStationState()
+    {
+        if (activeStation == null)
+            return;
+        stationState.text = $"当前状态:{activeStation.GetState()}" +
+            $"充电进度:{activeStation.rate:p0}";
     }
 
     private void Hide()
     {
         canvasGrounp.Visible = false;
+        activeStation = null;
     }
 }
