@@ -14,6 +14,10 @@ public class UserDataManager : DataManager
     }
 
     public Dictionary<int,UserData> userDict = new Dictionary<int,UserData>();
+    public int LocalUserPhoneNumber()
+    {
+        return 123456;
+    }
 
     protected override object Query()
     {

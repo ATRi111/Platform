@@ -8,6 +8,7 @@ public class ChargingStation : MonoBehaviour
     public List<UsageData> usageRecord = new List<UsageData>();
     public List<FaultData> faultRecord = new List<FaultData>();
     private UserDataManager userDataManager;
+    private StationDataManager stationDataManager;
 
     private void Awake()
     {

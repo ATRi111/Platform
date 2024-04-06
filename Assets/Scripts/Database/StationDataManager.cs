@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Services.Event;
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -87,12 +88,15 @@ public class StationDataManager : DataManager
             if (stationDict.ContainsKey(id))
                 stationDict[id].usageRecord.Add(usageDatas[i]);
         }
+        eventSystem.Invoke(EEvent.Refresh);
     }
+
     [Rpc(SendTo.Server)]
     public void InsertUsageRpc(int phoneNumber, string stationId, EStationState state)
     {
         string query = $"INSERT INTO Usage VALUES (NULL, {phoneNumber}, '{stationId}', '{DateTime.Now}',{(int)state})";
         databaseManager.QueryWithoutSO<UsageData>(query);
+        AskForJsonRpc(NetworkManager.LocalClientId);
     }
 
     [Rpc(SendTo.Server)]
@@ -100,6 +104,7 @@ public class StationDataManager : DataManager
     {
         string query = $"INSERT INTO Fault VALUES (NULL, '{stationId}',  '{DateTime.Now}','{content}',0)";
         databaseManager.QueryWithoutSO<FaultData>(query);
+        AskForJsonRpc(NetworkManager.LocalClientId);
     }
     [Rpc(SendTo.Server)]
     public void ModifyFaultRpc(string id, string content, bool solved)
@@ -107,5 +112,6 @@ public class StationDataManager : DataManager
         string s = solved ? "0" : "1";
         string query = $"UPDATE Fault SET content='{content}', solved = {s} WHERE id = '{id}')";
         databaseManager.QueryWithoutSO<FaultData>(query);
+        AskForJsonRpc(NetworkManager.LocalClientId);
     }
 }

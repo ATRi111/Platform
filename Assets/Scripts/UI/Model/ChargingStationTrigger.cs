@@ -21,7 +21,6 @@ public class ChargingStationTrigger : MonoBehaviour ,IPointerEnterHandler,IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        eventSystem.Invoke(EEvent.Refresh);
         eventSystem.Invoke(EEvent.ShowChargingStaionMessageWindow, station, transform.position + offset);
     }
 

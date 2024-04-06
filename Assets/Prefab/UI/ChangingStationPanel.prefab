@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 326988568329139611}
   - component: {fileID: 8195729957085690444}
   - component: {fileID: 6254621046135219228}
+  - component: {fileID: 659378616820871018}
   m_Layer: 5
   m_Name: Btn_Order
   m_TagString: Untagged
@@ -169,6 +170,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &659378616820871018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495283551492159941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eebf88a50cc62a41a64679b84f74eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2642614131401601639
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +194,7 @@ GameObject:
   - component: {fileID: 2642614131401601659}
   - component: {fileID: 2642614131401601656}
   - component: {fileID: 2642614131401601657}
+  - component: {fileID: 6652592330325542318}
   m_Layer: 5
   m_Name: Btn_Use
   m_TagString: Untagged
@@ -338,6 +352,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6652592330325542318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2642614131401601639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898e100e8d7af244d893192d93bcb86c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2687873478298212151
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,7 +1047,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationData: {fileID: 2687873478298212149}
   stationState: {fileID: 415326617142425551}
-  activeStation: {fileID: 0}
 --- !u!114 &3757354753844976667
 MonoBehaviour:
   m_ObjectHideFlags: 0
