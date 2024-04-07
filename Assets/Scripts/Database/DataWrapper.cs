@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using SQLite4Unity3d;
 
 [Table("ChargingStation")]

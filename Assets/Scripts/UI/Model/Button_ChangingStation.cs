@@ -14,22 +14,26 @@ public abstract class Button_ChangingStation : MyButton
         tmp = GetComponentInChildren<TextMeshProUGUI>();
         userDataManager = DataManager.FindInstance<UserDataManager>();
         stationDataManager = DataManager.FindInstance<StationDataManager>();
-        eventSystem.AddListener<ChargingStation>(EEvent.OpenChargingStationPanel, Refresh);
+        eventSystem.AddListener<ChargingStation>(EEvent.OpenChargingStationPanel, Show);
+        eventSystem.AddListener(EEvent.Refresh, Refresh);
     }
 
     protected virtual void OnDestroy()
     {
-        eventSystem.RemoveListener<ChargingStation>(EEvent.OpenChargingStationPanel, Refresh);
+        eventSystem.RemoveListener<ChargingStation>(EEvent.OpenChargingStationPanel, Show);
+        eventSystem.RemoveListener(EEvent.Refresh, Refresh);
     }
 
-    protected virtual void Refresh(ChargingStation station)
+    protected void Show(ChargingStation station)
     {
         activeStation = station;
+        Refresh();
     }
 
+    protected abstract void Refresh();
 
     protected void SetState(EStationState state)
     {
-        stationDataManager.InsertUsageRpc(userDataManager.LocalUserPhoneNumber(), activeStation.data.Id, state);
+        stationDataManager.InsertUsage(userDataManager.LocalUserPhoneNumber(), activeStation.data.Id, state);
     }
 }

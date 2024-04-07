@@ -3,6 +3,7 @@ using Services.Event;
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEngine;
 
 public class StationDataManager : DataManager
 {
@@ -58,17 +59,18 @@ public class StationDataManager : DataManager
         }
     }
 
-    protected override object Query()
+    protected override object LocalQuery()
     {
         List<ChargingStationData> stationDatas = databaseManager.Query<ChargingStationData>("AllChargingStation");
         List<UsageData> usageDatas = databaseManager.Query<UsageData>("NewUsage");
         List<FaultData> faultDatas = databaseManager.Query<FaultData>("NewFault");
         return new SyncData(stationDatas, usageDatas, faultDatas);
-    }
+    }   
 
     protected override void UpdateState()
     {
         base.UpdateState();
+        Debug.Log(dataJson);
         SyncData data = JsonConvert.DeserializeObject<SyncData>(dataJson);
         List<ChargingStationData> stationDatas = data.stationDatas;
         List<UsageData> usageDatas = data.usageDatas;
@@ -91,27 +93,23 @@ public class StationDataManager : DataManager
         eventSystem.Invoke(EEvent.Refresh);
     }
 
-    [Rpc(SendTo.Server)]
-    public void InsertUsageRpc(int phoneNumber, string stationId, EStationState state)
+
+    public void InsertUsage(int phoneNumber, string stationId, EStationState state)
     {
         string query = $"INSERT INTO Usage VALUES (NULL, {phoneNumber}, '{stationId}', '{DateTime.Now}',{(int)state})";
-        databaseManager.QueryWithoutSO<UsageData>(query);
-        AskForJsonRpc(NetworkManager.LocalClientId);
+        RemoteQueryRpc(query, localClientId);
     }
 
-    [Rpc(SendTo.Server)]
-    public void InsertFaultRpc(string stationId, string content)
+    public void InsertFault(string stationId, string content)
     {
         string query = $"INSERT INTO Fault VALUES (NULL, '{stationId}',  '{DateTime.Now}','{content}',0)";
-        databaseManager.QueryWithoutSO<FaultData>(query);
-        AskForJsonRpc(NetworkManager.LocalClientId);
+        RemoteQueryRpc(query, localClientId);
     }
-    [Rpc(SendTo.Server)]
-    public void ModifyFaultRpc(string id, string content, bool solved)
+
+    public void ModifyFault(string id, string content, bool solved)
     {
         string s = solved ? "0" : "1";
         string query = $"UPDATE Fault SET content='{content}', solved = {s} WHERE id = '{id}')";
-        databaseManager.QueryWithoutSO<FaultData>(query);
-        AskForJsonRpc(NetworkManager.LocalClientId);
+        RemoteQueryRpc(query, localClientId);
     }
 }

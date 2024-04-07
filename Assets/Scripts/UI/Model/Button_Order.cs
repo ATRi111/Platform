@@ -1,8 +1,9 @@
 public class Button_Order : Button_ChangingStation
 {
-    protected override void Refresh(ChargingStation station)
+    protected override void Refresh()
     {
-        base.Refresh(station);
+        if (activeStation == null)
+            return;
         switch (activeStation.GetState())
         {
             case EStationState.Available:

@@ -23,10 +23,6 @@ namespace Services.Event
         /// </summary>
         OpenChargingStationPanel,
         /// <summary>
-        /// 更新数据库
-        /// </summary>
-        AfterDatabaseUpdate,
-        /// <summary>
         /// 整体刷新用户界面
         /// </summary>
         Refresh,

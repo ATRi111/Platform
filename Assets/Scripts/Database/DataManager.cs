@@ -15,14 +15,16 @@ public abstract class DataManager : NetworkBehaviour
 
     protected new static bool IsServer => NetworkManager.Singleton.IsServer;
     protected IEventSystem eventSystem;
-    protected DatabaseManager databaseManager;
     protected string dataJson;
+    protected ulong localClientId;
+    protected DatabaseManager databaseManager;
 
     protected virtual void Awake()
     {
         eventSystem = ServiceLocator.Get<IEventSystem>();
         databaseManager = DatabaseManager.FindInstance();
         dataJson = string.Empty;
+        localClientId = NetworkManager.Singleton.LocalClientId;
     }
 
     public override void OnNetworkSpawn()
@@ -30,27 +32,20 @@ public abstract class DataManager : NetworkBehaviour
         base.OnNetworkSpawn();
         if (IsServer)
         {
-            eventSystem.AddListener(EEvent.AfterDatabaseUpdate, ReadData);
             ReadData();
         }
         else
         {
             eventSystem.AddListener<ChargingStation>(EEvent.OpenChargingStationPanel, OnOpenChargingStationPanel);
-            AskForJsonRpc(NetworkManager.LocalClientId);
+            AskForJsonRpc(localClientId);
         }
     }
 
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-        if(IsServer)
-        {
-            eventSystem.RemoveListener(EEvent.AfterDatabaseUpdate, ReadData);
-        }
-        else
-        {
+        if(!IsServer)
             eventSystem.RemoveListener<ChargingStation>(EEvent.OpenChargingStationPanel, OnOpenChargingStationPanel);
-        }
     }
 
     protected virtual void Start()
@@ -63,19 +58,29 @@ public abstract class DataManager : NetworkBehaviour
     /// </summary>
     protected void ReadData()
     {
-        dataJson = JsonConvert.SerializeObject(Query(), JsonTool.DefaultSettings);
-        SendJsonRpc(dataJson);
+        dataJson = JsonConvert.SerializeObject(LocalQuery(), JsonTool.DefaultSettings);
         UpdateState();
     }
 
-    protected abstract object Query();
-  
+    protected abstract object LocalQuery();
+
     [Rpc(SendTo.Server)]
     protected void AskForJsonRpc(ulong clientId)
+        => RemoteQueryRpc(null, clientId);
+
+    /// <summary>
+    /// 远程访问数据库必须经由此方法
+    /// </summary>
+    [Rpc(SendTo.Server)]
+    protected void RemoteQueryRpc(string content, ulong clientId)
     {
-        Debug.Log($"client {clientId} ask for json");
+        if(!string.IsNullOrEmpty(content))
+            databaseManager.QueryWithoutSO<FaultData>(content);
+        Debug.LogWarning($"send data to cilent {clientId}");
+        ReadData();
         SendJsonRpc(dataJson, RpcTarget.Single(clientId, RpcTargetUse.Temp));
     }
+
     /// <summary>
     /// 向客户端发送json
     /// </summary>
@@ -90,9 +95,9 @@ public abstract class DataManager : NetworkBehaviour
     /// </summary>
     protected virtual void UpdateState()
     {
-        Debug.Log(dataJson);
+
     }
 
     protected void OnOpenChargingStationPanel(ChargingStation _)
-        => AskForJsonRpc(NetworkManager.LocalClientId);
+        => AskForJsonRpc(localClientId);
 }

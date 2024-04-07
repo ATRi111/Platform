@@ -19,7 +19,7 @@ public class UserDataManager : DataManager
         return 123456;
     }
 
-    protected override object Query()
+    protected override object LocalQuery()
     {
         List<UserData> result = databaseManager.Query<UserData>("AllUser");
         return new SyncData(result);
