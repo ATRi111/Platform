@@ -1,47 +1,30 @@
-using Newtonsoft.Json;
-using Services;
 using Services.Event;
 using TMPro;
 using UnityEngine;
 
-public class ChargingStationPanel : MonoBehaviour
+public class ChargingStationPanel : DataPanel
 {
-    private IEventSystem eventSystem;
     [SerializeField]
     private TextMeshProUGUI stationData;
     [SerializeField]
     private TextMeshProUGUI stationState;
-    private MyCanvasGrounp canvasGrounp;
-    private ChargingStation activeStation;
 
-    private void Awake()
+    protected override void Awake()
     {
-        eventSystem = ServiceLocator.Get<IEventSystem>();
-        canvasGrounp = GetComponent<MyCanvasGrounp>();
+        base.Awake();
         eventSystem.AddListener<ChargingStation>(EEvent.OpenChargingStationPanel, Show);
-        eventSystem.AddListener(EEvent.Refresh, ShowStationState);
     }
 
-    private void Update()
+    protected override void OnDestroy()
     {
-        if(Input.GetKeyUp(KeyCode.Escape) || Input.GetMouseButtonDown(1))
-        {
-            Hide();
-        }
-    }
-
-    private void OnDestroy()
-    {
+        base.OnDestroy();
         eventSystem.RemoveListener<ChargingStation>(EEvent.OpenChargingStationPanel, Show);
-        eventSystem.RemoveListener(EEvent.Refresh, ShowStationState);
     }
 
-    private void Show(ChargingStation station)
+    public override void Show(ChargingStation station)
     {
-        activeStation = station;
+        base.Show(station);
         ShowStationData();
-        ShowStationState();
-        canvasGrounp.Visible = true;
     }
 
     public void ShowStationData()
@@ -56,17 +39,11 @@ public class ChargingStationPanel : MonoBehaviour
             $"电价:{data.Price:F2}元/度\n";
     }
 
-    public void ShowStationState()
+    public override void Refresh()
     {
         if (activeStation == null)
             return;
         stationState.text = $"当前状态:{activeStation.GetState()}\n" +
             $"充电进度:{activeStation.rate:p0}\n";
-    }
-
-    private void Hide()
-    {
-        canvasGrounp.Visible = false;
-        activeStation = null;
     }
 }
