@@ -45,14 +45,7 @@ public class ChargingStationMessageWindow : MonoBehaviour
         current = station;
         transform.position = Camera.main.WorldToScreenPoint(position);
         StringBuilder sb = new StringBuilder();
-        string s = station.GetState() switch
-        {
-            EStationState.Available => "空闲",
-            EStationState.Booked => "被预定",
-            EStationState.Ocuppied => "使用中",
-            EStationState.Repairing => "维修中",
-            _ => string.Empty,
-        };
+        string s = UsageData.StateName(station.GetState());
         s.FontSize(32);
         sb.AppendLine(s);
         sb.AppendLine("查看详情");

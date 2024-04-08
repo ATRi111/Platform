@@ -43,7 +43,7 @@ public class ChargingStationPanel : DataPanel
     {
         if (activeStation == null)
             return;
-        stationState.text = $"当前状态:{activeStation.GetState()}\n" +
+        stationState.text = $"当前状态:{UsageData.StateName(activeStation.GetState())}\n" +
             $"充电进度:{activeStation.rate:p0}\n";
     }
 }

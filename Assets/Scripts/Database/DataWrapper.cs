@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using SQLite4Unity3d;
 
 [Table("ChargingStation")]
@@ -73,6 +72,18 @@ public class UsageData
         StationId = stationId;
         Time = time;
         State = state;
+    }
+
+    public static string StateName(EStationState state)
+    {
+        return state switch
+        {
+            EStationState.Available => "空闲",
+            EStationState.Booked => "被预定",
+            EStationState.Ocuppied => "使用中",
+            EStationState.Repairing => "维修中",
+            _ => string.Empty,
+        };
     }
 }
 

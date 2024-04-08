@@ -915,6 +915,7 @@ GameObject:
   m_Component:
   - component: {fileID: 190459950}
   - component: {fileID: 190459951}
+  - component: {fileID: 190459952}
   m_Layer: 5
   m_Name: Borders
   m_TagString: Untagged
@@ -975,6 +976,14 @@ MonoBehaviour:
   - {x: 200, y: -187.93057}
   - {x: 400, y: 187.9306}
   - {x: 400, y: -187.93057}
+--- !u!222 &190459952
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190459949}
+  m_CullTransparentMesh: 1
 --- !u!1 &191938110
 GameObject:
   m_ObjectHideFlags: 0
@@ -7073,8 +7082,8 @@ GameObject:
   - component: {fileID: 1322041708}
   - component: {fileID: 1322041710}
   - component: {fileID: 1322041709}
-  - component: {fileID: 1322041711}
   - component: {fileID: 1322041713}
+  - component: {fileID: 1322041711}
   - component: {fileID: 1322041712}
   m_Layer: 5
   m_Name: Record

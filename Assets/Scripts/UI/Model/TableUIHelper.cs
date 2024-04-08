@@ -17,7 +17,7 @@ public class TableUIHelper : MonoBehaviour
             if(startIndex != value)
             {
                 startIndex = value;
-                Refresh();
+                Show();
             }
         }
     }
@@ -40,10 +40,10 @@ public class TableUIHelper : MonoBehaviour
         this.countPerPage = countPerPage;
         this.includingTitle = includingTitle ? 1 : 0;
         startIndex = 0;
-        Refresh();
+        Show();
     }
 
-    public void Refresh()
+    public void Show()
     {
         int n = Math.Min(countPerPage, RowCount() - startIndex);
         tableUI.Rows = n + includingTitle;
