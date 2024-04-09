@@ -18,7 +18,7 @@ public abstract class DataPanel : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetMouseButtonDown(1))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
             Hide();
         }
