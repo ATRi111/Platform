@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 using Services.Event;
 using System;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 
 public class StationDataManager : DataManager
@@ -10,10 +9,10 @@ public class StationDataManager : DataManager
     public class SyncData
     {
         public List<ChargingStationData> stationDatas;
-        public List<UsageData> usageDatas;
-        public List<FaultData> faultDatas;
+        public Dictionary<string, List<UsageData>> usageDatas;
+        public Dictionary<string, List<FaultData>> faultDatas;
 
-        public SyncData(List<ChargingStationData> stationDatas, List<UsageData> usageDatas, List<FaultData> faultDatas)
+        public SyncData(List<ChargingStationData> stationDatas, Dictionary<string, List<UsageData>> usageDatas, Dictionary<string, List<FaultData>> faultDatas)
         {
             this.stationDatas = stationDatas;
             this.usageDatas = usageDatas;
@@ -62,8 +61,13 @@ public class StationDataManager : DataManager
     protected override object LocalQuery()
     {
         List<ChargingStationData> stationDatas = databaseManager.Query<ChargingStationData>("AllChargingStation");
-        List<UsageData> usageDatas = databaseManager.Query<UsageData>("NewUsage");
-        List<FaultData> faultDatas = databaseManager.Query<FaultData>("NewFault");
+        Dictionary<string,List<UsageData>> usageDatas = new Dictionary<string, List<UsageData>>();
+        Dictionary<string,List<FaultData>> faultDatas = new Dictionary<string, List<FaultData>>();
+        foreach (string id in stationDict.Keys)
+        {
+            usageDatas.Add(id, databaseManager.QueryWithArguments<UsageData>("NewUsage", id));
+            faultDatas.Add(id, databaseManager.QueryWithArguments<FaultData>("NewFault", id));
+        }
         return new SyncData(stationDatas, usageDatas, faultDatas);
     }   
 
@@ -71,24 +75,18 @@ public class StationDataManager : DataManager
     {
         base.UpdateState();
         Debug.Log(dataJson);
-        SyncData data = JsonConvert.DeserializeObject<SyncData>(dataJson);
-        List<ChargingStationData> stationDatas = data.stationDatas;
-        List<UsageData> usageDatas = data.usageDatas;
+        SyncData wholeData = JsonConvert.DeserializeObject<SyncData>(dataJson);
+        List<ChargingStationData> stationDatas = wholeData.stationDatas;
         for (int i = 0; i < stationDatas.Count; i++)
         {
             string id = stationDatas[i].Id;
             if (stationDict.ContainsKey(id))
                 stationDict[id].data = stationDatas[i];
         }
-        foreach (ChargingStation station in stationDict.Values)
+        foreach (var station in stationDict)
         {
-            station.usageRecord.Clear();
-        }
-        for (int i = 0; i < usageDatas.Count; i++)
-        {
-            string id = usageDatas[i].StationId;
-            if (stationDict.ContainsKey(id))
-                stationDict[id].usageRecord.Add(usageDatas[i]);
+            station.Value.usageRecord = wholeData.usageDatas[station.Key];
+            station.Value.faultRecord = wholeData.faultDatas[station.Key];
         }
         eventSystem.Invoke(EEvent.Refresh);
     }

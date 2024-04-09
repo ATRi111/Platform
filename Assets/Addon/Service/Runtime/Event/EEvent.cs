@@ -19,9 +19,9 @@ namespace Services.Event
         /// </summary>
         HideChargingStaionMessageWindow,
         /// <summary>
-        /// 打开充电桩面板，参数：要显示的ChangingStation
+        /// ChangingStation被选中，参数：ChangingStation
         /// </summary>
-        OpenChargingStationPanel,
+        SelectStation,
         /// <summary>
         /// 整体刷新用户界面
         /// </summary>

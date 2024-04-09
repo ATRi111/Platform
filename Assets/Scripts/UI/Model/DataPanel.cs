@@ -12,6 +12,7 @@ public abstract class DataPanel : MonoBehaviour
     {
         eventSystem = ServiceLocator.Get<IEventSystem>();
         canvasGrounp = GetComponent<MyCanvasGrounp>();
+        eventSystem.AddListener<ChargingStation>(EEvent.SelectStation, AfterSelectStation);
         eventSystem.AddListener(EEvent.Refresh, Refresh);
     }
 
@@ -26,11 +27,16 @@ public abstract class DataPanel : MonoBehaviour
     protected virtual void OnDestroy()
     {
         eventSystem.RemoveListener(EEvent.Refresh, Refresh);
+        eventSystem.RemoveListener<ChargingStation>(EEvent.SelectStation, AfterSelectStation);
     }
 
-    public virtual void Show(ChargingStation station)
+    protected virtual void AfterSelectStation(ChargingStation station)
     {
         activeStation = station;
+    }
+
+    public virtual void Show()
+    {
         Refresh();
         canvasGrounp.Visible = true;
     }

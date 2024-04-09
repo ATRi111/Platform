@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class UseRecordPanel : DataPanel
 {
@@ -8,6 +9,11 @@ public class UseRecordPanel : DataPanel
     {
         base.Awake();
         tableUIHelper = GetComponentInChildren<TableUIHelper>();
+    }
+
+    private void Start()
+    {
+        tableUIHelper.Initialize(RowCount, RowContent, 10);
     }
 
     public int RowCount()
@@ -21,6 +27,11 @@ public class UseRecordPanel : DataPanel
     {
         if (activeStation == null)
             return null;
+        if(index < 0 || index >= activeStation.usageRecord.Count)
+        {
+            Debug.LogWarning(index);
+            return null;
+        }
         List<string> ret = new List<string>();
         UsageData data = activeStation.usageRecord[index];
         ret.Add(data.Id.ToString());
@@ -34,6 +45,6 @@ public class UseRecordPanel : DataPanel
     {
         if (activeStation == null)
             return;
-        tableUIHelper.Show();
+        tableUIHelper.Refresh();
     }
 }

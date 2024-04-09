@@ -1,4 +1,3 @@
-using Services.Event;
 using TMPro;
 using UnityEngine;
 
@@ -9,28 +8,15 @@ public class ChargingStationPanel : DataPanel
     [SerializeField]
     private TextMeshProUGUI stationState;
 
-    protected override void Awake()
+    protected override void AfterSelectStation(ChargingStation station)
     {
-        base.Awake();
-        eventSystem.AddListener<ChargingStation>(EEvent.OpenChargingStationPanel, Show);
+        base.AfterSelectStation(station);
+        Show();
     }
 
-    protected override void OnDestroy()
+    public override void Show()
     {
-        base.OnDestroy();
-        eventSystem.RemoveListener<ChargingStation>(EEvent.OpenChargingStationPanel, Show);
-    }
-
-    public override void Show(ChargingStation station)
-    {
-        base.Show(station);
-        ShowStationData();
-    }
-
-    public void ShowStationData()
-    {
-        if (activeStation == null)
-            return;
+        base.Show();
         ChargingStationData data = activeStation.data;
         stationData.text = $"编号:{data.Id}\n" +
             $"充电桩类型:{data.Type}\n" +

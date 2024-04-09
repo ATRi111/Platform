@@ -30,7 +30,7 @@ public class DatabaseManager : NetworkBehaviour
         QuerySO so = assetLoader.Load<QuerySO>(name);
         return connection.Query<T>(so.content);
     }
-    public List<T> QueryWithArguments<T>(string name,params string[] args) where T : new()
+    public List<T> QueryWithArguments<T>(string name, params string[] args) where T : new()
     {
         QuerySO so = assetLoader.Load<QuerySO>(name);
         return connection.Query<T>(so.ReplaceArguments(args));

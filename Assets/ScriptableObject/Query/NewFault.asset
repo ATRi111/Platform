@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92e4dad13834374aa7feb2ec3df74f5, type: 3}
   m_Name: NewFault
   m_EditorClassIdentifier: 
-  content: SELECT * FROM Fault ORDER BY id DESC LIMIT 100
+  content: 'SELECT * FROM Fault WHERE stationId = ''arg0''
+
+    ORDER BY id DESC
+    LIMIT 100'

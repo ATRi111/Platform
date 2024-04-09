@@ -11,7 +11,7 @@ public class QuerySO : ScriptableObject
         string copy = content;
         for (int i = 0; i < args.Length; i++)
         {
-            copy.Replace($"arg{i}", args[i]);
+            copy = copy.Replace($"arg{i}", args[i]);
         }
         return copy;
     }

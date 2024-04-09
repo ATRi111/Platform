@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UI.TableUI;
 
 [RequireComponent(typeof(TableUI))]
@@ -16,14 +17,20 @@ public class TableUIHelper : MonoBehaviour
         {
             if(startIndex != value)
             {
-                startIndex = value;
-                Show();
+                startIndex = Mathf.Clamp(value, 0, MaxIndex);
+                Refresh();
             }
         }
     }
 
     private int includingTitle;
     public int countPerPage;
+    public int MaxIndex => RowCount() - RowCount() % countPerPage;
+
+    [SerializeField]
+    private Button btn_prevPage;
+    [SerializeField]
+    private Button btn_nextPage;
 
     public Func<int> RowCount;                  //获取总行数的方法
     public Func<int, List<string>> RowContent;  //生成一行中各项的内容的方法
@@ -31,6 +38,7 @@ public class TableUIHelper : MonoBehaviour
     private void Awake()
     {
         tableUI = GetComponent<TableUI>();
+        tableUI.Rows = 0;
     }
 
     public void Initialize(Func<int> RowCount, Func<int, List<string>> RowContent, int countPerPage,bool includingTitle = true)
@@ -40,10 +48,10 @@ public class TableUIHelper : MonoBehaviour
         this.countPerPage = countPerPage;
         this.includingTitle = includingTitle ? 1 : 0;
         startIndex = 0;
-        Show();
+        Refresh();
     }
 
-    public void Show()
+    public void Refresh()
     {
         int n = Math.Min(countPerPage, RowCount() - startIndex);
         tableUI.Rows = n + includingTitle;
@@ -53,9 +61,11 @@ public class TableUIHelper : MonoBehaviour
             temp = RowContent(i);
             for (int j = 0; j < tableUI.Columns; j++)
             {
-                tableUI.GetCell(i, j + includingTitle).text = temp[j];
+                tableUI.GetCell(i + includingTitle, j).text = temp[j];
             }
         }
+        btn_prevPage.interactable = startIndex != 0;
+        btn_nextPage.interactable = startIndex != MaxIndex;
     }
 
     public void NextPage()
