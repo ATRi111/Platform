@@ -90,7 +90,7 @@ public class TableUIHelper : MonoBehaviour
 
     public int ClickIndex()
     {
-        for (int i = 0; i < RowCount(); i++)
+        for (int i = 0; i < tableUI.Rows; i++)
         {
             Transform temp = content.Find($"row{i}");
             if (temp == null)
@@ -98,7 +98,7 @@ public class TableUIHelper : MonoBehaviour
             Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(temp);
             bounds = new Bounds(bounds.center + temp.position, bounds.size);
             if (bounds.Contains(Input.mousePosition))
-                return i;
+                return i - includingTitle;
         }
         return -1;
     }

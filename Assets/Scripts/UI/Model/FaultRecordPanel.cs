@@ -22,7 +22,10 @@ public class FaultRecordPanel : DataPanel
         if(canvasGrounp.Visible && Input.GetMouseButtonDown(0))
         {
             int index = tableUIHelper.ClickIndex();
-            Debug.Log(index);
+            if(index != -1)
+            {
+                Debug.Log(index);
+            }
         }
     }
 
