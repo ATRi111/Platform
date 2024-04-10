@@ -3630,7 +3630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8885161801179681860, guid: 5de1ad1986d46cd4791369cbe7833301, type: 3}
       propertyPath: undoRedoEvent
-      value: Destroy Object
+      value: Select Table (GameObject)
       objectReference: {fileID: 0}
     - target: {fileID: 8885161801179681860, guid: 5de1ad1986d46cd4791369cbe7833301, type: 3}
       propertyPath: _columnsWidth.Array.size
@@ -6643,6 +6643,10 @@ PrefabInstance:
     - target: {fileID: 8600668268401092259, guid: 5de1ad1986d46cd4791369cbe7833301, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885161801179681860, guid: 5de1ad1986d46cd4791369cbe7833301, type: 3}
+      propertyPath: undoRedoEvent
+      value: Select Table (GameObject)
       objectReference: {fileID: 0}
     - target: {fileID: 9117024107417721567, guid: 5de1ad1986d46cd4791369cbe7833301, type: 3}
       propertyPath: m_AnchorMax.y

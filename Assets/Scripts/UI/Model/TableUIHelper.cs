@@ -35,10 +35,13 @@ public class TableUIHelper : MonoBehaviour
     public Func<int> RowCount;                  //获取总行数的方法
     public Func<int, List<string>> RowContent;  //生成一行中各项的内容的方法
 
+    private Transform content;
+
     private void Awake()
     {
         tableUI = GetComponent<TableUI>();
         tableUI.Rows = 0;
+        content = transform.Find("Content");
     }
 
     public void Initialize(Func<int> RowCount, Func<int, List<string>> RowContent, int countPerPage,bool includingTitle = true)
@@ -85,17 +88,32 @@ public class TableUIHelper : MonoBehaviour
         StartIndex = RowCount() - RowCount() % countPerPage;
     }
 
+    public int ClickIndex()
+    {
+        for (int i = 0; i < RowCount(); i++)
+        {
+            Transform temp = content.Find($"row{i}");
+            if (temp == null)
+                continue;
+            Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(temp);
+            bounds = new Bounds(bounds.center + temp.position, bounds.size);
+            if (bounds.Contains(Input.mousePosition))
+                return i;
+        }
+        return -1;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Transform content = transform.Find("Content");
-        for (int i = 0; i < 100; i++) 
+        for (int i = 0; i < 100; i++)
         {
             Transform temp = content.Find($"row{i}");
             if (temp == null)
                 return;
-            Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(temp, content);
+            Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(temp); 
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(content.position + bounds.center, bounds.size);
+            Gizmos.DrawWireCube(temp.position + bounds.center, bounds.size);
         }
     }
 }

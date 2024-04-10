@@ -16,6 +16,16 @@ public class FaultRecordPanel : DataPanel
         tableUIHelper.Initialize(RowCount, RowContent, 10);
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        if(canvasGrounp.Visible && Input.GetMouseButtonDown(0))
+        {
+            int index = tableUIHelper.ClickIndex();
+            Debug.Log(index);
+        }
+    }
+
     public int RowCount()
     {
         if(activeStation == null)
