@@ -84,4 +84,18 @@ public class TableUIHelper : MonoBehaviour
     {
         StartIndex = RowCount() - RowCount() % countPerPage;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Transform content = transform.Find("Content");
+        for (int i = 0; i < 100; i++) 
+        {
+            Transform temp = content.Find($"row{i}");
+            if (temp == null)
+                return;
+            Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(temp, content);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(content.position + bounds.center, bounds.size);
+        }
+    }
 }
