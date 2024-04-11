@@ -67,8 +67,8 @@ public class TableUIHelper : MonoBehaviour
                 tableUI.GetCell(i + includingTitle, j).text = temp[j];
             }
         }
-        btn_prevPage.interactable = startIndex != 0;
-        btn_nextPage.interactable = startIndex != MaxIndex;
+        btn_prevPage.gameObject.SetActive(startIndex != 0);
+        btn_nextPage.gameObject.SetActive(startIndex != MaxIndex);
     }
 
     public void NextPage()
