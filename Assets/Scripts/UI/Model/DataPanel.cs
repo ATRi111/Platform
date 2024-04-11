@@ -7,6 +7,7 @@ public abstract class DataPanel : MonoBehaviour
     protected MyCanvasGrounp canvasGrounp;
     protected IEventSystem eventSystem;
     protected ChargingStation activeStation;
+    public bool Visible => canvasGrounp.Visible;
 
     protected virtual void Awake()
     {
@@ -18,10 +19,7 @@ public abstract class DataPanel : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            Hide();
-        }
+
     }
 
     protected virtual void OnDestroy()
