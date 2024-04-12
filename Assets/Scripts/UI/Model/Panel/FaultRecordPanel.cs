@@ -26,7 +26,7 @@ public class FaultRecordPanel : DataPanel
             int index = tableUIHelper.ClickIndex();
             if(index != -1)
             {
-                Debug.Log(index);
+                ModifyFault(activeStation.faultRecord[index]);
             }
         }
     }

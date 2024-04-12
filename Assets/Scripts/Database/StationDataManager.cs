@@ -74,7 +74,6 @@ public class StationDataManager : DataManager
     protected override void UpdateState()
     {
         base.UpdateState();
-        Debug.Log(dataJson);
         SyncData wholeData = JsonConvert.DeserializeObject<SyncData>(dataJson);
         List<ChargingStationData> stationDatas = wholeData.stationDatas;
         for (int i = 0; i < stationDatas.Count; i++)
@@ -98,16 +97,17 @@ public class StationDataManager : DataManager
         RemoteQueryRpc(query, localClientId);
     }
 
-    public void InsertFault(string stationId, string content)
+    public void InsertFault(string stationId, string content,bool solved)
     {
-        string query = $"INSERT INTO Fault VALUES (NULL, '{stationId}',  '{DateTime.Now}','{content}',0)";
+        int flag = solved ? 1 : 0;
+        string query = $"INSERT INTO Fault VALUES (NULL, '{stationId}',  '{DateTime.Now}','{content}',{flag})";
         RemoteQueryRpc(query, localClientId);
     }
 
-    public void ModifyFault(string id, string content, bool solved)
+    public void ModifyFault(int id, string content, bool solved)
     {
-        string s = solved ? "0" : "1";
-        string query = $"UPDATE Fault SET content='{content}', solved = {s} WHERE id = '{id}')";
+        string s = solved ? "1" : "0";
+        string query = $"UPDATE Fault SET content='{content}', solved = {s} WHERE id = {id}";
         RemoteQueryRpc(query, localClientId);
     }
 }

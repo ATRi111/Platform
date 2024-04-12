@@ -43,7 +43,6 @@ public abstract class DataPanel : MonoBehaviour
 
     public virtual void Hide()
     {
-        activeStation = null;
         canvasGrounp.Visible = false;
     }
 }
