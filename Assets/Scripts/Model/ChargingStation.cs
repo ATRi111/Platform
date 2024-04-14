@@ -13,6 +13,7 @@ public class ChargingStation : MonoBehaviour
     private void Awake()
     {
         userDataManager = DataManager.FindInstance<UserDataManager>();
+        stationDataManager = DataManager.FindInstance<StationDataManager>();
     }
 
     public EStationState GetState()

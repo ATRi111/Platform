@@ -1,6 +1,7 @@
 using Services;
 using Services.Event;
 using Services.ObjectPools;
+using System;
 using UnityEngine;
 
 public class CarModelGenerator : MonoBehaviour
@@ -9,11 +10,13 @@ public class CarModelGenerator : MonoBehaviour
     private IEventSystem eventSystem;
     private ChargingStation station;
 
-    [SerializeField]
-    private string carType;
+    private EStationState prev;
+    private EStationState init;
 
     private void Awake()
     {
+        init = (EStationState)Enum.GetValues(typeof(EStationState)).Length;
+        prev = init;
         objectManager = ServiceLocator.Get<IObjectManager>(); 
         eventSystem = ServiceLocator.Get<IEventSystem>();
         station = GetComponentInParent<ChargingStation>();
@@ -21,36 +24,34 @@ public class CarModelGenerator : MonoBehaviour
 
     private void OnEnable()
     {
-        eventSystem.AddListener(EEvent.Refresh, AfterRefresh);
+        eventSystem.AddListener(EEvent.Refresh, Refresh);
     }
 
     private void OnDisable()
     {
-        eventSystem.AddListener(EEvent.Refresh, AfterRefresh);
+        eventSystem.AddListener(EEvent.Refresh, Refresh);
     }
 
-    private void AfterRefresh()
+    private void Refresh()
     {
         EStationState state = station.GetState();
-        switch(state)
+        if(prev != state)
         {
-            case EStationState.Ocuppied:
-                string newType = station.GetCarType();
-                if (newType != carType)
-                {
-                    carType = newType;
-                    ObjectPoolUtility.RecycleMyObjects(gameObject);
+            ObjectPoolUtility.RecycleMyObjects(gameObject);
+            switch (state)
+            {
+                case EStationState.Ocuppied:
+                    string carType = station.GetCarType();
                     if (!string.IsNullOrEmpty(carType))
                     {
                         IMyObject obj = objectManager.Activate(carType, transform.position, transform.eulerAngles, transform);
                         obj.Transform.localScale = Vector3.one;
+                        //待修改
                     }
-                }
-                break;
-            default:
-                ObjectPoolUtility.RecycleMyObjects(gameObject);
-                carType = null;
-                break;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
