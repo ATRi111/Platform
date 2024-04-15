@@ -467,7 +467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ef946b309f56848a20c34746d6da24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carType: 
 --- !u!1 &4826243060919438875
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65047c78848534e4c91cb5a36f6e669c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: 0
+  charingSpeed: 2
 --- !u!1 &5757195851663002851
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class FaultRecordPanel : DataPanel
 
     private void Start()
     {
-        tableUIHelper.Initialize(RowCount, RowContent, 10);
+        tableUIHelper.Initialize(RowCount, RowContent);
     }
 
     protected override void Update()

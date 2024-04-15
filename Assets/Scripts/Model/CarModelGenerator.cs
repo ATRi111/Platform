@@ -41,17 +41,27 @@ public class CarModelGenerator : MonoBehaviour
             switch (state)
             {
                 case EStationState.Ocuppied:
-                    string carType = station.GetCarType();
-                    if (!string.IsNullOrEmpty(carType))
-                    {
-                        IMyObject obj = objectManager.Activate(carType, transform.position, transform.eulerAngles, transform);
-                        obj.Transform.localScale = Vector3.one;
-                        //待修改
-                    }
+                    GenerateCar(station.GetCarType());
                     break;
                 default:
                     break;
             }
+            prev = state;
+        }
+    }
+
+    private void GenerateCar(string carType)
+    {
+        if (string.IsNullOrEmpty(carType))
+            return;
+        if(prev == init)
+        {
+            IMyObject obj = objectManager.Activate(carType, transform.position, transform.eulerAngles, transform);
+            obj.Transform.localScale = Vector3.one;
+        }
+        else
+        {
+
         }
     }
 }

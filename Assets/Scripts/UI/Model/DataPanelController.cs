@@ -11,15 +11,20 @@ public class DataPanelController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetMouseButtonDown(1))
         {
-            for (int i = dataPanels.Length - 1; i >= 0; i--)
+            Hide();
+        }
+    }
+
+    public void Hide()
+    {
+        for (int i = dataPanels.Length - 1; i >= 0; i--)
+        {
+            if (dataPanels[i].Visible)
             {
-                if (dataPanels[i].Visible)
-                {
-                    dataPanels[i].Hide();
-                    break;
-                }
+                dataPanels[i].Hide();
+                break;
             }
         }
     }

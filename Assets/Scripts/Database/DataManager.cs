@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using Services;
 using Services.Event;
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -11,6 +12,23 @@ public abstract class DataManager : NetworkBehaviour
     {
         Type type = typeof(T);
         return GameObject.Find(type.Name).GetComponent<T>();
+    }
+
+    public static DateTime ToDateTime(string s)
+    {
+        string[] ss = s.Split(' ');
+        string[] date = ss[0].Split('/');
+        string[] time = ss[1].Split(':');
+        List<int> temp = new List<int>();
+        for (int i = 0; i < date.Length; i++)
+        {
+            temp.Add(int.Parse(date[i]));
+        }
+        for (int i = 0; i < time.Length; i++)
+        {
+            temp.Add(int.Parse(time[i]));
+        }
+        return new DateTime(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], DateTimeKind.Utc);
     }
 
     protected new static bool IsServer => NetworkManager.Singleton.IsServer;
