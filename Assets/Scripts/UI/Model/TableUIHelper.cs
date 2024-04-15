@@ -41,7 +41,6 @@ public class TableUIHelper : MonoBehaviour
     {
         tableUI = GetComponent<TableUI>();
         content = transform.Find("Content");
-        countPerPage = tableUI.Rows - includingTitle;
     }
 
     public void Initialize(Func<int> RowCount, Func<int, List<string>> RowContent,bool includingTitle = true)
@@ -49,6 +48,7 @@ public class TableUIHelper : MonoBehaviour
         this.RowCount += RowCount;
         this.RowContent = RowContent;
         this.includingTitle = includingTitle ? 1 : 0;
+        countPerPage = tableUI.Rows - this.includingTitle;
         startIndex = 0;
         Refresh();
     }
@@ -65,11 +65,11 @@ public class TableUIHelper : MonoBehaviour
                 tableUI.GetCell(i + includingTitle, j).text = temp[j];
             }
         }
-        for (int i = n + includingTitle; i < countPerPage; i++)
+        for (int i = n; i < countPerPage; i++)
         {
-            for (int j = 0;j < tableUI.Columns; j++)
+            for (int j = 0; j < tableUI.Columns; j++)
             {
-                tableUI.GetCell(i, j).text = string.Empty;
+                tableUI.GetCell(i + includingTitle, j).text = string.Empty;
             }
         }
         btn_prevPage.gameObject.SetActive(startIndex != 0);

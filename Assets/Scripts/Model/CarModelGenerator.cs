@@ -9,6 +9,7 @@ public class CarModelGenerator : MonoBehaviour
     private IObjectManager objectManager;
     private IEventSystem eventSystem;
     private ChargingStation station;
+    private Transform enterPoint;
 
     private EStationState prev;
     private EStationState init;
@@ -20,6 +21,7 @@ public class CarModelGenerator : MonoBehaviour
         objectManager = ServiceLocator.Get<IObjectManager>(); 
         eventSystem = ServiceLocator.Get<IEventSystem>();
         station = GetComponentInParent<ChargingStation>();
+        enterPoint = GameObject.Find("EnterPoint").transform;
     }
 
     private void OnEnable()
@@ -61,7 +63,10 @@ public class CarModelGenerator : MonoBehaviour
         }
         else
         {
-
+            IMyObject obj = objectManager.Activate(carType, enterPoint.position, enterPoint.eulerAngles, transform);
+            obj.Transform.localScale = Vector3.one;
+            CarNavigator navigator = obj.Transform.gameObject.AddComponent<CarNavigator>();
+            navigator.destination = transform;
         }
     }
 }
