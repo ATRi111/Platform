@@ -63,10 +63,10 @@ public class CarModelGenerator : MonoBehaviour
         }
         else
         {
-            IMyObject obj = objectManager.Activate(carType, enterPoint.position, enterPoint.eulerAngles, transform);
+            IMyObject obj = objectManager.Activate(carType, enterPoint.position, Vector3.zero, transform);
             obj.Transform.localScale = Vector3.one;
             CarNavigator navigator = obj.Transform.gameObject.AddComponent<CarNavigator>();
-            navigator.destination = transform;
+            navigator.destination = transform.position;
         }
     }
 }

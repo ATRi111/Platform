@@ -1,21 +1,60 @@
+using Tools;
 using UnityEngine;
 
 public class CarNavigator : MonoBehaviour
 {
-    public Transform destination;
+    public Vector3 destination;
 
-    private float speed = 1f;
+    private NavigationRoute route;
+    [SerializeField]
+    private int pointIndex;
+    private bool align;
+    private readonly float alignDistance = 0.02f;
+    private readonly float closeDistance = 2f;
+    private readonly float speed = 2f;
+
+    private void Awake()
+    {
+        route = GameObject.Find("NavigationRoute").GetComponent<NavigationRoute>();
+        pointIndex = 0;
+    }
 
     private void FixedUpdate()
     {
         float d = Time.fixedDeltaTime * speed;
-        Vector3 v = destination.position - transform.position;
-        if (v.magnitude < d)
+        if (!align)
         {
-            transform.SetPositionAndRotation(destination.position, transform.parent.rotation);
-            Destroy(this);
+            if(Mathf.Abs(transform.position.z - destination.z) < alignDistance && (destination - transform.position).magnitude < closeDistance)
+            {
+                transform.localRotation = Quaternion.identity;
+                transform.position.ResetZ(destination.z);
+                align = true;
+            }
+        }
+        if (align)
+        {
+            Vector3 v = destination - transform.position;
+            if (v.magnitude > d)
+            {
+                transform.position += d * v.normalized;
+            }
+            else
+            {
+                transform.position = destination;
+                Destroy(this);
+            }
         }
         else
-            transform.position += d * v.normalized;
+        {
+            bool reach = route.MoveTowards(pointIndex, transform, d);
+            if (reach)
+                pointIndex = route.TurnNext(pointIndex, transform);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector3(2f * closeDistance, 1f, 2 * alignDistance));
     }
 }
