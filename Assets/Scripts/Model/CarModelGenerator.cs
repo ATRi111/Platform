@@ -12,12 +12,10 @@ public class CarModelGenerator : MonoBehaviour
     private Transform enterPoint;
 
     private EStationState prev;
-    private EStationState init;
 
     private void Awake()
     {
-        init = (EStationState)Enum.GetValues(typeof(EStationState)).Length;
-        prev = init;
+        prev = (EStationState)Enum.GetValues(typeof(EStationState)).Length;
         objectManager = ServiceLocator.Get<IObjectManager>(); 
         eventSystem = ServiceLocator.Get<IEventSystem>();
         station = GetComponentInParent<ChargingStation>();
@@ -56,17 +54,9 @@ public class CarModelGenerator : MonoBehaviour
     {
         if (string.IsNullOrEmpty(carType))
             return;
-        if(prev == init)
-        {
-            IMyObject obj = objectManager.Activate(carType, transform.position, transform.eulerAngles, transform);
-            obj.Transform.localScale = Vector3.one;
-        }
-        else
-        {
-            IMyObject obj = objectManager.Activate(carType, enterPoint.position, Vector3.zero, transform);
-            obj.Transform.localScale = Vector3.one;
-            CarNavigator navigator = obj.Transform.gameObject.AddComponent<CarNavigator>();
-            navigator.destination = transform.position;
-        }
+        IMyObject obj = objectManager.Activate(carType, enterPoint.position, Vector3.zero, transform);
+        obj.Transform.localScale = Vector3.one;
+        CarNavigator navigator = obj.Transform.gameObject.AddComponent<CarNavigator>();
+        navigator.destination = transform.position;
     }
 }

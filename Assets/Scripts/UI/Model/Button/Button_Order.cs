@@ -14,7 +14,7 @@ public class Button_Order : Button_ChangingStation
                 gameObject.SetActive(false);
                 break;
             case EStationState.Booked:
-                gameObject.SetActive(true);
+                gameObject.SetActive(activeStation.IsLocalUser());
                 tmp.text = "取消预订";
                 break;
             case EStationState.Ocuppied:

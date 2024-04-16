@@ -23,6 +23,14 @@ public class ChargingStation : MonoBehaviour
         prevTime = DateTime.Now;
     }
 
+    public bool IsLocalUser()
+    {
+        EStationState state = GetState();
+        if (state == EStationState.Booked || state == EStationState.Ocuppied)
+            return userDataManager.LocalUserPhoneNumber() == usageRecord[0].PhoneNumber;
+        return false;
+    }
+
     public float GetRate()
     {
         if (GetState() != EStationState.Ocuppied)
