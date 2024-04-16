@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Services.Event;
 using System.Collections.Generic;
 
 public class UserDataManager : DataManager
@@ -34,5 +35,12 @@ public class UserDataManager : DataManager
         {
             userDict.Add(data.userDatas[i].PhoneNumber, data.userDatas[i]);
         }
+        eventSystem.Invoke(EEvent.Refresh);
+    }
+
+    public void ModifyCarType(string carType)
+    {
+        string query = $"UPDATE User SET model='{carType}' WHERE phoneNumber = {LocalUserPhoneNumber()}";
+        RemoteQueryRpc(query, localClientId);
     }
 }

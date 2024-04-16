@@ -102,7 +102,7 @@ public abstract class DataManager : NetworkBehaviour
     /// <summary>
     /// 向客户端发送json
     /// </summary>
-    [Rpc(SendTo.NotServer, AllowTargetOverride = true)]
+    [Rpc(SendTo.ClientsAndHost, AllowTargetOverride = true)]
     protected void SendJsonRpc(string json, RpcParams _ = default)
     {
         dataJson = json;
