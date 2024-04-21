@@ -9,14 +9,23 @@ public class CarNavigator : MonoBehaviour
     [SerializeField]
     private int pointIndex;
     private bool align;
-    private readonly float alignDistance = 0.02f;
+    private float alignDistance;
     private readonly float closeDistance = 2f;
-    private readonly float speed = 2f;
+    private float speed = 2f;
 
     private void Awake()
     {
         route = GameObject.Find("NavigationRoute").GetComponent<NavigationRoute>();
         pointIndex = 0;
+        enabled = false;
+    }
+
+    public void Laucnch(Vector3 destination, float speed)
+    {
+        this.destination = destination;
+        this.speed = speed;
+        alignDistance = Time.fixedDeltaTime * speed;
+        enabled = true;
     }
 
     private void FixedUpdate()
@@ -52,7 +61,7 @@ public class CarNavigator : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(2f * closeDistance, 1f, 2 * alignDistance));
