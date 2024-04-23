@@ -14,11 +14,14 @@ public class UserDataManager : DataManager
         }
     }
 
-    public Dictionary<int,UserData> userDict = new Dictionary<int,UserData>();
-    public int LocalUserPhoneNumber()
+    protected override void Awake()
     {
-        return 123456;
+        base.Awake();
+        localPhoneNumber = 123456;
     }
+
+    public Dictionary<int,UserData> userDict = new Dictionary<int,UserData>();
+    public int localPhoneNumber;
 
     protected override object LocalQuery()
     {
@@ -40,7 +43,7 @@ public class UserDataManager : DataManager
 
     public void ModifyCarType(string carType)
     {
-        string query = $"UPDATE User SET model='{carType}' WHERE phoneNumber = {LocalUserPhoneNumber()}";
+        string query = $"UPDATE User SET model='{carType}' WHERE phoneNumber = {localPhoneNumber}";
         RemoteQueryRpc(query, localClientId);
     }
 }

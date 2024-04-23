@@ -15,7 +15,7 @@ public class UserPanel : DataPanel
 
     public override void Refresh()
     {
-        localData = dataManager.userDict[dataManager.LocalUserPhoneNumber()];
+        localData = dataManager.userDict[dataManager.localPhoneNumber];
         if(localData != null )
         {
             tmp.text = $"手机号:{localData.PhoneNumber}\n" +

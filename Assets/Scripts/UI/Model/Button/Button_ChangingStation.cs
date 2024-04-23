@@ -34,6 +34,6 @@ public abstract class Button_ChangingStation : MyButton
 
     protected void SetState(EStationState state)
     {
-        stationDataManager.InsertUsage(userDataManager.LocalUserPhoneNumber(), activeStation.data.Id, state);
+        stationDataManager.InsertUsage(userDataManager.localPhoneNumber, activeStation.data.Id, state);
     }
 }

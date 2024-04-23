@@ -27,7 +27,7 @@ public class ChargingStation : MonoBehaviour
     {
         EStationState state = GetState();
         if (state == EStationState.Booked || state == EStationState.Ocuppied)
-            return userDataManager.LocalUserPhoneNumber() == usageRecord[0].PhoneNumber;
+            return userDataManager.localPhoneNumber == usageRecord[0].PhoneNumber;
         return false;
     }
 
