@@ -35,7 +35,7 @@ public class UseRecordPanel : DataPanel
         List<string> ret = new List<string>();
         UsageData data = activeStation.usageRecord[index];
         ret.Add(data.Id.ToString());
-        ret.Add(data.StationId.ToString());
+        ret.Add(data.PhoneNumber.ToString());
         ret.Add(data.Time.ToString());
         ret.Add(UsageData.StateName((EStationState)data.State));
         return ret;

@@ -59,7 +59,7 @@ public class TableUIHelper : MonoBehaviour
         List<string> temp;
         for (int i = 0; i < n; i++)
         {
-            temp = RowContent(i);
+            temp = RowContent(i + startIndex);
             for (int j = 0; j < tableUI.Columns; j++)
             {
                 tableUI.GetCell(i + includingTitle, j).text = temp[j];

@@ -46,4 +46,10 @@ public class UserDataManager : DataManager
         string query = $"UPDATE User SET model='{carType}' WHERE phoneNumber = {localPhoneNumber}";
         RemoteQueryRpc(query, localClientId);
     }
+
+    public void NewUser(int phoneNumber, string password)
+    {
+        string query = $"INSERT INTO User VALUES ({phoneNumber}, 'Sport',  '{password}')";
+        RemoteQueryRpc(query, localClientId);
+    }
 }
