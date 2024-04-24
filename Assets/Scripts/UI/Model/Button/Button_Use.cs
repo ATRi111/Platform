@@ -19,11 +19,11 @@ public class Button_Use : Button_ChangingStation
                 gameObject.SetActive(false);
                 break;
             case EStationState.Booked:
-                gameObject.SetActive(activeStation.IsLocalUser());
+                gameObject.SetActive(activeStation.OccupiedByLocalUser());
                 tmp.text = "开始使用";
                 break;
             case EStationState.Ocuppied:
-                gameObject.SetActive(activeStation.IsLocalUser());
+                gameObject.SetActive(activeStation.OccupiedByLocalUser());
                 tmp.text = "使用完毕";
                 break;
         }

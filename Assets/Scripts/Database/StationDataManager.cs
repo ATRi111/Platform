@@ -89,6 +89,15 @@ public class StationDataManager : DataManager
         eventSystem.Invoke(EEvent.Refresh);
     }
 
+    public bool OccupyAny()
+    {
+        foreach(ChargingStation station in stationDict.Values)
+        {
+            if(station.OccupiedByLocalUser())
+                return true;
+        }
+        return false;
+    }
 
     public void InsertUsage(string phoneNumber, string stationId, EStationState state)
     {
