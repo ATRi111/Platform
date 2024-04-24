@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Services.Event;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class UserDataManager : DataManager
 {
@@ -17,11 +18,11 @@ public class UserDataManager : DataManager
     protected override void Awake()
     {
         base.Awake();
-        localPhoneNumber = 123456;
+        localPhoneNumber = "123456";
     }
 
-    public Dictionary<int,UserData> userDict = new Dictionary<int,UserData>();
-    public int localPhoneNumber;
+    public Dictionary<string, UserData> userDict = new Dictionary<string, UserData>();
+    public string localPhoneNumber;
 
     protected override object LocalQuery()
     {
@@ -47,9 +48,9 @@ public class UserDataManager : DataManager
         RemoteQueryRpc(query, localClientId);
     }
 
-    public void NewUser(int phoneNumber, string password)
+    public void NewUser(string phoneNumber, string password)
     {
-        string query = $"INSERT INTO User VALUES ({phoneNumber}, 'Sport',  '{password}')";
+        string query = $"INSERT INTO User VALUES ('{phoneNumber}', 'Sport',  '{password}')";
         RemoteQueryRpc(query, localClientId);
     }
 }

@@ -41,13 +41,6 @@ public class FaultData
     public bool Solved { get; set; }
 
     public FaultData() { }
-    public FaultData(int id, string time, string content, bool solved)
-    {
-        Id = id;
-        Time = time;
-        Content = content;
-        Solved = solved;
-    }
 }
 
 [Table("Usage")]
@@ -56,7 +49,7 @@ public class UsageData
     [Column("id"), PrimaryKey]
     public int Id { get; set; }
     [Column("phoneNumber")]
-    public int PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
     [Column("stationId")]
     public string StationId { get; set; }
     [Column("time")]
@@ -65,14 +58,6 @@ public class UsageData
     public int State { get; set; }
 
     public UsageData() { }
-    public UsageData(int id, int phoneNumber, string stationId, string time, int state)
-    {
-        Id = id;
-        PhoneNumber = phoneNumber;
-        StationId = stationId;
-        Time = time;
-        State = state;
-    }
 
     public static string StateName(EStationState state)
     {
@@ -91,17 +76,11 @@ public class UsageData
 public class UserData
 {
     [Column("phoneNumber"),PrimaryKey]
-    public int PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
     [Column("model")]
     public string Model { get; set; }
     [Column("password")]
     public string Password { get; set; }
 
     public UserData() { }
-    public UserData(int phoneNumber, string model, string password)
-    {
-        PhoneNumber = phoneNumber;
-        Model = model;
-        Password = password;
-    }
 }

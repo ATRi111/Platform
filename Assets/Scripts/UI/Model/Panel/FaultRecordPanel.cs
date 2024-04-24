@@ -24,7 +24,7 @@ public class FaultRecordPanel : DataPanel
         if(canvasGrounp.Visible && Input.GetMouseButtonDown(0))
         {
             int index = tableUIHelper.ClickIndex();
-            if(index != -1)
+            if(index >= 0 && index < activeStation.faultRecord.Count)
             {
                 ModifyFault(activeStation.faultRecord[index]);
             }

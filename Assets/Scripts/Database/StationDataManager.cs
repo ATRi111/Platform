@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 using Services.Event;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class StationDataManager : DataManager
 {
@@ -91,9 +90,9 @@ public class StationDataManager : DataManager
     }
 
 
-    public void InsertUsage(int phoneNumber, string stationId, EStationState state)
+    public void InsertUsage(string phoneNumber, string stationId, EStationState state)
     {
-        string query = $"INSERT INTO Usage VALUES (NULL, {phoneNumber}, '{stationId}', '{DateTime.Now}',{(int)state})";
+        string query = $"INSERT INTO Usage VALUES (NULL, '{phoneNumber}', '{stationId}', '{DateTime.Now}',{(int)state})";
         RemoteQueryRpc(query, localClientId);
     }
 

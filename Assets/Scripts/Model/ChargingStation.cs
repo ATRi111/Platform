@@ -62,7 +62,7 @@ public class ChargingStation : MonoBehaviour
     {
         if(GetState() == EStationState.Ocuppied)
         {
-            int phoneNumber = usageRecord[0].PhoneNumber;
+            string phoneNumber = usageRecord[0].PhoneNumber;
             if(userDataManager.userDict.ContainsKey(phoneNumber))
                 return userDataManager.userDict[phoneNumber].Model;
         }
