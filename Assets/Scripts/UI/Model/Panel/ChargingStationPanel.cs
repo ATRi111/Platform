@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class ChargingStationPanel : DataPanel
     [SerializeField]
     private TextMeshProUGUI stationData;
     [SerializeField]
-    private TextMeshProUGUI stationState;
+    private TextMeshProUGUI userMessage;
 
     protected override void AfterSelectStation(ChargingStation station)
     {
@@ -19,7 +20,7 @@ public class ChargingStationPanel : DataPanel
         base.Show();
         ChargingStationData data = activeStation.data;
         stationData.text = $"编号:{data.Id}\n" +
-            $"充电桩类型:{data.Type}\n" +
+            $"类型:{data.Type}\n" +
             $"输入电压:{data.Voltage}\n" +
             $"输出功率:{data.Power:F1}kW\n" +
             $"电价:{data.Price:F2}元/度\n";
@@ -29,7 +30,27 @@ public class ChargingStationPanel : DataPanel
     {
         if (activeStation == null)
             return;
-        stationState.text = $"当前状态:{UsageData.StateName(activeStation.GetState())}\n" +
-            $"充电进度:{activeStation.GetRate():p0}\n";
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(UsageData.StateName(activeStation.GetState()));
+        switch(activeStation.GetState())
+        {
+            case EStationState.Available:
+            case EStationState.Repairing:
+                break;
+            case EStationState.Booked:
+                if (IsServer)
+                    sb.AppendLine($"手机号:{activeStation.usageRecord[0].PhoneNumber}");
+                else if (activeStation.OccupiedOrBookedByLocalUser())
+                    sb.AppendLine("您已预订");
+                break;
+            case EStationState.Ocuppied:
+                if (IsServer)
+                    sb.AppendLine($"手机号:{activeStation.usageRecord[0].PhoneNumber}\n" +
+                        $"车型:{activeStation.GetCarType()}");
+                else if (activeStation.OccupiedOrBookedByLocalUser())
+                    sb.AppendLine("您正在使用");
+                break;
+        }
+        userMessage.text = sb.ToString();
     }
 }

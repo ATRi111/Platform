@@ -1,5 +1,6 @@
 using Services;
 using Services.Event;
+using Unity.Netcode;
 using UnityEngine;
 
 public abstract class DataPanel : MonoBehaviour
@@ -7,6 +8,7 @@ public abstract class DataPanel : MonoBehaviour
     protected MyCanvasGrounp canvasGrounp;
     protected IEventSystem eventSystem;
     protected ChargingStation activeStation;
+    protected bool IsServer => NetworkManager.Singleton.IsServer;
     public bool Visible => canvasGrounp.Visible;
 
     protected virtual void Awake()

@@ -23,16 +23,18 @@ public class ChargingStation : MonoBehaviour
         prevTime = DateTime.Now;
     }
 
-    public bool OccupiedByLocalUser()
+    public bool OccupiedOrBookedByLocalUser()
     {
         return userDataManager.localPhoneNumber == GetUserPhoneNumber();
     }
 
     public string GetUserPhoneNumber()
     {
-        if (GetState() != EStationState.Ocuppied)
-            return string.Empty;
-        return usageRecord[0].PhoneNumber;
+        return GetState() switch
+        {
+            EStationState.Ocuppied or EStationState.Booked => usageRecord[0].PhoneNumber,
+            _ => string.Empty,
+        };
     }
 
     public float GetRate()

@@ -93,7 +93,7 @@ public class StationDataManager : DataManager
     {
         foreach(ChargingStation station in stationDict.Values)
         {
-            if(station.OccupiedByLocalUser())
+            if(station.OccupiedOrBookedByLocalUser())
                 return true;
         }
         return false;
