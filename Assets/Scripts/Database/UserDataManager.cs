@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using Services.Event;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class UserDataManager : DataManager
 {
@@ -18,7 +17,7 @@ public class UserDataManager : DataManager
     protected override void Awake()
     {
         base.Awake();
-        localPhoneNumber = "123456";
+        localPhoneNumber = "13957008348";
     }
 
     public Dictionary<string, UserData> userDict = new Dictionary<string, UserData>();
