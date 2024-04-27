@@ -8,6 +8,13 @@ public class ChargingStationPanel : DataPanel
     private TextMeshProUGUI stationData;
     [SerializeField]
     private TextMeshProUGUI userMessage;
+    private ChargingProgress progress;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        progress = GetComponentInChildren<ChargingProgress>();
+    }
 
     protected override void AfterSelectStation(ChargingStation station)
     {
@@ -31,7 +38,7 @@ public class ChargingStationPanel : DataPanel
         if (activeStation == null)
             return;
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine(UsageData.StateName(activeStation.GetState()));
+        sb.AppendLine($"当前状态:{UsageData.StateName(activeStation.GetState())}");
         switch(activeStation.GetState())
         {
             case EStationState.Available:
@@ -52,5 +59,22 @@ public class ChargingStationPanel : DataPanel
                 break;
         }
         userMessage.text = sb.ToString();
+        
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (activeStation == null)
+            return;
+        if (activeStation.GetState() == EStationState.Ocuppied)
+        {
+            progress.gameObject.SetActive(true);
+            progress.SetRate(activeStation.GetRate());
+        }
+        else
+        {
+            progress.gameObject.SetActive(false);
+        }
     }
 }

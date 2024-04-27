@@ -12,14 +12,12 @@ public class ChargingStation : MonoBehaviour
 
     [SerializeField]
     private float charingSpeed;
-    private float prevRate;
     private DateTime prevTime;
 
     private void Awake()
     {
         userDataManager = DataManager.FindInstance<UserDataManager>();
         stationDataManager = DataManager.FindInstance<StationDataManager>();
-        prevRate = UnityEngine.Random.Range(0f, 0.8f);
         prevTime = DateTime.Now;
     }
 
@@ -45,11 +43,10 @@ public class ChargingStation : MonoBehaviour
         if(latest > prevTime)
         {
             prevTime = latest;
-            prevRate = UnityEngine.Random.Range(0f, 0.8f);
         }
         TimeSpan span = DateTime.Now - prevTime;
         float temp = (float)span.TotalMinutes * charingSpeed;
-        return Mathf.Clamp01(prevRate + temp);
+        return Mathf.Clamp01(temp);
     }
 
     public EStationState GetState()
