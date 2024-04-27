@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UserPanel : DataPanel
 {
@@ -7,6 +8,7 @@ public class UserPanel : DataPanel
     private TextMeshProUGUI message;
     [SerializeField]
     private TextMeshProUGUI hint;
+    private Button[] buttons;
     private UserDataManager userDataManager;
     private StationDataManager stationDataManager;
     private UserData localData;
@@ -16,6 +18,7 @@ public class UserPanel : DataPanel
         base.Awake();
         userDataManager = DataManager.FindInstance<UserDataManager>();
         stationDataManager = DataManager.FindInstance<StationDataManager>();
+        buttons = GetComponentsInChildren<Button>();
     }
 
     public override void Refresh()
@@ -26,9 +29,21 @@ public class UserPanel : DataPanel
             message.text = $"手机号:{localData.PhoneNumber}\n" +
                 $"车型:{localData.Model}\n";
             if (stationDataManager.OccupyAny())
+            {
                 hint.text = "正在使用充电桩，无法修改车型";
+                for (int i = 0; i < buttons.Length; i++)
+                {
+                    buttons[i].interactable = false;
+                }
+            }
             else
+            {
                 hint.text = "点击下方按钮选择车型";
+                for (int i = 0; i < buttons.Length; i++)
+                {
+                    buttons[i].interactable = true;
+                }
+            }
         }
     }
 }

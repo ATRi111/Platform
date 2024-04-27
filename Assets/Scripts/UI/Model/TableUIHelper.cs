@@ -53,6 +53,16 @@ public class TableUIHelper : MonoBehaviour
         Refresh();
     }
 
+    public void SetTitle(List<string> titles)
+    {
+        if (includingTitle == 0)
+            return;
+        for (int i = 0; i < tableUI.Columns; i++)
+        {
+            tableUI.GetCell(0, i).text = titles[i];
+        }
+    }
+
     public void Refresh()
     {
         int n = Math.Min(countPerPage, RowCount() - startIndex);
