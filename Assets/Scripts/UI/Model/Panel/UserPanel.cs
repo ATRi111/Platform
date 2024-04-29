@@ -30,7 +30,7 @@ public class UserPanel : DataPanel
                 $"车型:{localData.Model}\n";
             if (stationDataManager.OccupyAny())
             {
-                hint.text = "正在使用充电桩，无法修改车型";
+                hint.text = "您正在使用充电桩，无法修改车型";
                 for (int i = 0; i < buttons.Length; i++)
                 {
                     buttons[i].interactable = false;
@@ -38,7 +38,7 @@ public class UserPanel : DataPanel
             }
             else
             {
-                hint.text = "点击下方按钮选择车型";
+                hint.text = "选择您的车型";
                 for (int i = 0; i < buttons.Length; i++)
                 {
                     buttons[i].interactable = true;

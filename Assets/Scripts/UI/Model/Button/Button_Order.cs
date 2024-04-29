@@ -7,7 +7,7 @@ public class Button_Order : Button_ChangingStation
         switch (activeStation.GetState())
         {
             case EStationState.Available:
-                gameObject.SetActive(true);
+                gameObject.SetActive(!stationDataManager.OccupyAny());
                 tmp.text = "预订";
                 break;
             case EStationState.Repairing:

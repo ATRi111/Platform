@@ -45,10 +45,9 @@ public class MessageWindow : MonoBehaviour
         current = station;
         transform.position = Camera.main.WorldToScreenPoint(position);
         StringBuilder sb = new StringBuilder();
-        string s = UsageData.StateName(station.GetState());
-        s.FontSize(32);
-        sb.AppendLine(s);
-        sb.AppendLine("查看详情");
+        sb.Append($"{current.data.Id.ColorText("yellow")}号充电桩");
+        sb.AppendLine(UsageData.StateName(station.GetState()).ColorText("yellow").FontSize(32));
+        sb.AppendLine("点击查看详情");
         tmp.text = sb.ToString();
         canvasGrounp.Visible = true;
     }
