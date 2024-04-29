@@ -1,12 +1,9 @@
+using UnityEngine;
+
 public class Button_NewFault : Button_ChangingStation
 {
+    [SerializeField]
     private ModifyFaultPanel panel;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        panel = GetComponentInParent<ModifyFaultPanel>();
-    }
 
     protected override void Refresh()
     {
@@ -15,6 +12,7 @@ public class Button_NewFault : Button_ChangingStation
         switch(activeStation.GetState())
         {
             case EStationState.Available:
+            case EStationState.Repairing:
                 gameObject.SetActive(true);
                 break;
             default:

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 
 public class FaultRecordPanel : DataPanel
@@ -21,7 +22,7 @@ public class FaultRecordPanel : DataPanel
     protected override void Update()
     {
         base.Update();
-        if(canvasGrounp.Visible && Input.GetMouseButtonDown(0))
+        if(canvasGrounp.Visible && Input.GetMouseButtonDown(0) && !panel.Visible)
         {
             int index = tableUIHelper.ClickIndex();
             if(index >= 0 && index < activeStation.faultRecord.Count)
@@ -60,7 +61,10 @@ public class FaultRecordPanel : DataPanel
         FaultData data = activeStation.faultRecord[index];
         ret.Add(data.Id.ToString());
         ret.Add(data.Time.ToString());
-        ret.Add(data.Solved ? "已解决" : "未解决");
+        if(data.Solved)
+            ret.Add("已解决".ColorText("green"));
+        else
+            ret.Add("未解决".ColorText("red"));
         return ret;
     }
 
