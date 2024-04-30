@@ -23,7 +23,7 @@ namespace Services
         }
 
         /// <summary>
-        /// 用于将非Monobehavior方法加入游戏循环，加入的方法下一帧开始才会被调用
+        /// 鐢ㄤ簬灏嗛潪Monobehavior鏂规硶鍔犲叆娓告垙寰幆锛屽姞鍏ョ殑鏂规硶涓嬩竴甯у紑濮嬫墠浼氳璋冪敤
         /// </summary>
         public void AttachToGameCycle(EInvokeMode mode, UnityAction callBack)
         {

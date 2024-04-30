@@ -6,7 +6,7 @@ public static class TextureTool
     public static readonly Vector2 s_mid = new Vector2(0.5f, 0.5f);
 
     /// <summary>
-    /// ¶ÁÈ¡Í¼Æ¬£¬×ª»»ÎªTexture2D
+    /// è¯»å–å›¾ç‰‡ï¼Œè½¬æ¢ä¸ºTexture2D
     /// </summary>
     public static Texture2D LoadImage(string path)
     {
@@ -23,7 +23,7 @@ public static class TextureTool
     }
 
     /// <summary>
-    /// ¼ÓÔØÒ»ÕÅÍ¼Æ¬£¬ÒÔÔ­ÏñËØÊıÏÔÊ¾£¨´Ë·½·¨Ö»ÄÜÓÃÓÚÔËĞĞÊ±£©
+    /// åŠ è½½ä¸€å¼ å›¾ç‰‡ï¼Œä»¥åŸåƒç´ æ•°æ˜¾ç¤ºï¼ˆæ­¤æ–¹æ³•åªèƒ½ç”¨äºè¿è¡Œæ—¶ï¼‰
     /// </summary>
     public static Sprite LoadSptite(Texture2D texture)
     {
@@ -33,7 +33,7 @@ public static class TextureTool
     }
 
     /// <summary>
-    /// ÓÉRenderTextureÉú³ÉTexture2D£¬Éú³ÉºóĞèÒªÊÖ¶¯Ïú»Ù
+    /// ç”±RenderTextureç”ŸæˆTexture2Dï¼Œç”Ÿæˆåéœ€è¦æ‰‹åŠ¨é”€æ¯
     /// </summary>
     public static Texture2D CreateTexture2D(RenderTexture renderTexture)
     {
@@ -45,9 +45,9 @@ public static class TextureTool
     }
 
     /// <summary>
-    /// ½«Texture2DÊä³öÎªÍ¼Æ¬
+    /// å°†Texture2Dè¾“å‡ºä¸ºå›¾ç‰‡
     /// </summary>
-    /// <param name="filePath">ÎÄ¼şÂ·¾¶£¬Òª°üº¬ÎÄ¼ş¸ñÊ½</param>
+    /// <param name="filePath">æ–‡ä»¶è·¯å¾„ï¼Œè¦åŒ…å«æ–‡ä»¶æ ¼å¼</param>
     public static void CreateImage(string filePath, Texture2D texture)
     {
         byte[] bytes = texture.EncodeToPNG();

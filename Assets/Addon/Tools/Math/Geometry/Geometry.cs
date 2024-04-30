@@ -6,11 +6,11 @@ namespace Tools
 {
     public static partial class GeometryTool
     {
-        //�����еĽǶȵĺ��壺������0��1����Ӧ0�㣬����(-1,0)��Ӧ90��
-        //�������£���������ĳ����λδ��תʱ���ϣ�ŷ���Ǻ�����ò�λ�ĳ����һһ��Ӧ
+        //此类中的角度的含义：向量（0，1）对应0°，向量(-1,0)对应90°
+        //此条件下，如果物体的某个部位未旋转时朝上，欧拉角和物体该部位的朝向就一一对应
 
         /// <summary>
-        /// ʹ�Ƕ�����[0��,360��)��
+        /// 使角度落在[0°,360°)内
         /// </summary>
         public static float ClampAngle(float angle)
         {
@@ -21,7 +21,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ʹ�Ƕ�����[0��,180��]��
+        /// 使角度落在[0°,180°]内
         /// </summary>
         public static float ClampIncludedAngle(float angle)
         {
@@ -53,11 +53,11 @@ namespace Tools
         }
 
         /// <summary>
-        /// �������Ļ���͹����Σ��˷���������һ������
+        /// 利用中心划分凸多边形，此方法会增加一个顶点
         /// </summary>
-        /// <param name="points">�߽�ĵ㣬����Ҫ��˳���룬�˷�����outline�ᱻ�ı�</param>
-        /// <param name="triangles">���ս�������������飬ԭ�������ݲ��ᱻ���</param>
-        /// <param name="index">������������±�Ӽ���ʼ</param>
+        /// <param name="points">边界的点，不需要按顺序传入，此方法中outline会被改变</param>
+        /// <param name="triangles">接收结果的三角形数组，原本的内容不会被清除</param>
+        /// <param name="index">三角形数组的下标从几开始</param>
         public static void DivideConvexPolygon_Center(List<Vector2> points, List<int> triangles, int index = 0)
         {
             int n = points.Count;
@@ -80,10 +80,10 @@ namespace Tools
         }
 
         /// <summary>
-        /// �������Ļ���͹����Σ��˷���������һ������
+        /// 利用中心划分凸多边形，此方法会增加一个顶点
         /// </summary>
-        /// <param name="points">�߽�ĵ㣬����Ҫ��˳���룬�˷�����outline�ᱻ�ı�</param>
-        /// <param name="triangles">���ս��,���η���ÿ�������Σ�˳ʱ�뷵�������ε����������꣩</param>
+        /// <param name="points">边界的点，不需要按顺序传入，此方法中outline会被改变</param>
+        /// <param name="triangles">接收结果,依次返回每个三角形（顺时针返回三角形的三个点坐标）</param>
         public static void DivideConvexPolygon_Center(List<Vector2> points, List<List<Vector2>> triangles)
         {
             int n = points.Count;

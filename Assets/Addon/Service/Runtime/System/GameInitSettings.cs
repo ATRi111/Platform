@@ -4,6 +4,6 @@ namespace Services
 {
     public class GameInitSettings : ScriptableObject
     {
-        public int startGameIndex = 1; //初始化完成后游戏开始时，要加载的场景号
+        public int startGameIndex = 1; //鍒濆鍖栧畬鎴愬悗娓告垙寮�濮嬫椂锛岃鍔犺浇鐨勫満鏅彿
     }
 }

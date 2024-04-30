@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Services.Audio
 {
     /// <summary>
-    /// ¿ØÖÆÒôÆµ²¥·Åµ½Ä³Ò»Ê±¿Ìºó×Ô»Ù£¬½ûÓÃ»ò´İ»Ù´Ë½Å±¾¼´ÖĞÖ¹×Ô»Ù
+    /// æ§åˆ¶éŸ³é¢‘æ’­æ”¾åˆ°æŸä¸€æ—¶åˆ»åè‡ªæ¯ï¼Œç¦ç”¨æˆ–æ‘§æ¯æ­¤è„šæœ¬å³ä¸­æ­¢è‡ªæ¯
     /// </summary>
     public class SelfDestructiveAudio : MonoBehaviour
     {

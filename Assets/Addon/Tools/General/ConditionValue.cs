@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace Tools
 {
     /// <summary>
-    /// Ìõ¼şÁ¿£»Ä³¸öÊÂ¼şĞèÒªÍ¬Ê±Âú×ã¶à¸öÌõ¼ş²ÅÄÜÖ´ĞĞÊ±£¬¿ÉÒÔÊ¹ÓÃ´ËÀà
+    /// æ¡ä»¶é‡ï¼›æŸä¸ªäº‹ä»¶éœ€è¦åŒæ—¶æ»¡è¶³å¤šä¸ªæ¡ä»¶æ‰èƒ½æ‰§è¡Œæ—¶ï¼Œå¯ä»¥ä½¿ç”¨æ­¤ç±»
     /// </summary>
     [System.Serializable]
     public class ConditionValue
@@ -13,26 +13,26 @@ namespace Tools
         private int count;
 
         /// <summary>
-        /// ÉĞÎ´Âú×ãµÄÌõ¼şÊıÁ¿£»Èç¹ûÎª0£¬±íÊ¾Âú×ãËùÓĞÌõ¼ş
+        /// å°šæœªæ»¡è¶³çš„æ¡ä»¶æ•°é‡ï¼›å¦‚æœä¸º0ï¼Œè¡¨ç¤ºæ»¡è¶³æ‰€æœ‰æ¡ä»¶
         /// </summary>
         public int Count => count;
 
         /// <summary>
-        /// ĞÅºÅÁ¿Ğ¡ÓÚµÈÓÚ0¼´±íÊ¾¡°ÉÏËø¡±
+        /// ä¿¡å·é‡å°äºç­‰äº0å³è¡¨ç¤ºâ€œä¸Šé”â€
         /// </summary>
         public bool Locked => Count <= 0;
 
         /// <summary>
-        /// Ìõ¼ş´Ó²»È«Âú×ã±äÎªÈ«Âú×ãÊ±£¬µ÷ÓÃ´ËÊÂ¼ş
+        /// æ¡ä»¶ä»ä¸å…¨æ»¡è¶³å˜ä¸ºå…¨æ»¡è¶³æ—¶ï¼Œè°ƒç”¨æ­¤äº‹ä»¶
         /// </summary>
         public event UnityAction AfterSatisfied;
         /// <summary>
-        /// Ìõ¼ş´ÓÈ«Âú×ã±äÎª²»È«Âú×ãÊ±£¬µ÷ÓÃ´ËÊÂ¼ş
+        /// æ¡ä»¶ä»å…¨æ»¡è¶³å˜ä¸ºä¸å…¨æ»¡è¶³æ—¶ï¼Œè°ƒç”¨æ­¤äº‹ä»¶
         /// </summary>
         public event UnityAction AfterNotSatisfied;
 
         /// <summary>
-        /// Éè¶¨³õÖµ,²»»áÒı·¢AfterSatisfied»òAfterNotSatisfiedÊÂ¼ş
+        /// è®¾å®šåˆå€¼,ä¸ä¼šå¼•å‘AfterSatisfiedæˆ–AfterNotSatisfiedäº‹ä»¶
         /// </summary>
         public ConditionValue(int init = 0)
         {
@@ -53,7 +53,7 @@ namespace Tools
             if (semaphore.count == 0)
                 semaphore.AfterSatisfied?.Invoke();
             else if (semaphore.count < 0)
-                Debug.LogWarning("ÈÎºÎÇé¿öÏÂ,ĞÅºÅÁ¿²»Ó¦½µµÍµ½0ÒÔÏÂ");
+                Debug.LogWarning("ä»»ä½•æƒ…å†µä¸‹,ä¿¡å·é‡ä¸åº”é™ä½åˆ°0ä»¥ä¸‹");
             return semaphore;
         }
     }

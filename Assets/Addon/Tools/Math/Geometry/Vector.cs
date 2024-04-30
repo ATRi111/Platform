@@ -15,7 +15,7 @@ namespace Tools
             }
         }
 
-        /// <param name="count">±ØĞëÊÇ360µÄÒòÊı</param>
+        /// <param name="count">å¿…é¡»æ˜¯360çš„å› æ•°</param>
         public static void GetcirclePoints(Vector3 center, float radius, int count, List<Vector3> ret)
         {
             int delta = 360 / count;
@@ -28,12 +28,12 @@ namespace Tools
         }
 
         /// <summary>
-        /// ½Ç¶È×ª¶şÎ¬Ê¸Á¿
+        /// è§’åº¦è½¬äºŒç»´çŸ¢é‡
         /// </summary>
         public static Vector2 ToDirection(this float angle)
             => new Vector2(-Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
         /// <summary>
-        /// ¶şÎ¬Ê¸Á¿×ª½Ç¶È[0¡ã,360¡ã)
+        /// äºŒç»´çŸ¢é‡è½¬è§’åº¦[0Â°,360Â°)
         /// </summary>
         public static float ToAngle(this Vector2 direction)
         {
@@ -42,7 +42,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ÇóvÔÚtargetÉÏµÄÍ¶Ó°
+        /// æ±‚våœ¨targetä¸Šçš„æŠ•å½±
         /// </summary>
         public static Vector3 Projection(this Vector3 v, Vector3 target)
         {
@@ -52,7 +52,7 @@ namespace Tools
             return target * Vector3.Dot(v, target);
         }
         /// <summary>
-        /// ÇóvÔÚtargetÉÏµÄÍ¶Ó°
+        /// æ±‚våœ¨targetä¸Šçš„æŠ•å½±
         /// </summary>
         public static Vector2 Projection(this Vector2 v, Vector2 target)
         {
@@ -65,7 +65,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ¶ÔÏòÁ¿°´ÓëÄ³¸öÏòÁ¿µÄ¼Ğ½Ç´óĞ¡ÅÅĞò
+        /// å¯¹å‘é‡æŒ‰ä¸æŸä¸ªå‘é‡çš„å¤¹è§’å¤§å°æ’åº
         /// </summary>
         public class Comparer_Vector2_Nearer : IComparer<Vector2>, IComparer<Vector2Int>
         {
@@ -90,7 +90,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ÒÔËù¸øµãÎªÔ­µã£¬¶Ôµã°´Ë³Ê±ÕëÅÅĞò
+        /// ä»¥æ‰€ç»™ç‚¹ä¸ºåŸç‚¹ï¼Œå¯¹ç‚¹æŒ‰é¡ºæ—¶é’ˆæ’åº
         /// </summary>
         public class Comparer_Vector2_Clockwise : IComparer<Vector2>, IComparer<Vector2Int>, IComparer<Vector3>
         {
@@ -139,7 +139,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ·½ÏòÏòÁ¿µÄ²åÖµ
+        /// æ–¹å‘å‘é‡çš„æ’å€¼
         /// </summary>
         public static Vector3 DirectionLerp(Vector3 v1, Vector3 v2, float k)
         {

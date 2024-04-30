@@ -14,7 +14,7 @@ namespace MeshExtend
         public Vector3 position;
 
         /// <summary>
-        /// ½öÔÚGetColorÎª¿ÕÊ±£¬Ê¹ÓÃ´Ë×Ö¶Î
+        /// ä»…åœ¨GetColorä¸ºç©ºæ—¶ï¼Œä½¿ç”¨æ­¤å­—æ®µ
         /// </summary>
         public Color color;
         public Func<Vector3, Color> GetColor;
@@ -29,11 +29,11 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// ½öÔÚGetUVÎª¿ÕÊ±£¬Ê¹ÓÃ´Ë×Ö¶Î
+        /// ä»…åœ¨GetUVä¸ºç©ºæ—¶ï¼Œä½¿ç”¨æ­¤å­—æ®µ
         /// </summary>
         public Vector2 uv;
         /// <summary>
-        /// ÎÆÀíÓ³Éä
+        /// çº¹ç†æ˜ å°„
         /// </summary>
         public Func<Vector3, Vector2> GetUV;
         public Vector2 UV

@@ -5,12 +5,12 @@ using UnityEngine;
 namespace MeshExtend
 {
     /// <summary>
-    /// ÓÃÓÚ±ã½İµØ´´½¨mesh
+    /// ç”¨äºä¾¿æ·åœ°åˆ›å»ºmesh
     /// </summary>
     [Serializable]
     public class MeshHelper
     {
-        //²»ÄÜÖØ¸´Ìí¼ÓÍ¬Ò»¸öÎ»ÖÃÎª¶¥µã£¬¹ÊÊ¹ÓÃ×Öµä¼ì²é
+        //ä¸èƒ½é‡å¤æ·»åŠ åŒä¸€ä¸ªä½ç½®ä¸ºé¡¶ç‚¹ï¼Œæ•…ä½¿ç”¨å­—å…¸æ£€æŸ¥
         internal readonly Dictionary<Vector3, int> vertexToIndex;
 
         public bool dirty;
@@ -76,7 +76,7 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Ìí¼ÓÒ»¸öÈı½ÇĞÎ£¬±ØĞëÈ·±£°´Ë³Ê±ÕëË³Ğò´«ÈëÈı¸ö¶¥µã
+        /// æ·»åŠ ä¸€ä¸ªä¸‰è§’å½¢ï¼Œå¿…é¡»ç¡®ä¿æŒ‰é¡ºæ—¶é’ˆé¡ºåºä¼ å…¥ä¸‰ä¸ªé¡¶ç‚¹
         /// </summary>
         public void AddTriangle_Sorted(Vertex v1, Vertex v2, Vertex v3)
         {
@@ -101,7 +101,7 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Ìí¼ÓÒ»¸öÈı½ÇĞÎ£¬±ØĞëÈ·±£°´Ë³Ê±ÕëË³Ğò´«ÈëÈı¸ö¶¥µã
+        /// æ·»åŠ ä¸€ä¸ªä¸‰è§’å½¢ï¼Œå¿…é¡»ç¡®ä¿æŒ‰é¡ºæ—¶é’ˆé¡ºåºä¼ å…¥ä¸‰ä¸ªé¡¶ç‚¹
         /// </summary>
         public void AddTriangle_Sorted(List<Vertex> tri)
         {
@@ -111,7 +111,7 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Ìí¼ÓÒ»¸öËÄ±ßĞÎ£¬±ØĞëÈ·±£°´Ë³Ê±ÕëË³Ğò´«ÈëËÄ¸ö¶¥µã
+        /// æ·»åŠ ä¸€ä¸ªå››è¾¹å½¢ï¼Œå¿…é¡»ç¡®ä¿æŒ‰é¡ºæ—¶é’ˆé¡ºåºä¼ å…¥å››ä¸ªé¡¶ç‚¹
         /// </summary>
         public void AddQuad_Sorted(Vertex v1, Vertex v2, Vertex v3, Vertex v4)
         {
@@ -120,7 +120,7 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Ìí¼ÓÒ»¸öËÄ±ßĞÎ£¬±ØĞëÈ·±£°´Ë³Ê±ÕëË³Ğò´«ÈëËÄ¸ö¶¥µã
+        /// æ·»åŠ ä¸€ä¸ªå››è¾¹å½¢ï¼Œå¿…é¡»ç¡®ä¿æŒ‰é¡ºæ—¶é’ˆé¡ºåºä¼ å…¥å››ä¸ªé¡¶ç‚¹
         /// </summary>
         public void AddQuad_Sorted(List<Vertex> quad)
         {

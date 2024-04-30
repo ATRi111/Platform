@@ -5,7 +5,7 @@ namespace Tools
 {
     public static partial class GeneralTool
     {
-        //¿Õ·½·¨¼´Ö»ÓĞÒ»ÌõreturnÓï¾äµÄ·½·¨£¬±àÒëºóµÄMSILÂëByteÊı×é½ö°üº¬µ¥¸öÔªËØ(42)
+        //ç©ºæ–¹æ³•å³åªæœ‰ä¸€æ¡returnè¯­å¥çš„æ–¹æ³•ï¼Œç¼–è¯‘åçš„MSILç Byteæ•°ç»„ä»…åŒ…å«å•ä¸ªå…ƒç´ (42)
         public static bool IsEmptyMethod(this MethodInfo info)
         {
             return info.GetMethodBody().GetILAsByteArray().Length == 1;

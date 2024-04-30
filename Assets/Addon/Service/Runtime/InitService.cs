@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Services
 {
-    //此脚本仅用于便捷地挂载Service组件
+    //姝よ剼鏈粎鐢ㄤ簬渚挎嵎鍦版寕杞絊ervice缁勪欢
     public class InitService : MonoBehaviour
     {
         public string search;

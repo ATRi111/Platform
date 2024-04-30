@@ -5,12 +5,12 @@ namespace Services.ObjectPools
     public static class ObjectPoolUtility
     {
         /// <summary>
-        /// ÓÃ´Ë·½·¨Éú³ÉMyObject¹ÒÔØµÄÓÎÏ·ÎïÌå£¬¶ø²»ÊÇObject.Instantiate
+        /// ç”¨æ­¤æ–¹æ³•ç”ŸæˆMyObjectæŒ‚è½½çš„æ¸¸æˆç‰©ä½“ï¼Œè€Œä¸æ˜¯Object.Instantiate
         /// </summary>
-        /// <param name="prefab">Òª¿ËÂ¡µÄÓÎÏ·ÎïÌå</param>
-        /// <param name="byPool">ÊÇ·ñÓÉ¶ÔÏó³ØÉú³É</param>
-        /// <param name="pool">ËùÊôµÄ¶ÔÏó³Ø</param>
-        /// <returns>Éú³ÉµÄÓÎÏ·ÎïÌåµÄMyObject½Å±¾</returns>
+        /// <param name="prefab">è¦å…‹éš†çš„æ¸¸æˆç‰©ä½“</param>
+        /// <param name="byPool">æ˜¯å¦ç”±å¯¹è±¡æ± ç”Ÿæˆ</param>
+        /// <param name="pool">æ‰€å±çš„å¯¹è±¡æ± </param>
+        /// <returns>ç”Ÿæˆçš„æ¸¸æˆç‰©ä½“çš„MyObjectè„šæœ¬</returns>
         public static MyObject Clone(GameObject prefab, bool byPool = false, ObjectPool pool = null)
         {
             GameObject obj = Object.Instantiate(prefab);
@@ -26,7 +26,7 @@ namespace Services.ObjectPools
         }
 
         /// <summary>
-        /// »ØÊÕÒ»¸öÓÎÏ·ÎïÌåËùÓĞ×ÓÎïÌåÖĞµÄMyObject×é¼ş
+        /// å›æ”¶ä¸€ä¸ªæ¸¸æˆç‰©ä½“æ‰€æœ‰å­ç‰©ä½“ä¸­çš„MyObjectç»„ä»¶
         /// </summary>
         public static void RecycleMyObjects(GameObject gameObject)
         {

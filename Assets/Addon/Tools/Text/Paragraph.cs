@@ -9,9 +9,9 @@ namespace Tools
     public static partial class TextTool
     {
         /// <summary>
-        /// ¶ÁÈ¡£¨ÓÉ¿ÕĞĞ·Ö¸ôµÄ)Ò»¶ÎÎÄ±¾
+        /// è¯»å–ï¼ˆç”±ç©ºè¡Œåˆ†éš”çš„)ä¸€æ®µæ–‡æœ¬
         /// </summary>
-        /// <param name="maxLine">×î´ó¶ÁÈ¡ĞĞÊı</param>
+        /// <param name="maxLine">æœ€å¤§è¯»å–è¡Œæ•°</param>
         public static string GetParagraph(StreamReader reader, int maxLine)
         {
             StringBuilder ret = null;
@@ -34,9 +34,9 @@ namespace Tools
         }
 
         /// <summary>
-        /// Çå³ıÒ»¸ö×Ö·û´®µÄ»»ĞĞ£¬²¢ÖØĞÂ»»ĞĞ
+        /// æ¸…é™¤ä¸€ä¸ªå­—ç¬¦ä¸²çš„æ¢è¡Œï¼Œå¹¶é‡æ–°æ¢è¡Œ
         /// </summary>
-        /// <param name="characterPerLine">Ã¿ĞĞ×ÖÊı£¬0±íÊ¾²»»»ĞĞ</param>
+        /// <param name="characterPerLine">æ¯è¡Œå­—æ•°ï¼Œ0è¡¨ç¤ºä¸æ¢è¡Œ</param>
         public static string Wrap(string s, int characterPerLine)
         {
             StringBuilder sb = new StringBuilder();
@@ -60,7 +60,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ºÏ²¢¼¸¸ö×Ö·û´®£¬Á½¸ö×Ö·û´®Ö®¼äÈç¹ûÃ»ÓĞ»»ĞĞ£¬²¹³ä»»ĞĞ(¿Õ×Ö·û´®»á±»ºöÂÔ)
+        /// åˆå¹¶å‡ ä¸ªå­—ç¬¦ä¸²ï¼Œä¸¤ä¸ªå­—ç¬¦ä¸²ä¹‹é—´å¦‚æœæ²¡æœ‰æ¢è¡Œï¼Œè¡¥å……æ¢è¡Œ(ç©ºå­—ç¬¦ä¸²ä¼šè¢«å¿½ç•¥)
         /// </summary>
         public static string CombineAndWrap(params string[] s)
         {

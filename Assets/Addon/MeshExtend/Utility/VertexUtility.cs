@@ -7,9 +7,9 @@ namespace MeshExtend
     public static class VertexUtility
     {
         /// <summary>
-        /// 给List中的每个Vertex设定UV
+        /// 缁橪ist涓殑姣忎釜Vertex璁惧畾UV
         /// </summary>
-        /// <param name="resultOnly">是否保留运算结果而清空GetUV</param>
+        /// <param name="resultOnly">鏄惁淇濈暀杩愮畻缁撴灉鑰屾竻绌篏etUV</param>
         public static void SetUV(this List<Vertex> vertices, Func<Vector3, Vector2> GetUV, bool resultOnly = false)
         {
             if (resultOnly)
@@ -30,9 +30,9 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// 给List中的每个Vertex设定Color
+        /// 缁橪ist涓殑姣忎釜Vertex璁惧畾Color
         /// </summary>
-        /// <param name="resultOnly">是否保留运算结果并清空GetColor</param>
+        /// <param name="resultOnly">鏄惁淇濈暀杩愮畻缁撴灉骞舵竻绌篏etColor</param>
         public static void SetColor(this List<Vertex> vertices, Func<Vector3, Color> GetColor, bool resultOnly = false)
         {
             if (resultOnly)
@@ -53,9 +53,9 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// 给List中的每个Vertex设定Color
+        /// 缁橪ist涓殑姣忎釜Vertex璁惧畾Color
         /// </summary>
-        /// <param name="resultOnly">是否保留运算结果并清空GetColor</param>
+        /// <param name="resultOnly">鏄惁淇濈暀杩愮畻缁撴灉骞舵竻绌篏etColor</param>
         public static void SetColor(this List<Vertex> vertices, Color color)
         {
             for (int i = 0; i < vertices.Count; i++)

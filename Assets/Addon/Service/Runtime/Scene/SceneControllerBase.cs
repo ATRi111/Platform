@@ -13,11 +13,11 @@ namespace Services.SceneManagement
         protected SceneControllerCore core;
 
         /// <summary>
-        /// ÊÇ·ñÒì²½¼ÓÔØ³¡¾°
+        /// æ˜¯å¦å¼‚æ­¥åŠ è½½åœºæ™¯
         /// </summary>
         public bool async;
         /// <summary>
-        /// Òì²½¼ÓÔØ³¡¾°Ê±ÊÇ·ñĞèÒªÈ·ÈÏ
+        /// å¼‚æ­¥åŠ è½½åœºæ™¯æ—¶æ˜¯å¦éœ€è¦ç¡®è®¤
         /// </summary>
         public bool needConfirm;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MeshExtend
 {
     /// <summary>
-    /// ÓÃÓÚ±ã½İµØ´´½¨ÓÃÓÚ2DÍ¼ÏñµÄmesh
+    /// ç”¨äºä¾¿æ·åœ°åˆ›å»ºç”¨äº2Då›¾åƒçš„mesh
     /// </summary>
     [Serializable]
     public class MeshHelper2D : MeshHelper
@@ -16,7 +16,7 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// ÓÃÓÚÉú³ÉÄ¬ÈÏµÄ¼ÆËãUVµÄ·½·¨
+        /// ç”¨äºç”Ÿæˆé»˜è®¤çš„è®¡ç®—UVçš„æ–¹æ³•
         /// </summary>
         public Func<Rect> GetRect;
 
@@ -27,10 +27,10 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Ìí¼ÓÒ»¸öÍ¹¶à±ßĞÎ
+        /// æ·»åŠ ä¸€ä¸ªå‡¸å¤šè¾¹å½¢
         /// </summary>
-        /// <param name="sorted">¶¥µãÊÇ·ñÒÑ¾­¾­¹ıÅÅĞò</param>
-        /// <returns>ĞÂÌí¼ÓµÄ¶¥µã£¬ĞèÒªÎªÆä·ÖÅäpositionÒÔÍâµÄÊôĞÔ(±ßÊıÎª3»ò4Ê±£¬²»»áÌí¼ÓĞÂµÄ¶¥µã)</returns>
+        /// <param name="sorted">é¡¶ç‚¹æ˜¯å¦å·²ç»ç»è¿‡æ’åº</param>
+        /// <returns>æ–°æ·»åŠ çš„é¡¶ç‚¹ï¼Œéœ€è¦ä¸ºå…¶åˆ†é…positionä»¥å¤–çš„å±æ€§(è¾¹æ•°ä¸º3æˆ–4æ—¶ï¼Œä¸ä¼šæ·»åŠ æ–°çš„é¡¶ç‚¹)</returns>
         public Vertex AddConvexPolygon(List<Vertex> vertices, bool sorted = false)
         {
             int n = vertices.Count;
@@ -63,7 +63,7 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Ìí¼ÓÒ»¸öÍ¹¶à±ßĞÎ
+        /// æ·»åŠ ä¸€ä¸ªå‡¸å¤šè¾¹å½¢
         /// </summary>
         public Vertex AddConvexPolygon(params Vertex[] vertices)
         {

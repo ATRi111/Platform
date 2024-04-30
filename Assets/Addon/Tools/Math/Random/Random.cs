@@ -23,19 +23,19 @@ namespace Tools
         }
 
         /// <summary>
-        /// ·µ»Ø[min,max£©¼äµÄËæ»úÕûÊı
+        /// è¿”å›[min,maxï¼‰é—´çš„éšæœºæ•´æ•°
         /// </summary>
         public static int RandomInt(int min, int max, ERandomGrounp eRandomGrounp = ERandomGrounp.Default)
             => groups[eRandomGrounp].Next(min, max);
 
         /// <summary>
-        /// ·µ»Ø[min,max£©¼äµÄËæ»ú¸¡µãÊı
+        /// è¿”å›[min,maxï¼‰é—´çš„éšæœºæµ®ç‚¹æ•°
         /// </summary>
         public static float RandomFloat(float min, float max, ERandomGrounp eRandomGrounp = ERandomGrounp.Default)
             => (float)(groups[eRandomGrounp].NextDouble()) * (max - min) + min;
 
         /// <summary>
-        /// Éú³ÉËæ»úµ¥Î»¶şÎ¬ÏòÁ¿£¨Ê¹ÓÃ¶à¸öËæ»úÊı£©
+        /// ç”Ÿæˆéšæœºå•ä½äºŒç»´å‘é‡ï¼ˆä½¿ç”¨å¤šä¸ªéšæœºæ•°ï¼‰
         /// </summary>
         public static Vector2 RandomVector2(ERandomGrounp eRandomGrounp = ERandomGrounp.Default)
         {
@@ -50,7 +50,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// Éú³ÉËæ»úµ¥Î»ÈıÎ¬ÏòÁ¿£¨Ê¹ÓÃ¶à¸öËæ»úÊı£©
+        /// ç”Ÿæˆéšæœºå•ä½ä¸‰ç»´å‘é‡ï¼ˆä½¿ç”¨å¤šä¸ªéšæœºæ•°ï¼‰
         /// </summary>
         public static Vector3 RandomVector3(ERandomGrounp eRandomGrounp = ERandomGrounp.Default)
         {
@@ -65,9 +65,9 @@ namespace Tools
             return new Vector2((float)x, (float)y).normalized;
         }
 
-        private static double spare;    //¶àÓàµÄÕıÌ¬·Ö²¼Ëæ»úÊı
+        private static double spare;    //å¤šä½™çš„æ­£æ€åˆ†å¸ƒéšæœºæ•°
         /// <summary>
-        /// Éú³É·ûºÏ±ê×¼ÕıÌ¬·Ö²¼µÄËæ»úÊı(Ê¹ÓÃ¶à¸öËæ»úÊı)
+        /// ç”Ÿæˆç¬¦åˆæ ‡å‡†æ­£æ€åˆ†å¸ƒçš„éšæœºæ•°(ä½¿ç”¨å¤šä¸ªéšæœºæ•°)
         /// </summary>
         /// <returns></returns>
         public static double RandomNormalDistribution(ERandomGrounp eRandomGrounp = ERandomGrounp.Default)

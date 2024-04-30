@@ -14,12 +14,12 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Éú³ÉÕı¶à±ßĞÎ£¨ÒÑÅÅĞò£©
+        /// ç”Ÿæˆæ­£å¤šè¾¹å½¢ï¼ˆå·²æ’åºï¼‰
         /// </summary>
-        /// <param name="center">ÖĞĞÄ</param>
-        /// <param name="r">Íâ½ÓÔ²°ë¾¶</param>
-        /// <param name="n">±ßÊı</param>
-        /// <param name="rotateAngle">Ğı×ª½Ç</param>
+        /// <param name="center">ä¸­å¿ƒ</param>
+        /// <param name="r">å¤–æ¥åœ†åŠå¾„</param>
+        /// <param name="n">è¾¹æ•°</param>
+        /// <param name="rotateAngle">æ—‹è½¬è§’</param>
         public static List<Vertex> GenerateRegularPolygon(Vector2 center, float r, int n, float rotateAngle = 0f)
         {
             List<Vertex> ret = new List<Vertex>();
@@ -32,9 +32,9 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Éú³ÉÓĞ¿í¶ÈµÄÏß¶Î£¨ÒÑÅÅĞò£©
+        /// ç”Ÿæˆæœ‰å®½åº¦çš„çº¿æ®µï¼ˆå·²æ’åºï¼‰
         /// </summary>
-        /// <param name="extend">Á½¶ËÊÇ·ñÒª·Ö±ğÑÓ³¤width/2</param>
+        /// <param name="extend">ä¸¤ç«¯æ˜¯å¦è¦åˆ†åˆ«å»¶é•¿width/2</param>
         public static List<Vertex> GenerateLine(Vector2 a, Vector2 b, float width, bool extend = false)
         {
             Vector2 direction = (b - a).normalized;
@@ -60,13 +60,13 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Éú³ÉÖá¶ÔÆëµÄ¾ØĞÎ£¨ÒÑÅÅĞò£©
+        /// ç”Ÿæˆè½´å¯¹é½çš„çŸ©å½¢ï¼ˆå·²æ’åºï¼‰
         /// </summary>
         public static List<Vertex> GenerateRect(Rect rect)
             => GenerateRect(rect.xMin, rect.yMin, rect.xMax, rect.yMax);
 
         /// <summary>
-        /// Éú³ÉÖá¶ÔÆëµÄ¾ØĞÎ£¨ÒÑÅÅĞò£©
+        /// ç”Ÿæˆè½´å¯¹é½çš„çŸ©å½¢ï¼ˆå·²æ’åºï¼‰
         /// </summary>
         public static List<Vertex> GenerateRect(float x1, float y1, float x2, float y2)
         {
@@ -81,10 +81,10 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// Éú³É¾ùÔÈµÄ¡¢Öá¶ÔÆëµÄ¾ØĞÎÍø¸ñ
+        /// ç”Ÿæˆå‡åŒ€çš„ã€è½´å¯¹é½çš„çŸ©å½¢ç½‘æ ¼
         /// </summary>
-        /// <param name="nx">x·½ÏòÉÏ»®·ÖµÄ¸ñÊı</param>
-        /// <param name="ny">y·½ÏòÉÏ»®·ÖµÄ¸ñÊı</param>
+        /// <param name="nx">xæ–¹å‘ä¸Šåˆ’åˆ†çš„æ ¼æ•°</param>
+        /// <param name="ny">yæ–¹å‘ä¸Šåˆ’åˆ†çš„æ ¼æ•°</param>
         public static List<List<Vertex>> GenerateGrid(float x1, float x2, float y1, float y2, float nx, float ny)
         {
             List<List<Vertex>> ret = new List<List<Vertex>>();

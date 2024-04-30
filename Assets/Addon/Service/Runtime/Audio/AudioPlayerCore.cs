@@ -47,7 +47,7 @@ namespace Services.Audio
             }
         }
 
-        //dB = 10 * lg(p/p0) => dB = k*lg(percent + жд) + C
+        //dB = 10 * lg(p/p0) => dB = k*lg(percent + ╬Ф) + C
         internal void SetVolume(AudioMixer mixer, string name, float percent)
         {
             percent = Mathf.Clamp(percent, 0.01f, 1f);

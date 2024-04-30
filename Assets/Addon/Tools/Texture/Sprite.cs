@@ -6,23 +6,23 @@ namespace Tools
     public enum SpriteScaleMode
     {
         /// <summary>
-        /// ¿í¸ß×ÔÓÉËõ·Å
+        /// å®½é«˜è‡ªç”±ç¼©æ”¾
         /// </summary>
         Free,
         /// <summary>
-        /// ½ö¸Ä±ä¿í¶È
+        /// ä»…æ”¹å˜å®½åº¦
         /// </summary>
         WidthOnly,
         /// <summary>
-        /// ½ö¸Ä±ä¸ß¶È
+        /// ä»…æ”¹å˜é«˜åº¦
         /// </summary>
         HeightOnly,
         /// <summary>
-        /// ¸Ä±ä¿í¶È£¬¸ß¶ÈµÈ±ÈÀıËõ·Å
+        /// æ”¹å˜å®½åº¦ï¼Œé«˜åº¦ç­‰æ¯”ä¾‹ç¼©æ”¾
         /// </summary>
         ByWidth,
         /// <summary>
-        /// ¸Ä±ä¸ß¶È£¬¿í¶ÈµÈ±ÈÀıËõ·Å
+        /// æ”¹å˜é«˜åº¦ï¼Œå®½åº¦ç­‰æ¯”ä¾‹ç¼©æ”¾
         /// </summary>
         ByHeight,
     }
@@ -30,12 +30,12 @@ namespace Tools
     public static class SpriteTool
     {
         /// <summary>
-        /// µ÷ÕûSpriteµÄ¿í¸ß
+        /// è°ƒæ•´Spriteçš„å®½é«˜
         /// </summary>
-        /// <param name="width">Ä¿±ê¿í¶È£¨ÒÔÆÁÄ»¿í¶ÈµÄ±¶Êı¼Æ£©</param>
-        /// <param name="height">Ä¿±ê¸ß¶È£¨ÒÔÆÁÄ»¸ß¶ÈµÄ±¶Êı¼Æ£©</param>
-        /// <param name="scaleMode">ĞÎ±äÄ£Ê½</param>
-        /// <returns>¸ÃÓÎÏ·ÎïÌåµÄlossyScaleÓ¦µ÷ÕûÎª¶àÉÙ</returns>
+        /// <param name="width">ç›®æ ‡å®½åº¦ï¼ˆä»¥å±å¹•å®½åº¦çš„å€æ•°è®¡ï¼‰</param>
+        /// <param name="height">ç›®æ ‡é«˜åº¦ï¼ˆä»¥å±å¹•é«˜åº¦çš„å€æ•°è®¡ï¼‰</param>
+        /// <param name="scaleMode">å½¢å˜æ¨¡å¼</param>
+        /// <returns>è¯¥æ¸¸æˆç‰©ä½“çš„lossyScaleåº”è°ƒæ•´ä¸ºå¤šå°‘</returns>
         public static Vector3 ScaleWithScreen(Camera camera, SpriteRenderer spriteRenderer, float width, float height, SpriteScaleMode scaleMode = Free)
         {
             if (spriteRenderer == null || spriteRenderer.transform == null || spriteRenderer.sprite == null)
@@ -80,7 +80,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ¼ÆËãÍ¼Æ¬¿í¸ß±È
+        /// è®¡ç®—å›¾ç‰‡å®½é«˜æ¯”
         /// </summary>
         public static float GetAspectRatio(Sprite sprite)
         {

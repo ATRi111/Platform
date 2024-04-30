@@ -49,7 +49,7 @@ namespace Tools
         {
             if (Dict_EDirection.ContainsKey(direction))
                 return Dict_EDirection[direction];
-            Debug.LogWarning($"ÊäÈëµÄ·½ÏòÎª{direction}£¬²»ÊÇ°ËÖÖ·½ÏòÖ®Ò»");
+            Debug.LogWarning($"è¾“å…¥çš„æ–¹å‘ä¸º{direction}ï¼Œä¸æ˜¯å…«ç§æ–¹å‘ä¹‹ä¸€");
             return EDirection.None;
         }
 
@@ -75,7 +75,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// °´ÄæÊ±ÕëË³Ğò·µ»Ø°Ë¸ö·½Ïò
+        /// æŒ‰é€†æ—¶é’ˆé¡ºåºè¿”å›å…«ä¸ªæ–¹å‘
         /// </summary>
         public static List<Vector2Int> GetDirections()
         {
@@ -88,9 +88,9 @@ namespace Tools
         }
 
         /// <summary>
-        /// °´Ë³Ğò·µ»Ø°Ë¸ö·½Ïò£¬Óëdirection¸ü½Ó½üµÄÔÚÇ°
+        /// æŒ‰é¡ºåºè¿”å›å…«ä¸ªæ–¹å‘ï¼Œä¸directionæ›´æ¥è¿‘çš„åœ¨å‰
         /// </summary>
-        /// <param name="n">½á¹û±£ÁôÇ°n¸öÖµ</param>
+        /// <param name="n">ç»“æœä¿ç•™å‰nä¸ªå€¼</param>
         public static List<Vector2Int> NearerDirections(Vector2 direction, int n = 8)
         {
             n = Mathf.Clamp(n, 0, 8);
@@ -101,7 +101,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ·µ»Ø°Ë¸ö·½ÏòÖĞÓëËù¸ø·½Ïò×î½Ó½üµÄ
+        /// è¿”å›å…«ä¸ªæ–¹å‘ä¸­ä¸æ‰€ç»™æ–¹å‘æœ€æ¥è¿‘çš„
         /// </summary>
         public static Vector2Int NearestDirection(Vector2 direciton)
         {
@@ -109,7 +109,7 @@ namespace Tools
             return Vectors[sign];
         }
         /// <summary>
-        /// ·µ»ØËÄ¸ö·½ÏòÖĞÓëËù¸ø·½Ïò×î½Ó½üµÄ
+        /// è¿”å›å››ä¸ªæ–¹å‘ä¸­ä¸æ‰€ç»™æ–¹å‘æœ€æ¥è¿‘çš„
         /// </summary>
         public static Vector2Int NearestDirection4(Vector2 direciton)
         {
@@ -118,9 +118,9 @@ namespace Tools
         }
 
         /// <summary>
-        /// ½«Î»ÒÆ·Ö½â³É°ËÏòÒÆ¶¯µÄ×éºÏ£¬¾¡Á¿Ê¹½á¹û½Ó½üÖ±Ïß
+        /// å°†ä½ç§»åˆ†è§£æˆå…«å‘ç§»åŠ¨çš„ç»„åˆï¼Œå°½é‡ä½¿ç»“æœæ¥è¿‘ç›´çº¿
         /// </summary>
-        /// <returns>Â·¾¶ÉÏµÄÃ¿Ò»µã£¨°üÀ¨Æğµã£©</returns>
+        /// <returns>è·¯å¾„ä¸Šçš„æ¯ä¸€ç‚¹ï¼ˆåŒ…æ‹¬èµ·ç‚¹ï¼‰</returns>
         public static List<Vector2Int> DivideDisplacement(Vector2Int origin, Vector2Int target, int maxCount = 20)
         {
             Vector2Int offset = target - origin;
@@ -190,12 +190,12 @@ namespace Tools
         }
 
         /// <summary>
-        /// ÑØÒ»ÌõÖ±ÏßÇ°½ø£¬ÔÚ²»·ûºÏÌõ¼şÊ±Í£ÏÂ£¨Ö±ÏßÓÃÃ¿Ò»µãµÄ×ø±ê±íÊ¾£©
+        /// æ²¿ä¸€æ¡ç›´çº¿å‰è¿›ï¼Œåœ¨ä¸ç¬¦åˆæ¡ä»¶æ—¶åœä¸‹ï¼ˆç›´çº¿ç”¨æ¯ä¸€ç‚¹çš„åæ ‡è¡¨ç¤ºï¼‰
         /// </summary>
-        /// <param name="CanMove">Ìõ¼ş£¬Á½¸ö²ÎÊı·Ö±ğ±íÊ¾Ò»²½µÄÆğµãºÍÖÕµã</param>
-        /// <param name="containStop">·µ»Ø½á¹ûÊÇ·ñ°üº¬Ê¹Ö±ÏßÍ£ÏÂµÄµã</param>
-        /// <param name="containStart">·µ»Ø½á¹ûÊÇ·ñ°üº¬Æğµã</param>
-        /// <returns>Ö±ÏßÖ±µ½Í£ÏÂÖ®Ç°µÄ²¿·Ö</returns>
+        /// <param name="CanMove">æ¡ä»¶ï¼Œä¸¤ä¸ªå‚æ•°åˆ†åˆ«è¡¨ç¤ºä¸€æ­¥çš„èµ·ç‚¹å’Œç»ˆç‚¹</param>
+        /// <param name="containStop">è¿”å›ç»“æœæ˜¯å¦åŒ…å«ä½¿ç›´çº¿åœä¸‹çš„ç‚¹</param>
+        /// <param name="containStart">è¿”å›ç»“æœæ˜¯å¦åŒ…å«èµ·ç‚¹</param>
+        /// <returns>ç›´çº¿ç›´åˆ°åœä¸‹ä¹‹å‰çš„éƒ¨åˆ†</returns>
         public static List<Vector2Int> StopLine(List<Vector2Int> line, Func<Vector2Int, Vector2Int, bool> CanMove, bool containStop = false, bool containStart = false)
         {
             List<Vector2Int> ret = new List<Vector2Int> { line[0] };

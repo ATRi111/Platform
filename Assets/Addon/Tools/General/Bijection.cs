@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Tools
 {
     /// <summary>
-    /// 双向字典
+    /// 鍙屽悜瀛楀吀
     /// </summary>
     public class Bijection<X, Y>
     {
@@ -61,7 +61,7 @@ namespace Tools
         {
             if (!injecion1.ContainsKey(key))
             {
-                UnityEngine.Debug.LogWarning($"不包含{key}元素");
+                UnityEngine.Debug.LogWarning($"涓嶅寘鍚珄key}鍏冪礌");
                 return default;
             }
             return injecion1[key];
@@ -70,7 +70,7 @@ namespace Tools
         {
             if (!injecion2.ContainsKey(key))
             {
-                UnityEngine.Debug.LogWarning($"不包含{key}元素");
+                UnityEngine.Debug.LogWarning($"涓嶅寘鍚珄key}鍏冪礌");
                 return default;
             }
             return injecion2[key];

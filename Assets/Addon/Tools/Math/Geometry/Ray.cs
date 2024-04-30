@@ -5,7 +5,7 @@ namespace Tools
     public static partial class GeometryTool
     {
         /// <summary>
-        /// ÇóÒ»µãµ½Ö±ÏßµÄ´¹ÏòÁ¿£¨¹²ÏßÊ±£¬·µ»ØÁãÏòÁ¿£©
+        /// æ±‚ä¸€ç‚¹åˆ°ç›´çº¿çš„å‚å‘é‡ï¼ˆå…±çº¿æ—¶ï¼Œè¿”å›é›¶å‘é‡ï¼‰
         /// </summary>
         public static Vector3 NormalVector(this Ray ray, Vector3 point)
         {
@@ -17,7 +17,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ¼ÆËãÄ³µãµ½Ä³ÉäÏßÔ­µãµÄÏòÁ¿ÔÚ¸ÃÉäÏß·½ÏòÉÏµÄÍ¶Ó°µÄ³¤¶È
+        /// è®¡ç®—æŸç‚¹åˆ°æŸå°„çº¿åŸç‚¹çš„å‘é‡åœ¨è¯¥å°„çº¿æ–¹å‘ä¸Šçš„æŠ•å½±çš„é•¿åº¦
         /// </summary>
         public static float DistanceOnDirection(this Ray ray, Vector3 point)
         {
@@ -25,7 +25,7 @@ namespace Tools
             return Vector3.Dot(v, ray.direction);
         }
         /// <summary>
-        /// ¹ıÖ¸¶¨µã×÷ÓëÉäÏß·½Ïò´¹Ö±µÄÆ½Ãæ£¬·µ»ØÓëÉäÏßµÄ½»µã
+        /// è¿‡æŒ‡å®šç‚¹ä½œä¸å°„çº¿æ–¹å‘å‚ç›´çš„å¹³é¢ï¼Œè¿”å›ä¸å°„çº¿çš„äº¤ç‚¹
         /// </summary>
         public static Vector3 GetPoint(this Ray ray, Vector3 worldPosition)
         {
@@ -33,13 +33,13 @@ namespace Tools
         }
 
         /// <summary>
-        /// ÇóÁ½Ö±ÏßÉÏµ½¶Ô·½×î½üµÄµã
+        /// æ±‚ä¸¤ç›´çº¿ä¸Šåˆ°å¯¹æ–¹æœ€è¿‘çš„ç‚¹
         /// </summary>
-        /// <returns>Á½Ö±Ïß¾àÀë</returns>
+        /// <returns>ä¸¤ç›´çº¿è·ç¦»</returns>
         public static float ClosestPointPair(this Ray ray1, Ray ray2, out Vector3 point1, out Vector3 point2)
         {
-            Vector3 n = Vector3.Cross(ray1.direction, ray2.direction).normalized;   //¹«´¹Ïß
-            if (n == Vector3.zero)  //Á½Ö±ÏßÆ½ĞĞ
+            Vector3 n = Vector3.Cross(ray1.direction, ray2.direction).normalized;   //å…¬å‚çº¿
+            if (n == Vector3.zero)  //ä¸¤ç›´çº¿å¹³è¡Œ
             {
                 point1 = ray1.origin;
                 point2 = ray2.origin;
@@ -50,7 +50,7 @@ namespace Tools
             Vector3 v = ray1.origin - ray2.origin;
             float sign = Mathf.Sign(Vector3.Dot(v, n));
             float distance = Vector3.Dot(n, v);
-            //¹ıÒ»ÌõÖ±ÏßÉÏÈÎÒâÒ»µã£¬ÑØ¹«´¹Ïß×÷³¤¶ÈÎªÁ½Ö±Ïß¼ä¾àÀëµÄÏß¶Î
+            //è¿‡ä¸€æ¡ç›´çº¿ä¸Šä»»æ„ä¸€ç‚¹ï¼Œæ²¿å…¬å‚çº¿ä½œé•¿åº¦ä¸ºä¸¤ç›´çº¿é—´è·ç¦»çš„çº¿æ®µ
             Vector3 projection = ray2.origin + sign * distance * n;
             Vector3 tempn = ray1.NormalVector(projection);
             float tempd = tempn.magnitude / Mathf.Sqrt(1 - cos * cos);

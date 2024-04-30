@@ -14,7 +14,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ÔÚÒ»ÌõÓĞÏòÏß¶ÎÉÏ½øĞĞÉäÏß¼ì²â£¬Ö»»á¼ì²âµ½Óë"·¨ÏßÓëÏß¶Î·½ÏòµÄ¼Ğ½ÇĞ¡ÓÚ90¡ãµÄÃæ"µÄ½»µã
+        /// åœ¨ä¸€æ¡æœ‰å‘çº¿æ®µä¸Šè¿›è¡Œå°„çº¿æ£€æµ‹ï¼Œåªä¼šæ£€æµ‹åˆ°ä¸"æ³•çº¿ä¸çº¿æ®µæ–¹å‘çš„å¤¹è§’å°äº90Â°çš„é¢"çš„äº¤ç‚¹
         /// </summary>
         public static RaycastHit[] InverseRaycastAll(Vector3 origin, Vector3 direction, float maxDistance, int layerMask)
         {
@@ -22,7 +22,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ÔÚÒ»ÌõÓĞÏòÏß¶ÎÉÏ½øĞĞÉäÏß¼ì²â£¬Ö»»á¼ì²âµ½Óë"·¨ÏßÓëÏß¶Î·½ÏòµÄ¼Ğ½ÇĞ¡ÓÚ90¡ãµÄÃæ"µÄ½»µã£¬·µ»ØÀëÆğµã×î½üµÄµã
+        /// åœ¨ä¸€æ¡æœ‰å‘çº¿æ®µä¸Šè¿›è¡Œå°„çº¿æ£€æµ‹ï¼Œåªä¼šæ£€æµ‹åˆ°ä¸"æ³•çº¿ä¸çº¿æ®µæ–¹å‘çš„å¤¹è§’å°äº90Â°çš„é¢"çš„äº¤ç‚¹ï¼Œè¿”å›ç¦»èµ·ç‚¹æœ€è¿‘çš„ç‚¹
         /// </summary>
         public static bool InverseRaycast(Vector3 origin, Vector3 direction, out RaycastHit result, float maxDistance, int layerMask)
         {
@@ -42,7 +42,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ÔÚÒ»ÌõÏß¶ÎÉÏ½øĞĞË«ÏòÉäÏß¼ì²â
+        /// åœ¨ä¸€æ¡çº¿æ®µä¸Šè¿›è¡ŒåŒå‘å°„çº¿æ£€æµ‹
         /// </summary>
         public static RaycastHit[] TowWayRaycastAll(Vector3 origin, Vector3 direction, float maxDistance, int layerMask)
         {
@@ -55,7 +55,7 @@ namespace Tools
         }
 
         /// <summary>
-        /// ÔÚÒ»ÌõÏß¶ÎÉÏ½øĞĞË«ÏòÉäÏß¼ì²â£¬·µ»ØÀëÆğµã×î½üµÄµã
+        /// åœ¨ä¸€æ¡çº¿æ®µä¸Šè¿›è¡ŒåŒå‘å°„çº¿æ£€æµ‹ï¼Œè¿”å›ç¦»èµ·ç‚¹æœ€è¿‘çš„ç‚¹
         /// </summary>
         public static bool TwoWayRaycast(Vector3 origin, Vector3 direction, out RaycastHit result, float maxDistance, int layerMask)
         {

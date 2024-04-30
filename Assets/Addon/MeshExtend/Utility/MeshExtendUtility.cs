@@ -7,7 +7,7 @@ namespace MeshExtend
     public static class MeshExtendUtility
     {
         /// <summary>
-        /// ÊäÈëÒ»ÏµÁĞVertex£¬Éú³ÉËüÃÇµÄÖĞĞÄ£¬Éú³ÉµÄVertex½öÉèÖÃÁËposition
+        /// è¾“å…¥ä¸€ç³»åˆ—Vertexï¼Œç”Ÿæˆå®ƒä»¬çš„ä¸­å¿ƒï¼Œç”Ÿæˆçš„Vertexä»…è®¾ç½®äº†position
         /// </summary>
         public static Vertex GenerateCenter(params Vertex[] vertices)
         {
@@ -21,13 +21,13 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// ½Ç¶È×ª¶şÎ¬Ê¸Á¿£¬£¨0£¬1£©¶ÔÓ¦0¡ã£¬(-1,0)¶ÔÓ¦90¡ã
+        /// è§’åº¦è½¬äºŒç»´çŸ¢é‡ï¼Œï¼ˆ0ï¼Œ1ï¼‰å¯¹åº”0Â°ï¼Œ(-1,0)å¯¹åº”90Â°
         /// </summary>
         public static Vector2 ToDirection(float angle)
             => new Vector2(-Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
 
         /// <summary>
-        /// ¶şÎ¬Ê¸Á¿×ª½Ç¶È£¬£¨0£¬1£©¶ÔÓ¦0¡ã£¬(-1,0)¶ÔÓ¦90¡ã
+        /// äºŒç»´çŸ¢é‡è½¬è§’åº¦ï¼Œï¼ˆ0ï¼Œ1ï¼‰å¯¹åº”0Â°ï¼Œ(-1,0)å¯¹åº”90Â°
         /// </summary>
         public static float ToAngle(Vector2 direction)
         {
@@ -39,7 +39,7 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// ÒÔËù¸øµãÎªÔ­µã£¬¶Ôµã°´Ë³Ê±ÕëÅÅĞò
+        /// ä»¥æ‰€ç»™ç‚¹ä¸ºåŸç‚¹ï¼Œå¯¹ç‚¹æŒ‰é¡ºæ—¶é’ˆæ’åº
         /// </summary>
         public class Comparer_Clockwise : IComparer<Vector2>, IComparer<Vector2Int>, IComparer<Vector3>, IComparer<Vertex>
         {
@@ -69,12 +69,12 @@ namespace MeshExtend
         }
 
         /// <summary>
-        /// ÀûÓÃÖĞĞÄ»®·ÖÍ¹¶à±ßĞÎ,´Ë·½·¨»áÔö¼Ó¶à±ßĞÎµÄÖĞĞÄÎªĞÂµÄ¶¥µã
+        /// åˆ©ç”¨ä¸­å¿ƒåˆ’åˆ†å‡¸å¤šè¾¹å½¢,æ­¤æ–¹æ³•ä¼šå¢åŠ å¤šè¾¹å½¢çš„ä¸­å¿ƒä¸ºæ–°çš„é¡¶ç‚¹
         /// </summary>
-        /// <param name="vertices">¶¥µã</param>
-        /// <param name="triangles">½ÓÊÕ½á¹û,ÒÀ´Î·µ»ØÃ¿¸öÈı½ÇĞÎ£¨Ë³Ê±Õë·µ»ØÈı½ÇĞÎµÄÈı¸öµã×ø±ê£©</param>
-        /// <param name="sorted">¶¥µãÊÇ·ñÒÑ¾­ÅÅĞò¹ı</param>
-        /// <returns>ĞÂÌí¼ÓµÄ¶¥µã£¬ĞèÒªÎªÆä·ÖÅäpositionÒÔÍâµÄÊôĞÔ</returns>
+        /// <param name="vertices">é¡¶ç‚¹</param>
+        /// <param name="triangles">æ¥æ”¶ç»“æœ,ä¾æ¬¡è¿”å›æ¯ä¸ªä¸‰è§’å½¢ï¼ˆé¡ºæ—¶é’ˆè¿”å›ä¸‰è§’å½¢çš„ä¸‰ä¸ªç‚¹åæ ‡ï¼‰</param>
+        /// <param name="sorted">é¡¶ç‚¹æ˜¯å¦å·²ç»æ’åºè¿‡</param>
+        /// <returns>æ–°æ·»åŠ çš„é¡¶ç‚¹ï¼Œéœ€è¦ä¸ºå…¶åˆ†é…positionä»¥å¤–çš„å±æ€§</returns>
         public static Vertex DivideConvexPolygon(List<Vertex> vertices, List<List<Vertex>> triangles, bool sorted = false)
         {
             int n = vertices.Count;
