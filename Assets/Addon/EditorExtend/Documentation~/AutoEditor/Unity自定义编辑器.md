@@ -352,13 +352,3 @@ public class Editor_Character : AutoEditor
 ![屏幕截图 2022-08-09 154442](Image/屏幕截图 2022-08-09 154442.png)
 
 教程：https://blog.csdn.net/alexhu2010q/article/details/122210800
-
-
-
-
-
-
-
-上面的代码基本是我自己边看文档边用摸索出来的，如果有错误，欢迎通过QQ告诉我。
-
-QQ：1657125180
