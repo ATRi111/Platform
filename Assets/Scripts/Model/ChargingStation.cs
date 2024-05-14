@@ -30,14 +30,14 @@ public class ChargingStation : MonoBehaviour
     {
         return GetState() switch
         {
-            EStationState.Ocuppied or EStationState.Booked => usageRecord[0].PhoneNumber,
+            EStationState.Occuppied or EStationState.Booked => usageRecord[0].PhoneNumber,
             _ => string.Empty,
         };
     }
 
     public float GetRate()
     {
-        if (GetState() != EStationState.Ocuppied)
+        if (GetState() != EStationState.Occuppied)
             return 0f;
         DateTime latest = DataManager.ToDateTime(usageRecord[0].Time);
         if(latest > prevTime)
@@ -63,7 +63,7 @@ public class ChargingStation : MonoBehaviour
 
     public string GetCarType()
     {
-        if(GetState() == EStationState.Ocuppied)
+        if(GetState() == EStationState.Occuppied)
         {
             string phoneNumber = usageRecord[0].PhoneNumber;
             if(userDataManager.userDict.ContainsKey(phoneNumber))
@@ -77,6 +77,6 @@ public enum EStationState
 {
     Available,
     Booked,
-    Ocuppied,
+    Occuppied,
     Repairing,
 }

@@ -44,14 +44,14 @@ public class UseRecordPanel : DataPanel
         switch ((EStationState)data.State)
         {
             case EStationState.Available:
-                if (prev == EStationState.Ocuppied)
+                if (prev == EStationState.Occuppied)
                     content = $"用户{EmphasizedText(data.PhoneNumber)}于{EmphasizedText(data.Time)}使用完毕此充电桩";
                 else if (prev == EStationState.Booked)
                     content = $"用户{EmphasizedText(data.PhoneNumber)}于{EmphasizedText(data.Time)}取消预订此充电桩";
                 else
                     content = $"此充电桩于{EmphasizedText(data.Time)}变为空闲状态";
                 break;
-            case EStationState.Ocuppied:
+            case EStationState.Occuppied:
                 if (prev == EStationState.Booked)
                     content = $"用户{EmphasizedText(data.PhoneNumber)}于{EmphasizedText(data.Time)}开始使用此充电桩";
                 else

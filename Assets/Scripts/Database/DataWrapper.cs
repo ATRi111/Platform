@@ -65,7 +65,7 @@ public class UsageData
         {
             EStationState.Available => "空闲",
             EStationState.Booked => "被预定",
-            EStationState.Ocuppied => "使用中",
+            EStationState.Occuppied => "使用中",
             EStationState.Repairing => "维修中",
             _ => string.Empty,
         };

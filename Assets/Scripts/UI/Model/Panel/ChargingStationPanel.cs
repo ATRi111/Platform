@@ -50,7 +50,7 @@ public class ChargingStationPanel : DataPanel
                 else if (activeStation.OccupiedOrBookedByLocalUser())
                     sb.AppendLine("您已预订");
                 break;
-            case EStationState.Ocuppied:
+            case EStationState.Occuppied:
                 if (IsServer)
                     sb.AppendLine($"手机号:{activeStation.usageRecord[0].PhoneNumber}\n" +
                         $"车型:{activeStation.GetCarType()}");
@@ -67,7 +67,7 @@ public class ChargingStationPanel : DataPanel
         base.Update();
         if (activeStation == null)
             return;
-        if (activeStation.GetState() == EStationState.Ocuppied)
+        if (activeStation.GetState() == EStationState.Occuppied)
         {
             progress.gameObject.SetActive(true);
             progress.SetRate(activeStation.GetRate());

@@ -22,7 +22,7 @@ public class Button_Use : Button_ChangingStation
                 gameObject.SetActive(activeStation.OccupiedOrBookedByLocalUser());
                 tmp.text = "开始使用";
                 break;
-            case EStationState.Ocuppied:
+            case EStationState.Occuppied:
                 gameObject.SetActive(activeStation.OccupiedOrBookedByLocalUser());
                 tmp.text = "使用完毕";
                 break;
@@ -34,10 +34,10 @@ public class Button_Use : Button_ChangingStation
         switch (activeStation.GetState())
         {
             case EStationState.Booked:
-                SetState(EStationState.Ocuppied);
+                SetState(EStationState.Occuppied);
                 controller.Hide();
                 break;
-            case EStationState.Ocuppied:
+            case EStationState.Occuppied:
                 SetState(EStationState.Available);
                 break;
             default:

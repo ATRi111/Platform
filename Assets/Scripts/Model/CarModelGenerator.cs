@@ -40,7 +40,7 @@ public class CarModelGenerator : MonoBehaviour
             ObjectPoolUtility.RecycleMyObjects(gameObject);
             switch (state)
             {
-                case EStationState.Ocuppied:
+                case EStationState.Occuppied:
                     GenerateCar(station.GetCarType());
                     break;
                 default:
