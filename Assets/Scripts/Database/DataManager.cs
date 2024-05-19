@@ -36,6 +36,7 @@ public abstract class DataManager : NetworkBehaviour
     protected string dataJson;
     protected ulong localClientId;
     protected DatabaseManager databaseManager;
+    protected MyTimer.Metronome metronome;
 
     protected virtual void Awake()
     {
@@ -54,6 +55,9 @@ public abstract class DataManager : NetworkBehaviour
         }
         else
         {
+            metronome = new MyTimer.Metronome();
+            metronome.AfterCompelete += AfterComplete;
+            metronome.Initialize(1f);
             eventSystem.AddListener<ChargingStation>(EEvent.SelectStation, OnOpenChargingStationPanel);
             AskForJsonRpc(localClientId);
         }
@@ -63,12 +67,9 @@ public abstract class DataManager : NetworkBehaviour
     {
         base.OnNetworkDespawn();
         if(!IsServer)
+        {
             eventSystem.RemoveListener<ChargingStation>(EEvent.SelectStation, OnOpenChargingStationPanel);
-    }
-
-    protected virtual void Start()
-    {
-
+        }
     }
 
     /// <summary>
@@ -116,6 +117,8 @@ public abstract class DataManager : NetworkBehaviour
 
     }
 
+    private void AfterComplete(float _)
+        => AskForJsonRpc(localClientId);
     protected void OnOpenChargingStationPanel(ChargingStation _)
         => AskForJsonRpc(localClientId);
 }
