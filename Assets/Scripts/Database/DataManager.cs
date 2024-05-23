@@ -55,10 +55,8 @@ public abstract class DataManager : NetworkBehaviour
         }
         else
         {
-            metronome = new MyTimer.Metronome();
-            metronome.AfterCompelete += AfterComplete;
-            metronome.Initialize(1f);
             eventSystem.AddListener<ChargingStation>(EEvent.SelectStation, OnOpenChargingStationPanel);
+            eventSystem.AddListener<ChargingStation, Vector3>(EEvent.ShowChargingStaionMessageWindow, OnShowChargingStaionMessageWindow);
             AskForJsonRpc(localClientId);
         }
     }
@@ -69,6 +67,7 @@ public abstract class DataManager : NetworkBehaviour
         if(!IsServer)
         {
             eventSystem.RemoveListener<ChargingStation>(EEvent.SelectStation, OnOpenChargingStationPanel);
+            eventSystem.RemoveListener<ChargingStation, Vector3>(EEvent.ShowChargingStaionMessageWindow, OnShowChargingStaionMessageWindow);
         }
     }
 
@@ -117,8 +116,8 @@ public abstract class DataManager : NetworkBehaviour
 
     }
 
-    private void AfterComplete(float _)
-        => AskForJsonRpc(localClientId);
     protected void OnOpenChargingStationPanel(ChargingStation _)
         => AskForJsonRpc(localClientId);
+    protected void OnShowChargingStaionMessageWindow(ChargingStation _, Vector3 __)
+       => AskForJsonRpc(localClientId);
 }
